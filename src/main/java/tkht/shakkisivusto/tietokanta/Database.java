@@ -1,17 +1,19 @@
 package tkht.shakkisivusto.tietokanta;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
 public class Database {
     
-    private String osoite;
+    DataSource yhteysVarasto;
     
-    public Database(String osoite){
-        this.osoite = osoite;
+    public Database() throws Exception{
+        InitialContext cxt = new InitialContext();
+        yhteysVarasto = (DataSource) cxt.lookup("java:/comp/env/jdbc/tietokanta");
     }
     
     public Connection getConnection() throws Exception{
-        return DriverManager.getConnection(osoite);
+        return yhteysVarasto.getConnection();
     }
 }
