@@ -14,7 +14,7 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
         this.taulu = taulu;
     }
     
-    public abstract T createT(ResultSet rs);
+    public abstract T createT(ResultSet rs) throws Exception;
     public abstract List<Object> decomposeT(T t);
     
     private void setPreparedStatementValues(PreparedStatement ps, List<Object> values) throws Exception{

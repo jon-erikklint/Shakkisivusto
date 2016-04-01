@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/Kissalista-java">
+<Context antiJARLocking="true" path="/Shakkisivusto">
     <Resource name="jdbc/tietokanta" auth="Container"
         type="javax.sql.DataSource" removeAbandoned="true"
         removeAbandonedTimeout="30" maxActive="100"
         maxIdle="30" maxWait="10000" username="klint"
         password="salasana"
         driverClassName="org.postgresql.Driver"
-        url="jdbc:postgresql://localhost/tietokannan_nimi"/>
+        url="jdbc:postgresql://localhost/klint"/>
 </Context>
