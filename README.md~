@@ -2,4 +2,3 @@ Harjoitustyö on shakkisivistu, jossa shakin pelaajat voivat pelata shakkia, ja 
 
 Lähdekoodi löytyy src-kansiosta.
 HTML-näkymät löytyvät src/main/resources -kansiosta
-Sql löytyy sql-kansiosta
