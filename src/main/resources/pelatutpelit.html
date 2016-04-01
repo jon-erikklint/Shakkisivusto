@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Omat pelit: Pelaaja</title>
+        <title>Vanhat pelit: Pelaaja</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
@@ -14,12 +14,19 @@
             <a href="asetukset.html">Asetukset</a>
         </nav>
         
-        <h1>Pelaajan X pelit:</h1>
+        <form method="GET">
+            Hae pelaajalla: 
+            <input type="text" name="pealaajannimi"/>
+            <input type="submit" value="Hae"/>
+        </form>
+        
+        <h1>Pelaajan X pelatut pelit:</h1>
         
         <ul>
             <li>
                 <h2>Pelin nimi</h2>
                 <p>Vuoro: 0</p>
+                <p>Peli loppui: 2000.01.01 00:00:00</p>
                 <a href="pelisivu.html">linkki peliin</a>
                 <form method="POST">
                     <input type="checkbox" value="Varmistus" name="varmistus"/>
