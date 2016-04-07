@@ -1,20 +1,20 @@
 package tkht.shakkisivusto.domain;
 
-import java.sql.Timestamp;
+import java.util.List;
 
 public class Peli {
     
+    private int id;
     private String nimi;
     private String status;
     
-    private int vuoro;
-    private Timestamp edellisenVuoronPelaamisaika;
-    private Pelaaja kenenVuoro;
+    private List<Vuoro> vuorot;
     
     private Pelaaja pelaaja1;
     private Pelaaja pelaaja2;
     
-    public Peli(String nimi, String status){
+    public Peli(int id, String nimi, String status){
+        this.id = id;
         this.nimi = nimi;
         this.status = status;
     }
@@ -22,17 +22,6 @@ public class Peli {
     public void alustaPelaajat(Pelaaja pelaaja1, Pelaaja pelaaja2){
         this.pelaaja1 = pelaaja1;
         this.pelaaja2 = pelaaja2;
-    }
-    
-    public void alustaVuoro(int vuoro, Timestamp vuorontekoaika, int pelaajaindeksi){
-        this.vuoro = vuoro;
-        this.edellisenVuoronPelaamisaika = vuorontekoaika;
-        
-        if(pelaajaindeksi == pelaaja1.getIndeksi()){
-            kenenVuoro = pelaaja1;
-        }else{
-            kenenVuoro = pelaaja2;
-        }
     }
 
     public String getNimi() {
@@ -51,30 +40,6 @@ public class Peli {
         this.status = status;
     }
 
-    public int getVuoro() {
-        return vuoro;
-    }
-
-    public void setVuoro(int vuoro) {
-        this.vuoro = vuoro;
-    }
-
-    public Timestamp getEdellisenVuoronPelaamisaika() {
-        return edellisenVuoronPelaamisaika;
-    }
-
-    public void setEdellisenVuoronPelaamisaika(Timestamp edellisenVuoronPelaamisaika) {
-        this.edellisenVuoronPelaamisaika = edellisenVuoronPelaamisaika;
-    }
-
-    public Pelaaja getKenenVuoro() {
-        return kenenVuoro;
-    }
-
-    public void setKenenVuoro(Pelaaja kenenVuoro) {
-        this.kenenVuoro = kenenVuoro;
-    }
-
     public Pelaaja getPelaaja1() {
         return pelaaja1;
     }
@@ -89,5 +54,21 @@ public class Peli {
 
     public void setPelaaja2(Pelaaja pelaaja2) {
         this.pelaaja2 = pelaaja2;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<Vuoro> getVuorot() {
+        return vuorot;
+    }
+
+    public void setVuorot(List<Vuoro> vuorot) {
+        this.vuorot = vuorot;
     }
 }

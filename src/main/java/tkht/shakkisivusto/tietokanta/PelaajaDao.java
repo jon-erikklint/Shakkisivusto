@@ -46,5 +46,7 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
         
         return attribuutit;
     }
+
+    
     
 }

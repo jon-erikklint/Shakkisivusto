@@ -49,4 +49,31 @@ public class Nappula {
     public void setValkoinen(boolean valkoinen) {
         this.valkoinen = valkoinen;
     }
+
+    public Ruutu getSijainti() {
+        return sijainti;
+    }
+
+    public void setSijainti(Ruutu sijainti) {
+        this.sijainti = sijainti;
+    }
+    
+    @Override
+    public String toString(){
+        String teksti;
+        
+        if(valkoinen){
+            teksti = "v";
+        }else{
+            teksti = "m";
+        }
+        
+        teksti += tyyppi.toString();
+        
+        teksti += indeksi;
+        
+        teksti += sijainti.toString();
+        
+        return teksti;
+    }
 }

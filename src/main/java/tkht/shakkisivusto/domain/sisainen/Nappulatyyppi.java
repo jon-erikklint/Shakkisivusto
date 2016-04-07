@@ -2,7 +2,18 @@ package tkht.shakkisivusto.domain.sisainen;
 
 public enum Nappulatyyppi {
     
-    SOTILAS, LAHETTI, RATSU, TORNI, KUNINGATAR, KUNINGAS;
+    SOTILAS('s'), LAHETTI('l'), RATSU('r'), TORNI('t'), KUNINGATAR('g'), KUNINGAS('k');
+    
+    private char kirjain;
+    
+    Nappulatyyppi(char kirjain){
+        this.kirjain = kirjain;
+    }
+    
+    @Override
+    public String toString(){
+        return ""+kirjain;
+    }
     
     public static Nappulatyyppi getTyyppi(char kirjain){
         switch(kirjain){

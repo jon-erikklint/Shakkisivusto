@@ -1,4 +1,4 @@
-package tkht.shakkisivusto.tietokanta;
+ package tkht.shakkisivusto.tietokanta;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -6,9 +6,9 @@ import java.util.List;
 
 public abstract class AbstraktiDao<T> implements Dao<T>{
 
-    private Database db;
-    private String taulu;
-    private String columns;
+    Database db;
+    String taulu;
+    String columns;
     
     public AbstraktiDao(Database db, String taulu, String columns){
         this.db = db;

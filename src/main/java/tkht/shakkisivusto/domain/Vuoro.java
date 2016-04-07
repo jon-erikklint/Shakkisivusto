@@ -7,16 +7,23 @@ import tkht.shakkisivusto.domain.sisainen.*;
 public class Vuoro {
     
     private int vuoro;
+    private int peliid;
+    private int pelaaja;
     private Timestamp tekoaika;
     
     private Peli peli;
     private Pelaaja kenenVuoro;
     
     private List<Nappula> nappulat;
+    private Erikoistilanteet erikoistilanteet;
     
-    public Vuoro(int vuoro, Timestamp tekoaika, String lauta){
+    public Vuoro(int vuoro, int peliid, int pelaaja, Timestamp tekoaika, String lauta, String erikoistilanteet){
         this.vuoro = vuoro;
+        this.peliid = peliid;
+        this.pelaaja = pelaaja;
         this.tekoaika = tekoaika;
+        
+        this.erikoistilanteet = new Erikoistilanteet(erikoistilanteet);
         
         alustaLauta(lauta);
     }
@@ -34,6 +41,14 @@ public class Vuoro {
                 alku = i+1;
             }
         }
+    }
+    
+    public String getErikoistilanteetString(){
+        return "";
+    }
+    
+    public String getNappulatString(){
+        return "";
     }
 
     public int getVuoro() {
@@ -75,5 +90,30 @@ public class Vuoro {
     public void setNappulat(List<Nappula> nappulat) {
         this.nappulat = nappulat;
     }
+
+    public int getPeliid() {
+        return peliid;
+    }
+
+    public void setPeliid(int peliid) {
+        this.peliid = peliid;
+    }
+
+    public int getPelaaja() {
+        return pelaaja;
+    }
+
+    public void setPelaaja(int pelaaja) {
+        this.pelaaja = pelaaja;
+    }
+
+    public Erikoistilanteet getErikoistilanteet() {
+        return erikoistilanteet;
+    }
+
+    public void setErikoistilanteet(Erikoistilanteet erikoistilanteet) {
+        this.erikoistilanteet = erikoistilanteet;
+    }
+    
     
 }
