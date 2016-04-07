@@ -5,13 +5,15 @@ public class Pelaaja {
     private int indeksi;
     private String nimi;
     private String kayttajanimi;
+    private String salasana;
     private boolean admin;
 
-    public Pelaaja(int indeksi, String nimi, String kayttajanimi, boolean admin) {
+    public Pelaaja(int indeksi, String nimi, String kayttajanimi, String salasana, boolean admin) {
         this.indeksi = indeksi;
         this.nimi = nimi;
         this.kayttajanimi = kayttajanimi;
         this.admin = admin;
+        this.salasana = salasana;
     }
     
     public String getNimi() {
@@ -44,5 +46,13 @@ public class Pelaaja {
 
     public void setIndeksi(int indeksi) {
         this.indeksi = indeksi;
+    }
+
+    public String getSalasana() {
+        return salasana;
+    }
+
+    public void setSalasana(String salasana) {
+        this.salasana = salasana;
     }
 }

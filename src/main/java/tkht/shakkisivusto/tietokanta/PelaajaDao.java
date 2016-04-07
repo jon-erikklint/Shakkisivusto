@@ -8,7 +8,20 @@ import tkht.shakkisivusto.domain.Pelaaja;
 public class PelaajaDao extends AbstraktiDao<Pelaaja>{
 
     public PelaajaDao(Database db) {
-        super(db, "Pelaaja");
+        super(db, "Pelaaja", "kayttajanimi, pelaajanimi, salasana, admin");
+    }
+    
+    public Pelaaja findByKayttajatunnus(String kayttajatunnus) throws Exception{
+        String query = "SELECT * FROM Pelaaja WHERE kayttajatunnus = ?";
+        List<Object> values = new ArrayList<>();
+        values.add(kayttajatunnus);
+        
+        List<Pelaaja> vastaus = super.findByQuery(query, values);
+        
+        if(vastaus.isEmpty()){
+            return null;
+        }
+        return vastaus.get(0);
     }
 
     @Override
@@ -16,18 +29,19 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
         int indeksi = rs.getInt("indeksi");
         String nimi = rs.getString("nimi");
         String kayttajanimi = rs.getString("kayttajanimi");
+        String salasana = rs.getString("salasana");
         boolean admin = rs.getBoolean("admin");
         
-        return new Pelaaja(indeksi, nimi, kayttajanimi, admin);
+        return new Pelaaja(indeksi, nimi, kayttajanimi, salasana, admin);
     }
 
     @Override
     public List decomposeT(Pelaaja t) {
         List attribuutit = new ArrayList();
         
-        attribuutit.add(t.getIndeksi());
         attribuutit.add(t.getKayttajanimi());
         attribuutit.add(t.getNimi());
+        attribuutit.add(t.getSalasana());
         attribuutit.add(t.isAdmin());
         
         return attribuutit;

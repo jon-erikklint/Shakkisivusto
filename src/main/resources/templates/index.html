@@ -1,8 +1,9 @@
-<html>
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Shakkisivusto</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     
     <body>
@@ -20,7 +21,7 @@
         </form>
         
         <h2>Rekisteröidy</h2>
-        <form method="POST">
+        <form method="POST" action="/rekisterointi">
             <input type="text" name="kayttaja"/>
             <input type="password" name="salasana"/>
             <input type="submit"/>

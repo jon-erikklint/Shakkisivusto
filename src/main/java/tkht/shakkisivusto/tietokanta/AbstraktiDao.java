@@ -8,10 +8,12 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
 
     private Database db;
     private String taulu;
+    private String columns;
     
-    public AbstraktiDao(Database db, String taulu){
+    public AbstraktiDao(Database db, String taulu, String columns){
         this.db = db;
         this.taulu = taulu;
+        this.columns = columns;
     }
     
     public abstract T createT(ResultSet rs) throws Exception;
@@ -107,7 +109,7 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
         
         List<Object> decomposed = decomposeT(t);
         
-        String query = "INSERT INTO "+taulu+" VALUES (";
+        String query = "INSERT INTO "+taulu+" ("+columns+") VALUES (";
         query = addQuestionMarks(query, decomposed.size());
         query+=")";
         
