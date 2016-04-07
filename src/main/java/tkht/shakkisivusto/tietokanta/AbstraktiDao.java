@@ -193,5 +193,42 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
         return ts;
     }
     
-     
+    @Override
+    public int findIntByAggregate(String query, List<Object> values) throws Exception{
+        Connection c = db.getConnection();
+        PreparedStatement ps = c.prepareStatement(query);
+        setPreparedStatementValues(ps, values);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        rs.next();
+        
+        int result = rs.getInt(1);
+        
+        rs.close();
+        ps.close();
+        c.close();
+        
+        return result;
+    }
+    
+    @Override
+    public double findDoubleByAggregate(String query, List<Object> values) throws Exception{
+        Connection c = db.getConnection();
+        PreparedStatement ps = c.prepareStatement(query);
+        setPreparedStatementValues(ps, values);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        rs.next();
+        
+        double result = rs.getInt(1);
+        
+        rs.close();
+        ps.close();
+        c.close();
+
+        return result; 
+    }
+    
 }

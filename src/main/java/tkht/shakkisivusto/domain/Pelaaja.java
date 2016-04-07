@@ -7,6 +7,9 @@ public class Pelaaja {
     private String kayttajanimi;
     private String salasana;
     private boolean admin;
+    
+    private int voittoja;
+    private int tappioita;
 
     public Pelaaja(int indeksi, String nimi, String kayttajanimi, String salasana, boolean admin) {
         this.indeksi = indeksi;
@@ -57,4 +60,22 @@ public class Pelaaja {
     public void setSalasana(String salasana) {
         this.salasana = salasana;
     }
+
+    public int getVoittoja() {
+        return voittoja;
+    }
+
+    public void setVoittoja(int voittoja) {
+        this.voittoja = voittoja;
+    }
+
+    public int getTappioita() {
+        return tappioita;
+    }
+
+    public void setTappioita(int tappioita) {
+        this.tappioita = tappioita;
+    }
+    
+    
 }

@@ -1,16 +1,18 @@
 package tkht.shakkisivusto;
 
-import tkht.shakkisivusto.kontrollerit.index.IndexController;
 import java.util.*;
 import tkht.shakkisivusto.kontrollerit.*;
 import tkht.shakkisivusto.tietokanta.*;
 import static spark.Spark.*;
 import spark.TemplateViewRoute;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
+import tkht.shakkisivusto.kontrollerit.index.IndexController;
+import tkht.shakkisivusto.kontrollerit.pelaajasivu.PelaajasivuController;
 
 public class Alustaja {
     
-    PelaajaDao pelaajaDao;
+    private PelaajaDao pelaajaDao;
+    private PeliDao peliDao;
     
     public void alusta() throws Exception{
         alustaTietokanta();
@@ -21,6 +23,7 @@ public class Alustaja {
         Database db = new Database();
         
         pelaajaDao = new PelaajaDao(db);
+        peliDao = new PeliDao(db);
     }
     
     public void alustaNakymat(){
@@ -45,6 +48,7 @@ public class Alustaja {
         List<NakymaController> kontrollerit = new ArrayList<>();
         
         kontrollerit.add(new IndexController(pelaajaDao));
+        kontrollerit.add(new PelaajasivuController(pelaajaDao, peliDao));
         
         return kontrollerit;
     }

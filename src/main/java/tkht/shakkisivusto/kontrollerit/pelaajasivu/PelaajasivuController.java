@@ -5,20 +5,21 @@ import java.util.Map;
 import spark.TemplateViewRoute;
 import tkht.shakkisivusto.kontrollerit.NakymaController;
 import tkht.shakkisivusto.tietokanta.PelaajaDao;
+import tkht.shakkisivusto.tietokanta.PeliDao;
 
 public class PelaajasivuController implements NakymaController{
 
     private PelaajasivuGet get;
     
-    public PelaajasivuController(PelaajaDao pelaajaDao){
-        get = new PelaajasivuGet(pelaajaDao);
+    public PelaajasivuController(PelaajaDao pelaajaDao, PeliDao peliDao){
+        get = new PelaajasivuGet(pelaajaDao, peliDao);
     }
     
     @Override
     public Map<String, TemplateViewRoute> gets() {
         Map<String, TemplateViewRoute> map = new HashMap<>();
         
-        map.put("/pelaajasivu/:pelaaja", get);
+        map.put("/pelaaja/:pelaaja", get);
         
         return map;
     }
