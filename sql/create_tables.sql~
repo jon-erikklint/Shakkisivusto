@@ -9,15 +9,12 @@ admin boolean not null
 CREATE TABLE Peli(
 id serial primary key,
 nimi varchar(50) not null,
-status varchar(25) not null,
-voittaja int,
-FOREIGN KEY (voittaja) REFERENCES Pelaaja(id)
+status varchar(25) not null
 );
 
 CREATE TABLE Pelinpelaaja(
 pelaajaid int not null,
 peliid int not null,
-valkoinen boolean not null,
 FOREIGN KEY (pelaajaid) REFERENCES Pelaaja(id),
 FOREIGN KEY (peliid) REFERENCES Peli(id),
 CONSTRAINT pk_pelinpelaaja PRIMARY KEY (pelaajaid, peliid)

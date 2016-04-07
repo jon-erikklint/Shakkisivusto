@@ -5,10 +5,12 @@ import spark.Request;
 import spark.Response;
 import spark.TemplateViewRoute;
 import tkht.shakkisivusto.tietokanta.PelaajaDao;
+import tkht.shakkisivusto.tietokanta.PeliDao;
 
 public class PelaajasivuGet implements TemplateViewRoute{
 
     private PelaajaDao pelaajaDao;
+    private PeliDao peliDao;
     
     public PelaajasivuGet(PelaajaDao pelaajaDao){
         this.pelaajaDao = pelaajaDao;
