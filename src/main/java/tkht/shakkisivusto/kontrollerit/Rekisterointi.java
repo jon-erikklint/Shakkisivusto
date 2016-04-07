@@ -25,16 +25,27 @@ public class Rekisterointi implements TemplateViewRoute{
         
         Pelaaja pelaaja = pelaajaDao.findByKayttajatunnus(kayttajatunnus);
         
-        if(pelaaja == null){
+        if(pelaaja != null){
             rspns.redirect("/");
-            return null;
+            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         }
         
-        pelaaja.setNimi(kayttajatunnus);
-        pelaaja.setSalasana(salasana);
-        pelaaja.setAdmin(false);
+        else{
+            pelaaja = new Pelaaja();
+            
+            pelaaja.setKayttajanimi(kayttajatunnus);
+            pelaaja.setNimi(kayttajatunnus);
         
-        return null;
+            pelaaja.setSalasana(salasana);
+            pelaaja.setAdmin(false);
+
+            pelaajaDao.add(pelaaja);
+
+            rspns.redirect("/"+pelaaja.getKayttajanimi());
+        
+        }
+        
+        return new ModelAndView(new HashMap(), "index");
     }
     
 }

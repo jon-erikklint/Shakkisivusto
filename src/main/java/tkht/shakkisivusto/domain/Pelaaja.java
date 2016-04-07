@@ -16,6 +16,8 @@ public class Pelaaja {
         this.salasana = salasana;
     }
     
+    public Pelaaja(){}
+    
     public String getNimi() {
         return nimi;
     }

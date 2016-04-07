@@ -21,15 +21,18 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
     
     private void setPreparedStatementValues(PreparedStatement ps, List<Object> values) throws Exception{
         for(int i = 0 ; i < values.size() ; i++){
+            int j = i+1;
             Object o = values.get(i);
             Class clas = o.getClass();
             
             if(clas == String.class){
-                ps.setString(i+1, (String) o);
+                ps.setString(j, (String) o);
             }else if(clas == Integer.class){
-                ps.setInt(i+1, (Integer) o);
+                ps.setInt(j, (Integer) o);
             }else if(clas == Timestamp.class){
-                ps.setTimestamp(i+1, (Timestamp) o);
+                ps.setTimestamp(j, (Timestamp) o);
+            }else if(clas == Boolean.class){
+                ps.setBoolean(j, (Boolean) o);
             }
         }
     }

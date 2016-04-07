@@ -12,7 +12,7 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
     }
     
     public Pelaaja findByKayttajatunnus(String kayttajatunnus) throws Exception{
-        String query = "SELECT * FROM Pelaaja WHERE kayttajatunnus = ?";
+        String query = "SELECT * FROM Pelaaja WHERE kayttajanimi = ?";
         List<Object> values = new ArrayList<>();
         values.add(kayttajatunnus);
         
@@ -27,7 +27,7 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
     @Override
     public Pelaaja createT(ResultSet rs) throws Exception{
         int indeksi = rs.getInt("indeksi");
-        String nimi = rs.getString("nimi");
+        String nimi = rs.getString("pelaajanimi");
         String kayttajanimi = rs.getString("kayttajanimi");
         String salasana = rs.getString("salasana");
         boolean admin = rs.getBoolean("admin");
