@@ -1,5 +1,6 @@
 package tkht.shakkisivusto;
 
+import tkht.shakkisivusto.kontrollerit.index.IndexController;
 import java.util.*;
 import tkht.shakkisivusto.kontrollerit.*;
 import tkht.shakkisivusto.tietokanta.*;

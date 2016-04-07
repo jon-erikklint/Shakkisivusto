@@ -15,18 +15,18 @@
             <a href="asetukset.html">Asetukset</a>
         </nav>
         
-        <h1>Pelaajan nimi</h1>
+        <h1 th:text="${pelaaja.nimi}">Pelaajan nimi</h1>
         
         <h2>Tilastot:</h2>
         
         <table>
             <tr>
                 <td>Voittoja:</td>
-                <td>0</td>
+                <td th:text="${pelaaja.voittoja}">0</td>
             </tr>
             <tr>
                 <td>Tappioita:</td>
-                <td>0</td>
+                <td th:text="${pelaaja.tappioita}">0</td>
             </tr>
         </table>
     </body>

@@ -1,7 +1,8 @@
-package tkht.shakkisivusto.kontrollerit;
+package tkht.shakkisivusto.kontrollerit.index;
 
 import java.util.*;
 import spark.TemplateViewRoute;
+import tkht.shakkisivusto.kontrollerit.NakymaController;
 import tkht.shakkisivusto.tietokanta.PelaajaDao;
 
 public class IndexController implements NakymaController{

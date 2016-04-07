@@ -1,27 +1,22 @@
-package tkht.shakkisivusto.kontrollerit;
+package tkht.shakkisivusto.kontrollerit.pelaajasivu;
 
-import java.util.*;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.TemplateViewRoute;
 import tkht.shakkisivusto.tietokanta.PelaajaDao;
 
-public class IndexPost implements TemplateViewRoute{
+public class PelaajasivuGet implements TemplateViewRoute{
 
     private PelaajaDao pelaajaDao;
     
-    public IndexPost(PelaajaDao pelaajaDao){
+    public PelaajasivuGet(PelaajaDao pelaajaDao){
         this.pelaajaDao = pelaajaDao;
     }
     
     @Override
     public ModelAndView handle(Request rqst, Response rspns) throws Exception {
-        Map map = new HashMap();
-        
-        
-        
-        return new ModelAndView(map, "index");
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

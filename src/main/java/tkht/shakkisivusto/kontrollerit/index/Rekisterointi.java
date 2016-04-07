@@ -1,4 +1,4 @@
-package tkht.shakkisivusto.kontrollerit;
+package tkht.shakkisivusto.kontrollerit.index;
 
 import java.util.*;
 import spark.ModelAndView;
@@ -27,7 +27,6 @@ public class Rekisterointi implements TemplateViewRoute{
         
         if(pelaaja != null){
             rspns.redirect("/");
-            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         }
         
         else{
@@ -41,7 +40,7 @@ public class Rekisterointi implements TemplateViewRoute{
 
             pelaajaDao.add(pelaaja);
 
-            rspns.redirect("/"+pelaaja.getKayttajanimi());
+            rspns.redirect("/pelaaja/"+pelaaja.getKayttajanimi());
         
         }
         

@@ -26,7 +26,7 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
 
     @Override
     public Pelaaja createT(ResultSet rs) throws Exception{
-        int indeksi = rs.getInt("indeksi");
+        int indeksi = rs.getInt("id");
         String nimi = rs.getString("pelaajanimi");
         String kayttajanimi = rs.getString("kayttajanimi");
         String salasana = rs.getString("salasana");
