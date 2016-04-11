@@ -12,23 +12,16 @@
             <a href="liitypeliin.html">Uudet pelit</a>
             <a href="omatpelit.html">Omat pelit</a>
             <a href="pelatutpelit.html">Vanhat pelit</a>
-            <a th:href="${etsipelaajia}">Hae pelaajia</a>
+            <a th:href="${etsipelaajia}">Etsi pelaajia</a>
             <a href="asetukset.html">Asetukset</a>
         </nav>
         
-        <h1 th:text="${pelaaja.nimi}">Pelaajan nimi</h1>
+        <h1>Hae pelaajia</h1>
         
-        <h2>Tilastot:</h2>
+        <form method="GET">
+            <input type="submit" name="Hae"/>
+        </form>
         
-        <table>
-            <tr>
-                <td>Voittoja:</td>
-                <td th:text="${pelaaja.voittoja}">0</td>
-            </tr>
-            <tr>
-                <td>Tappioita:</td>
-                <td th:text="${pelaaja.tappioita}">0</td>
-            </tr>
-        </table>
     </body>
 </html>
+
