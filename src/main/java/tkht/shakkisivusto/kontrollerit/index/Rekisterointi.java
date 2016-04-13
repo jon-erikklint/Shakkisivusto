@@ -6,14 +6,19 @@ import spark.Request;
 import spark.Response;
 import spark.TemplateViewRoute;
 import tkht.shakkisivusto.domain.Pelaaja;
+import tkht.shakkisivusto.kontrollerit.SessionGenerator;
+import tkht.shakkisivusto.kontrollerit.SessionManager;
 import tkht.shakkisivusto.tietokanta.PelaajaDao;
 
 public class Rekisterointi implements TemplateViewRoute{
 
     private PelaajaDao pelaajaDao;
+    
+    private SessionGenerator sg;
 
-    public Rekisterointi(PelaajaDao pelaajaDao) {
+    public Rekisterointi(PelaajaDao pelaajaDao, SessionManager sm) {
         this.pelaajaDao = pelaajaDao;
+        sg = new SessionGenerator(sm);
     }
     
     @Override
@@ -39,9 +44,9 @@ public class Rekisterointi implements TemplateViewRoute{
             pelaaja.setAdmin(false);
 
             pelaajaDao.add(pelaaja);
-
+            
+            sg.generateSession(pelaaja, rspns);
             rspns.redirect("/pelaaja/"+pelaaja.getKayttajanimi());
-        
         }
         
         return new ModelAndView(new HashMap(), "index");

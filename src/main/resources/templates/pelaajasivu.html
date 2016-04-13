@@ -14,6 +14,9 @@
             <a href="pelatutpelit.html">Vanhat pelit</a>
             <a th:href="${etsipelaajia}">Hae pelaajia</a>
             <a href="asetukset.html">Asetukset</a>
+            <form method="POST" action="/ulos">
+                <input type="submit" value="Kirjaudu ulos"/>
+            </form>
         </nav>
         
         <h1 th:text="${pelaaja.nimi}">Pelaajan nimi</h1>

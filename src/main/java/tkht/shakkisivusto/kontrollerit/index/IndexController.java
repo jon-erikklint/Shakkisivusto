@@ -11,11 +11,13 @@ public class IndexController implements NakymaController{
     private IndexGet indexGet;
     private IndexPost indexPost;
     private Rekisterointi rek;
+    private Uloskirjaantuminen ulos;
     
     public IndexController(PelaajaDao pelaajaDao, SessionManager sm){
         this.indexGet = new IndexGet();
         this.indexPost = new IndexPost(pelaajaDao, sm);
-        this.rek = new Rekisterointi(pelaajaDao);
+        this.rek = new Rekisterointi(pelaajaDao, sm);
+        this.ulos = new Uloskirjaantuminen(sm);
     }
     
     @Override
@@ -33,6 +35,7 @@ public class IndexController implements NakymaController{
         
         posts.put("/", indexPost);
         posts.put("/rekisterointi", rek);
+        posts.put("/ulos", ulos);
         
         return posts;
     }

@@ -11,7 +11,7 @@ import tkht.shakkisivusto.domain.Pelaaja;
 
 public abstract class KirjautunutHelper implements TemplateViewRoute{
     
-    private SessionManager sm;
+    protected SessionManager sm;
     private String sivu;
     
     public KirjautunutHelper(SessionManager sm, String sivu){
@@ -23,13 +23,12 @@ public abstract class KirjautunutHelper implements TemplateViewRoute{
     public ModelAndView handle(Request rqst, Response rspns) throws Exception {
         Map map = new HashMap<>();
         
-        
         Pelaaja kirjautunut = haeKirjautumistiedot(rqst, rspns);
         
         if(kirjautunut == null){
             rspns.redirect("/");
             
-            return null;
+            return new ModelAndView(map, sivu);
         }
         
         lisaaSivulinkit(map);
@@ -47,6 +46,7 @@ public abstract class KirjautunutHelper implements TemplateViewRoute{
     
     void lisaaSivulinkit(Map map){
         map.put("etsipelaaja", Serveri.osoite+"/pelaajahaku");
+        map.put("kirjauduulos", Serveri.osoite+"/ulos");
     }
     
     public abstract void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut) throws Exception;

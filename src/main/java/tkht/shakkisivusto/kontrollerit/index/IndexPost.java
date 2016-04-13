@@ -35,9 +35,9 @@ public class IndexPost implements TemplateViewRoute{
             if(!pelaaja.getSalasana().equals(salasana)){
                 rspns.redirect("/");
             }else{
-                rspns.redirect("/pelaaja/"+pelaaja.getKayttajanimi());
-                
                 sg.generateSession(pelaaja, rspns);
+                
+                rspns.redirect("/pelaaja/"+pelaaja.getKayttajanimi());
             }
             
         }

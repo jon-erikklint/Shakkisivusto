@@ -86,13 +86,14 @@ public class SessionManager {
         String session;
         
         while(true){
-            session = "";
-        
             Random r = new Random();
 
+            session = "";
+            
             for(int i = 0 ; i < 16 ; i++){
-                char[] k = Character.toChars(r.nextInt(28));
-                session += k;
+                int ran = r.nextInt(25)+65;
+                char[] c = Character.toChars(ran);
+                session += c[0];
             }
             
             if(sessions.get(session) == null){

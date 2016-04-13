@@ -30,7 +30,7 @@ public class Alustaja {
     }
     
     public void alustaSessionhallinta(){
-        sm = new SessionManager(1000, 1000000);
+        sm = new SessionManager(1000, 3600000);
     }
     
     public void alustaNakymat(){
