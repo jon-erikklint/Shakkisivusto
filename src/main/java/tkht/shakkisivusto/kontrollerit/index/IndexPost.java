@@ -6,13 +6,18 @@ import spark.Request;
 import spark.Response;
 import spark.TemplateViewRoute;
 import tkht.shakkisivusto.domain.Pelaaja;
+import tkht.shakkisivusto.kontrollerit.SessionGenerator;
+import tkht.shakkisivusto.kontrollerit.SessionManager;
 import tkht.shakkisivusto.tietokanta.PelaajaDao;
 
 public class IndexPost implements TemplateViewRoute{
 
+    private SessionGenerator sg;
+    
     private PelaajaDao pelaajaDao;
     
-    public IndexPost(PelaajaDao pelaajaDao){
+    public IndexPost(PelaajaDao pelaajaDao, SessionManager sm){
+        sg = new SessionGenerator(sm);
         this.pelaajaDao = pelaajaDao;
     }
     
@@ -31,6 +36,8 @@ public class IndexPost implements TemplateViewRoute{
                 rspns.redirect("/");
             }else{
                 rspns.redirect("/pelaaja/"+pelaaja.getKayttajanimi());
+                
+                sg.generateSession(pelaaja, rspns);
             }
             
         }

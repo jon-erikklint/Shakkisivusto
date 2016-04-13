@@ -11,11 +11,14 @@ import tkht.shakkisivusto.kontrollerit.pelaajasivu.PelaajasivuController;
 
 public class Alustaja {
     
+    private SessionManager sm;
+    
     private PelaajaDao pelaajaDao;
     private PeliDao peliDao;
     
     public void alusta() throws Exception{
         alustaTietokanta();
+        alustaSessionhallinta();
         alustaNakymat();
     }
     
@@ -24,6 +27,10 @@ public class Alustaja {
         
         pelaajaDao = new PelaajaDao(db);
         peliDao = new PeliDao(db);
+    }
+    
+    public void alustaSessionhallinta(){
+        sm = new SessionManager(1000, 1000000);
     }
     
     public void alustaNakymat(){
@@ -47,8 +54,8 @@ public class Alustaja {
     public List<NakymaController> alustaKontrollerit(){
         List<NakymaController> kontrollerit = new ArrayList<>();
         
-        kontrollerit.add(new IndexController(pelaajaDao));
-        kontrollerit.add(new PelaajasivuController(pelaajaDao, peliDao));
+        kontrollerit.add(new IndexController(pelaajaDao, sm));
+        kontrollerit.add(new PelaajasivuController(pelaajaDao, peliDao, sm));
         
         return kontrollerit;
     }
