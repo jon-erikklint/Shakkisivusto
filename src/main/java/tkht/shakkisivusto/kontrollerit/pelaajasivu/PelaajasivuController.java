@@ -3,31 +3,23 @@ package tkht.shakkisivusto.kontrollerit.pelaajasivu;
 import java.util.HashMap;
 import java.util.Map;
 import spark.TemplateViewRoute;
-import tkht.shakkisivusto.kontrollerit.NakymaController;
+import tkht.shakkisivusto.kontrollerit.AbstraktiController;
 import tkht.shakkisivusto.kontrollerit.SessionManager;
 import tkht.shakkisivusto.tietokanta.PelaajaDao;
 import tkht.shakkisivusto.tietokanta.PeliDao;
 
-public class PelaajasivuController implements NakymaController{
+public class PelaajasivuController extends AbstraktiController{
 
-    private PelaajasivuGet get;
-    
     public PelaajasivuController(PelaajaDao pelaajaDao, PeliDao peliDao, SessionManager sm){
-        get = new PelaajasivuGet(pelaajaDao, peliDao, sm);
-    }
-    
-    @Override
-    public Map<String, TemplateViewRoute> gets() {
-        Map<String, TemplateViewRoute> map = new HashMap<>();
+        PelaajasivuGet get = new PelaajasivuGet(pelaajaDao, peliDao, sm);
         
-        map.put("/pelaaja/:pelaaja", get);
+        Map<String, TemplateViewRoute> gets = new HashMap<>();
         
-        return map;
-    }
-
-    @Override
-    public Map<String, TemplateViewRoute> posts() {
-        return new HashMap<>();
+        gets.put("/pelaaja/:pelaaja", get);
+        
+        Map<String, TemplateViewRoute> posts = new HashMap<>();
+        
+        super.initialize(gets, posts);
     }
     
 }

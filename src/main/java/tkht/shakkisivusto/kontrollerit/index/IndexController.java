@@ -2,44 +2,29 @@ package tkht.shakkisivusto.kontrollerit.index;
 
 import java.util.*;
 import spark.TemplateViewRoute;
-import tkht.shakkisivusto.kontrollerit.NakymaController;
+import tkht.shakkisivusto.kontrollerit.AbstraktiController;
 import tkht.shakkisivusto.kontrollerit.SessionManager;
 import tkht.shakkisivusto.tietokanta.PelaajaDao;
 
-public class IndexController implements NakymaController{
+public class IndexController extends AbstraktiController{
 
-    private IndexGet indexGet;
-    private IndexPost indexPost;
-    private Rekisterointi rek;
-    private Uloskirjaantuminen ulos;
-    
     public IndexController(PelaajaDao pelaajaDao, SessionManager sm){
-        this.indexGet = new IndexGet();
-        this.indexPost = new IndexPost(pelaajaDao, sm);
-        this.rek = new Rekisterointi(pelaajaDao, sm);
-        this.ulos = new Uloskirjaantuminen(sm);
-    }
-    
-    @Override
-    public Map<String,TemplateViewRoute> gets() {
+        IndexGet indexGet = new IndexGet();
+        IndexPost indexPost = new IndexPost(pelaajaDao, sm);
+        Rekisterointi rek = new Rekisterointi(pelaajaDao, sm);
+        Uloskirjaantuminen ulos = new Uloskirjaantuminen(sm);
+        
         Map<String, TemplateViewRoute> gets = new HashMap<>();
         
         gets.put("/", indexGet);
         
-        return gets;
-    }
-
-    @Override
-    public Map<String,TemplateViewRoute> posts() {
         Map<String, TemplateViewRoute> posts = new HashMap<>();
         
         posts.put("/", indexPost);
         posts.put("/rekisterointi", rek);
         posts.put("/ulos", ulos);
         
-        return posts;
+        super.initialize(gets, posts);
     }
-
-    
     
 }
