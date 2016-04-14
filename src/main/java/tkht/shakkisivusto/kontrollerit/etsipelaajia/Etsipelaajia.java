@@ -22,8 +22,6 @@ public class Etsipelaajia extends KirjautunutHelper{
 
     @Override
     public void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut) throws Exception {
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        
         String haettuPelaaja = rqst.queryParams("pelaaja");
         
         List<Pelaaja> haetut;
@@ -32,7 +30,13 @@ public class Etsipelaajia extends KirjautunutHelper{
             haetut = pelaajaDao.findAll();
         }else{
             haetut = new ArrayList<>();
-            haetut.add(pelaajaDao.findByKayttajatunnus(haettuPelaaja));
+            
+            Pelaaja loydetty = pelaajaDao.findByKayttajatunnus(haettuPelaaja);
+            
+            if(loydetty != null){
+                haetut.add(loydetty);
+            }
+            
         }
         
         map.put("pelaajat", haetut);

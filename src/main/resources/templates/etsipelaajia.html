@@ -8,11 +8,11 @@
     
     <body>
         <nav>
-            <a th:href="@{pelaaja.linkki}">Oma sivu</a>
+            <a th:href="${pelaaja.linkki}">Oma sivu</a>
             <a href="liitypeliin.html">Uudet pelit</a>
             <a href="omatpelit.html">Omat pelit</a>
             <a href="pelatutpelit.html">Vanhat pelit</a>
-            <a th:href="@{etsipelaajia}">Hae pelaajia</a>
+            <a th:href="${etsipelaajia}">Hae pelaajia</a>
             <a href="asetukset.html">Asetukset</a>
             <form method="POST" action="/ulos">
                 <input type="submit" value="Kirjaudu ulos"/>
