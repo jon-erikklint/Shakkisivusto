@@ -1,5 +1,7 @@
 package tkht.shakkisivusto.domain;
 
+import tkht.shakkisivusto.Serveri;
+
 public class Pelaaja {
     
     private int indeksi;
@@ -77,5 +79,7 @@ public class Pelaaja {
         this.tappioita = tappioita;
     }
     
-    
+    public String getLinkki(){
+        return Serveri.osoite+"/pelaaja/"+kayttajanimi;
+    }
 }

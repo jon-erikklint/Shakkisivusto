@@ -23,7 +23,7 @@ public abstract class KirjautunutHelper implements TemplateViewRoute{
     public ModelAndView handle(Request rqst, Response rspns) throws Exception {
         Map map = new HashMap<>();
         
-        Pelaaja kirjautunut = haeKirjautumistiedot(rqst, rspns);
+        Pelaaja kirjautunut = haeKirjautunut(rqst, rspns);
         
         if(kirjautunut == null){
             rspns.redirect("/");
@@ -31,21 +31,22 @@ public abstract class KirjautunutHelper implements TemplateViewRoute{
             return new ModelAndView(map, sivu);
         }
         
-        lisaaSivulinkit(map);
+        lisaaSivulinkit(map, kirjautunut);
         
         handle(rqst, rspns, map, kirjautunut);
         
         return new ModelAndView(map, sivu);
     }
     
-    private Pelaaja haeKirjautumistiedot(Request rq, Response rs){
+    private Pelaaja haeKirjautunut(Request rq, Response rs){
         String sessionName = rq.cookie("session");
         
         return sm.getPelaaja(sessionName);
     }
     
-    void lisaaSivulinkit(Map map){
-        map.put("etsipelaaja", Serveri.osoite+"/pelaajahaku");
+    void lisaaSivulinkit(Map map, Pelaaja pelaaja){
+        map.put("pelaaja", pelaaja);
+        map.put("etsipelaajia", Serveri.osoite+"/pelaajahaku");
         map.put("kirjauduulos", Serveri.osoite+"/ulos");
     }
     

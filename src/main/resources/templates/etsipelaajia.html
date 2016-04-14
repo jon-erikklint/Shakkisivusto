@@ -8,19 +8,32 @@
     
     <body>
         <nav>
-            <a href="pelaajasivu.html">Oma sivu</a>
+            <a th:href="@{pelaaja.linkki}">Oma sivu</a>
             <a href="liitypeliin.html">Uudet pelit</a>
             <a href="omatpelit.html">Omat pelit</a>
             <a href="pelatutpelit.html">Vanhat pelit</a>
-            <a th:href="${etsipelaajia}">Etsi pelaajia</a>
+            <a th:href="@{etsipelaajia}">Hae pelaajia</a>
             <a href="asetukset.html">Asetukset</a>
+            <form method="POST" action="/ulos">
+                <input type="submit" value="Kirjaudu ulos"/>
+            </form>
         </nav>
         
         <h1>Hae pelaajia</h1>
         
         <form method="GET">
-            <input type="submit" name="Hae"/>
+            Nimi: <input type="text" name="pelaaja"/>
+            <input type="submit" value="Hae"/>
         </form>
+        
+        <ul>
+            <li th:each="pelaaja :${pelaajat}">
+                Pelaajan nimi: 
+                <a th:href="${pelaaja.linkki}">
+                    <span th:text="${pelaaja.nimi}">nimi</span>
+                </a>
+            </li>
+        </ul>
         
     </body>
 </html>

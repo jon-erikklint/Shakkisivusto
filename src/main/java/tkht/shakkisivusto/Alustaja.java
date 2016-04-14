@@ -6,6 +6,7 @@ import tkht.shakkisivusto.tietokanta.*;
 import static spark.Spark.*;
 import spark.TemplateViewRoute;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
+import tkht.shakkisivusto.kontrollerit.etsipelaajia.EtsipelaajiaController;
 import tkht.shakkisivusto.kontrollerit.index.IndexController;
 import tkht.shakkisivusto.kontrollerit.pelaajasivu.PelaajasivuController;
 
@@ -56,6 +57,7 @@ public class Alustaja {
         
         kontrollerit.add(new IndexController(pelaajaDao, sm));
         kontrollerit.add(new PelaajasivuController(pelaajaDao, peliDao, sm));
+        kontrollerit.add(new EtsipelaajiaController(pelaajaDao, sm));
         
         return kontrollerit;
     }
