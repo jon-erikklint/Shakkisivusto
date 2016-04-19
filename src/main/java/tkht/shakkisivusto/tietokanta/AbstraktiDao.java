@@ -25,6 +25,8 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
             Object o = values.get(i);
             Class clas = o.getClass();
             
+            System.out.println("LUOKKA ON: "+clas+" @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            
             if(clas == Timestamp.class){
                 ps.setTimestamp(j, (Timestamp) o);
             }else if(clas == Integer.class){
