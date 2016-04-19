@@ -26,6 +26,7 @@ public class PelinPelaajaDao extends AbstraktiDao<PelinPelaaja>{
         
         lista.add(t.getPelaaja());
         lista.add(t.getPeli());
+        lista.add(t.isValkoinen());
         
         return lista;
     }
