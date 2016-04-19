@@ -25,12 +25,12 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
             Object o = values.get(i);
             Class clas = o.getClass();
             
-            if(clas == String.class){
-                ps.setString(j, (String) o);
+            if(clas == Timestamp.class){
+                ps.setTimestamp(j, (Timestamp) o);
             }else if(clas == Integer.class){
                 ps.setInt(j, (Integer) o);
-            }else if(clas == Timestamp.class){
-                ps.setTimestamp(j, (Timestamp) o);
+            }else if(clas == String.class){
+                ps.setString(j, (String) o);
             }else if(clas == Boolean.class){
                 ps.setBoolean(j, (Boolean) o);
             }

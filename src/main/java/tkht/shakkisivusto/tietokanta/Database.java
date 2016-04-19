@@ -77,7 +77,7 @@ public class Database {
                     "vuoro int not null,\n" +
                     "peliid int not null,\n" +
                     "pelaaja int,\n" +
-                    "lauta varchar(50) not null,\n" +
+                    "lauta varchar(100) not null,\n" +
                     "erikoistilanteet varchar(20) not null,\n" +
                     "tekoaika timestamp not null,\n" +
                     "FOREIGN KEY (peliid) REFERENCES Peli(id),\n" +
