@@ -1,6 +1,7 @@
 package tkht.shakkisivusto.domain;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.*;
 import tkht.shakkisivusto.domain.sisainen.*;
 
@@ -32,7 +33,7 @@ public class Vuoro {
         this.vuoro = 0;
         this.peliid = peliid;
         this.pelaaja = pelaaja;
-        this.tekoaika = new Timestamp(System.currentTimeMillis());
+        this.tekoaika = Timestamp.from(Instant.now());
         
         this.erikoistilanteet = new Erikoistilanteet(Alku.alkutilanteet);
         
