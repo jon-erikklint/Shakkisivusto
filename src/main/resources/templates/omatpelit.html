@@ -25,7 +25,7 @@
             <li th:each="peli: ${pelit}">
                 <h2 th:text="${peli.nimi}">Pelin nimi</h2>
                 <p th:text="${peli.uusinVuoro}">Vuoro: 0</p>
-                <a href="@{localhost:4567__${peli.pelisivu}__}">linkki peliin</a>
+                <a href="${peli.pelisivu}">linkki peliin</a>
             </li>
         </ul>
         
