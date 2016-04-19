@@ -8,7 +8,7 @@ import tkht.shakkisivusto.domain.PelinPelaaja;
 public class PelinPelaajaDao extends AbstraktiDao<PelinPelaaja>{
 
     public PelinPelaajaDao(Database db) {
-        super(db, "PelinPelaaja", "pelaajaid, peliid");
+        super(db, "PelinPelaaja", "pelaajaid, peliid, valkoinen");
     }
 
     @Override
