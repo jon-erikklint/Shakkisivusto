@@ -20,12 +20,18 @@ public class Alustaja {
     private VuoroDao vuoroDao;
     
     public void alusta() throws Exception{
+        alustaHeroku();
         alustaTietokanta();
         alustaSessionhallinta();
         alustaNakymat();
     }
     
+    public void alustaHeroku(){
+        port(Integer.valueOf(System.getenv("PORT")));
+    }
+    
     public void alustaTietokanta() throws Exception{
+        
         Database db = new Database();
         
         pelaajaDao = new PelaajaDao(db);

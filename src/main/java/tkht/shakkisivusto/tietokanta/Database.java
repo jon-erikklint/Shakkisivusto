@@ -9,7 +9,7 @@ public class Database {
     private String osoite;
     
     public Database() throws Exception{
-        osoite = "jdbc:sqlite:shakkisivusto.db";
+        osoite = System.getenv("DATABASE_URL");
     }
     
     public Connection getConnection() throws Exception{
