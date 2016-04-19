@@ -6,7 +6,6 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.TemplateViewRoute;
-import tkht.shakkisivusto.Serveri;
 import tkht.shakkisivusto.domain.Pelaaja;
 
 public abstract class KirjautunutHelper implements TemplateViewRoute{
@@ -46,8 +45,8 @@ public abstract class KirjautunutHelper implements TemplateViewRoute{
     
     void lisaaSivulinkit(Map map, Pelaaja pelaaja){
         map.put("pelaaja", pelaaja);
-        map.put("etsipelaajia", Serveri.osoite+"/pelaajahaku");
-        map.put("kirjauduulos", Serveri.osoite+"/ulos");
+        map.put("etsipelaajia", "pelaajahaku");
+        map.put("kirjauduulos", "ulos");
     }
     
     public abstract void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut) throws Exception;

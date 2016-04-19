@@ -8,24 +8,24 @@
     
     <body>
         <nav>
-            <a href="pelaajasivu.html">Oma sivu</a>
+            <a th:href="${pelaaja.linkki}">Oma sivu</a>
             <a href="liitypeliin.html">Uudet pelit</a>
-            <a href="omatpelit.html">Omat pelit</a>
+            <a href="/omatpelit">Omat pelit</a>
             <a href="pelatutpelit.html">Vanhat pelit</a>
+            <a href="/pelaajahaku">Hae pelaajia</a>
             <a href="asetukset.html">Asetukset</a>
+            <form method="POST" action="/ulos">
+                <input type="submit" value="Kirjaudu ulos"/>
+            </form>
         </nav>
         
-        <h1>Pelaajan X pelit:</h1>
+        <h1>Pelaajan <span th:text="${pelaaja.nimi}"></span> pelit:</h1>
         
         <ul>
-            <li>
-                <h2>Pelin nimi</h2>
-                <p>Vuoro: 0</p>
-                <a href="pelisivu.html">linkki peliin</a>
-                <form method="POST">
-                    <input type="checkbox" value="Varmistus" name="varmistus"/>
-                    <input type="submit" value="Poistu pelistä"/>
-                </form>
+            <li th:each="peli: ${pelit}">
+                <h2 th:text="${peli.nimi}">Pelin nimi</h2>
+                <p th:text="${peli.uusinVuoro}">Vuoro: 0</p>
+                <a href="@{localhost:4567__${peli.pelisivu}__}">linkki peliin</a>
             </li>
         </ul>
     </body>

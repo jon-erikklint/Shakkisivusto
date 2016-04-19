@@ -4,12 +4,34 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import tkht.shakkisivusto.domain.Peli;
 import tkht.shakkisivusto.domain.Vuoro;
 
 public class VuoroDao extends AbstraktiDao<Vuoro>{
 
     public VuoroDao(Database db) {
         super(db, "Vuoro", "vuoro, peliid, pelaaja, lauta, erikoistilanteet, tekoaika");
+    }
+    
+    public void lisaaVuorotiedotPeleihin(List<Peli> pelit) throws Exception{
+        
+        for(Peli peli : pelit){
+            lisaaVuorotiedotPeliin(peli);
+        }
+        
+    }
+    
+    public void lisaaVuorotiedotPeliin(Peli peli) throws Exception{
+        peli.setVuorot(findByPeli(peli));
+    }
+    
+    public List<Vuoro> findByPeli(Peli peli) throws Exception{
+        String query = "SELECT * FROM Vuoro WHERE peliid = ? ORDER BY vuoro DESC LIMIT 1";
+        
+        List<Object> values = new ArrayList<>();
+        values.add(peli.getId());
+        
+        return super.findByQuery(query, values);
     }
 
     @Override

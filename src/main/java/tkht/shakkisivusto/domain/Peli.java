@@ -13,6 +13,8 @@ public class Peli {
     private Pelaaja pelaaja1;
     private Pelaaja pelaaja2;
     
+    private int uusinVuoro;
+    
     public Peli(int id, String nimi, String status){
         this.id = id;
         this.nimi = nimi;
@@ -70,5 +72,15 @@ public class Peli {
 
     public void setVuorot(List<Vuoro> vuorot) {
         this.vuorot = vuorot;
+        
+        this.uusinVuoro = vuorot.size();
+    }
+
+    public int getUusinVuoro() {
+        return uusinVuoro;
+    }
+    
+    public String getPelisivu(){
+        return "/peli/"+id;
     }
 }

@@ -9,6 +9,7 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tkht.shakkisivusto.kontrollerit.etsipelaajia.EtsipelaajiaController;
 import tkht.shakkisivusto.kontrollerit.index.IndexController;
 import tkht.shakkisivusto.kontrollerit.pelaajasivu.PelaajasivuController;
+import tkht.shakkisivusto.kontrollerit.pelisivu.OmatpelitController;
 
 public class Alustaja {
     
@@ -16,6 +17,7 @@ public class Alustaja {
     
     private PelaajaDao pelaajaDao;
     private PeliDao peliDao;
+    private VuoroDao vuoroDao;
     
     public void alusta() throws Exception{
         alustaTietokanta();
@@ -28,6 +30,7 @@ public class Alustaja {
         
         pelaajaDao = new PelaajaDao(db);
         peliDao = new PeliDao(db);
+        vuoroDao = new VuoroDao(db);
     }
     
     public void alustaSessionhallinta(){
@@ -58,6 +61,7 @@ public class Alustaja {
         kontrollerit.add(new IndexController(pelaajaDao, sm));
         kontrollerit.add(new PelaajasivuController(pelaajaDao, peliDao, sm));
         kontrollerit.add(new EtsipelaajiaController(pelaajaDao, sm));
+        kontrollerit.add(new OmatpelitController(peliDao, vuoroDao, sm));
         
         return kontrollerit;
     }

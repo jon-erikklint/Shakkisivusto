@@ -31,6 +31,16 @@ public class PeliDao extends AbstraktiDao<Peli>{
         
         return super.findIntByAggregate(query, values);
     }
+    
+    public List<Peli> findByPelaaja(int pelaajaid) throws Exception{
+        String query = "SELECT * FROM PelinPelaaja, Peli WHERE PelinPelaaja.pelaajaid = ?";
+        
+        List<Object> values = new ArrayList<>();
+        
+        values.add(pelaajaid);
+        
+        return super.findByQuery(query, values);
+    }
 
     @Override
     public Peli createT(ResultSet rs) throws Exception {
