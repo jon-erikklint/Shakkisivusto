@@ -1,21 +1,25 @@
 package tkht.shakkisivusto.tietokanta;
 
+import java.net.URI;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class Database {
     
     private String osoite;
-    private String kayttaja;
-    private String salasana;
     
     public Database() throws Exception{
-        osoite = "jdbc:postgresql://localhost/klint";
-        kayttaja = "klint";
-        salasana = "d1e04e393847d728";
+        osoite = "jdbc:sqlite:shakkisivusto.db";
     }
     
     public Connection getConnection() throws Exception{
-        return DriverManager.getConnection(osoite, kayttaja, salasana);
+        URI dbUri = new URI(osoite);
+
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+
+        return DriverManager.getConnection(dbUrl, username, password);
+           
     }
 }
