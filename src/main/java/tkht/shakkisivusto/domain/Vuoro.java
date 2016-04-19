@@ -46,6 +46,8 @@ public class Vuoro {
         for(int i = 0 ; i < lauta.length() ; i++){
             if(lauta.charAt(i) == ','){
                 
+                System.out.println(lauta.substring(alku, i));
+                
                 Nappula uusiNappula = new Nappula(lauta.substring(alku, i));
                 nappulat.add(uusiNappula);
                 
