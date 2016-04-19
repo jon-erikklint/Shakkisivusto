@@ -23,7 +23,7 @@ public class Nappula {
         tyyppi = Nappulatyyppi.getTyyppi(teksti.charAt(1));
         indeksi = Integer.parseInt(""+teksti.charAt(2));
         
-        sijainti = new Ruutu(teksti.substring(4));
+        sijainti = new Ruutu(teksti.substring(3));
     }
 
     public Nappulatyyppi getTyyppi() {

@@ -28,6 +28,17 @@ public class Vuoro {
         alustaLauta(lauta);
     }
     
+    public Vuoro(int peliid, int pelaaja){
+        this.vuoro = 0;
+        this.peliid = peliid;
+        this.pelaaja = pelaaja;
+        this.tekoaika = new Timestamp(System.currentTimeMillis());
+        
+        this.erikoistilanteet = new Erikoistilanteet(Alku.alkulauta);
+        
+        alustaLauta(Alku.alkulauta);
+    }
+    
     public void alustaLauta(String lauta){
         nappulat = new ArrayList<>();
         

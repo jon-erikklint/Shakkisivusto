@@ -4,10 +4,12 @@ public class PelinPelaaja {
     
     private int pelaaja;
     private int peli;
+    private boolean valkoinen;
 
-    public PelinPelaaja(int pelaaja, int peli) {
+    public PelinPelaaja(int pelaaja, int peli, boolean valkoinen) {
         this.pelaaja = pelaaja;
         this.peli = peli;
+        this.valkoinen = valkoinen;
     }
 
     public int getPelaaja() {
@@ -24,5 +26,13 @@ public class PelinPelaaja {
 
     public void setPeli(int peli) {
         this.peli = peli;
+    }
+
+    public boolean isValkoinen() {
+        return valkoinen;
+    }
+
+    public void setValkoinen(boolean valkoinen) {
+        this.valkoinen = valkoinen;
     }
 }

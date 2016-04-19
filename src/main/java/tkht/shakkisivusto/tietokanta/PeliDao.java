@@ -8,7 +8,7 @@ import tkht.shakkisivusto.domain.Peli;
 public class PeliDao extends AbstraktiDao<Peli>{
 
     public PeliDao(Database db) {
-        super(db, "Peli", "");
+        super(db, "Peli", "nimi, status");
     }
     
     public int voitettujaPeleja(int pelaajaid) throws Exception{
@@ -55,15 +55,10 @@ public class PeliDao extends AbstraktiDao<Peli>{
     public List<Object> decomposeT(Peli t) {
         List<Object> hajoitettu = new ArrayList<>();
         
-        hajoitettu.add(t.getId());
         hajoitettu.add(t.getNimi());
         hajoitettu.add(t.getStatus());
         
         return hajoitettu;
     }
 
-    
-
-
-    
 }

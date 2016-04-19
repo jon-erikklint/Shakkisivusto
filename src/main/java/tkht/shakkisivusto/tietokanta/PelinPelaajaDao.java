@@ -15,8 +15,9 @@ public class PelinPelaajaDao extends AbstraktiDao<PelinPelaaja>{
     public PelinPelaaja createT(ResultSet rs) throws Exception {
         int pelaajaid = rs.getInt("pelaajaid");
         int peliid = rs.getInt("peliid");
+        boolean valkoinen = rs.getBoolean("valkoinen");
         
-        return new PelinPelaaja(pelaajaid, peliid);
+        return new PelinPelaaja(pelaajaid, peliid, valkoinen);
     }
 
     @Override

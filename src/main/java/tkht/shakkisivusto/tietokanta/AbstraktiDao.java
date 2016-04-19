@@ -85,6 +85,29 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
         
         return null;
     }
+    
+    @Override
+    public T findNewest() throws Exception{
+        Connection c = db.getConnection();
+        
+        PreparedStatement ps = c.prepareStatement("SELECT * FROM "+taulu+" ORDER BY id DESC");
+        
+        ResultSet rs = ps.executeQuery();
+        
+        T t;
+        
+        if(rs.next()){
+            t = createT(rs);
+            rs.close();
+        }else{
+            t = null;
+        }
+        
+        ps.close();
+        c.close();
+        
+        return t;
+    }
 
     @Override
     public List<T> findAll() throws Exception {

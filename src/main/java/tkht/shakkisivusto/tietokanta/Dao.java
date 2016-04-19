@@ -5,6 +5,7 @@ import java.util.List;
 public interface Dao<T> {
     
     public T findOne(int index) throws Exception;
+    public T findNewest() throws Exception;
     public List<T> findAll() throws Exception;
     
     public boolean add(T t) throws Exception;

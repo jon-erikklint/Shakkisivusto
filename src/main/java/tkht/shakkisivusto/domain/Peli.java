@@ -21,6 +21,11 @@ public class Peli {
         this.status = status;
     }
     
+    public Peli(String nimi){
+        this.nimi = nimi;
+        this.status = "HAETAAN VASTAPELAAJAA";
+    }
+    
     public void alustaPelaajat(Pelaaja pelaaja1, Pelaaja pelaaja2){
         this.pelaaja1 = pelaaja1;
         this.pelaaja2 = pelaaja2;
