@@ -31,8 +31,8 @@ public class Alustaja {
     }
     
     public void alustaTietokanta() throws Exception{
-        
         Database db = new Database();
+        db.alustaTietokanta();
         
         pelaajaDao = new PelaajaDao(db);
         peliDao = new PeliDao(db);
