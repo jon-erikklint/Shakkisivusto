@@ -4,6 +4,7 @@ import java.net.URI;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,8 @@ public class Database {
         if(!tietokantaPystyssa()){
             alustaTietokantataulut();
         }
+        
+        test();
     }
     
     private boolean tietokantaPystyssa(){
@@ -86,6 +89,22 @@ public class Database {
                     ")");
         
         return taulut;
+    }
+    
+    private void test() throws Exception{
+        Connection c = getConnection();
+        
+        PreparedStatement ps = c.prepareStatement("SELECT * FROM Peli");
+        
+        ResultSet rs = ps.executeQuery();
+        
+        while(rs.next()){
+            System.out.println(rs.getString("id"));
+        }
+        
+        rs.close();
+        ps.close();
+        c.close();
     }
     
     public Connection getConnection() throws Exception{
