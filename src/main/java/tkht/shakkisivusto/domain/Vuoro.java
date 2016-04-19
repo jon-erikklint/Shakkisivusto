@@ -34,7 +34,7 @@ public class Vuoro {
         this.pelaaja = pelaaja;
         this.tekoaika = new Timestamp(System.currentTimeMillis());
         
-        this.erikoistilanteet = new Erikoistilanteet(Alku.alkulauta);
+        this.erikoistilanteet = new Erikoistilanteet(Alku.alkutilanteet);
         
         alustaLauta(Alku.alkulauta);
     }
