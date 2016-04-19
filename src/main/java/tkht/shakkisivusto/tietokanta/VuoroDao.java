@@ -10,7 +10,7 @@ import tkht.shakkisivusto.domain.Vuoro;
 public class VuoroDao extends AbstraktiDao<Vuoro>{
 
     public VuoroDao(Database db) {
-        super(db, "Vuoro", "vuoro, peliid, pelaaja, lauta, erikoistilanteet, tekoaika");
+        super(db, "Vuoro", "vuoro, peliid, pelaaja, tekoaika, lauta, erikoistilanteet");
     }
     
     public void lisaaVuorotiedotPeleihin(List<Peli> pelit) throws Exception{
