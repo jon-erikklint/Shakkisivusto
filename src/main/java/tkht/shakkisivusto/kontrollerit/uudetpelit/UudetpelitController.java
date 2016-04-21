@@ -12,7 +12,7 @@ public class UudetpelitController extends AbstraktiController{
     
     public UudetpelitController(PeliDao peliDao, PelaajaDao pelaajaDao, SessionManager sm){
         Map<String, TemplateViewRoute> gets = new HashMap<>();
-        gets.put("", new UudetpelitGet(peliDao, pelaajaDao, sm));
+        gets.put("uudetpelit", new UudetpelitGet(peliDao, pelaajaDao, sm));
         
         Map<String, TemplateViewRoute> sets = new HashMap<>();
         
