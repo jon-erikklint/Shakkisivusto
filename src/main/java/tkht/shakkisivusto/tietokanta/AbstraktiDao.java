@@ -17,6 +17,7 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
     }
     
     public abstract T createT(ResultSet rs) throws Exception;
+    public void addExtra(ResultSet rs, T t, int ekstra){};
     public abstract List<Object> decomposeT(T t);
     public abstract int getId(T t);
     
@@ -245,6 +246,10 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
     
     @Override
     public List<T> findByQuery(String query, List<Object> values) throws Exception{
+        return findByQueryExtra(query, values, -1);
+    }
+    
+    public List<T> findByQueryExtra(String query, List<Object> values, int extra) throws Exception{
         Connection c = db.getConnection();
         
         PreparedStatement ps = c.prepareStatement(query);
@@ -254,6 +259,9 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
         List<T> ts = new ArrayList<>();
         while(rs.next()){
             T t = createT(rs);
+            if( extra != -1){
+                addExtra(rs, t, extra);
+            }
             ts.add(t);
         }
         

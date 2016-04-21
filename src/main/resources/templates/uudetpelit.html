@@ -1,7 +1,7 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Pelaaja</title>
+        <title>Uudet pelit</title>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
@@ -19,19 +19,19 @@
             </form>
         </nav>
         
-        <h1 th:text="${pelaaja.nimi}">Pelaajan nimi</h1>
+        <h1>Uudet pelit</h1>
         
-        <h2>Tilastot:</h2>
+        <ul>
+            <li th:each="peli : ${pelit}">
+                <h2 th:text="${peli.nimi}">Pelin nimi</h2>
+                <p>Pelin tekijä: <span th:text="${peli.pelaaja1.nimi}"></span></p>
+                <p>Vastapelaajan voittoratio: <span th:text="${peli.pelaaja1.voittoratio}"></span></p>
+                <form method="POST" action="${peli.pelisivu}">
+                    <input type="submit" value="Liity peliin"/>
+                </form>
+            </li>
+        </ul>
         
-        <table>
-            <tr>
-                <td>Voittoja:</td>
-                <td th:text="${pelaaja.voittoja}">0</td>
-            </tr>
-            <tr>
-                <td>Tappioita:</td>
-                <td th:text="${pelaaja.tappioita}">0</td>
-            </tr>
-        </table>
+        <h2><a href="/uusipeli">Luo uusi peli</a></h2>
     </body>
 </html>

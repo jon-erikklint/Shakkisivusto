@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import tkht.shakkisivusto.domain.Pelaaja;
+import tkht.shakkisivusto.domain.Peli;
 
 public class PelaajaDao extends AbstraktiDao<Pelaaja>{
 
@@ -31,6 +32,29 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
         values.add(uusiNimi);
         
         return update(columns, values, pelaaja.getIndeksi());
+    }
+    
+    public void haePelaajat(List<Peli> pelit) throws Exception{
+        for(Peli peli : pelit){
+            haePelaajat(peli);
+        }
+    }
+    
+    public void haePelaajat(Peli peli) throws Exception{
+        String query = "SELECT * FROM Peli, Pelinpelaaja, Pelaaja WHERE Peli.id = Pelinpelaaja.peliid AND Pelinpelaaja.pelaajaid = Pelaaja.id"
+                + "AND Peli.id = ?";
+        List<Object> values = new ArrayList<>();
+        values.add(peli.getId());
+        
+        List<Pelaaja> pelaajat = findByQueryExtra(query, values, 0);
+        
+        for(Pelaaja pelaaja : pelaajat){
+            if(pelaaja.isHelpValkoinen()){
+                peli.setPelaaja1(pelaaja);
+            }else{
+                peli.setPelaaja2(pelaaja);
+            }
+        }
     }
 
     @Override

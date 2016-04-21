@@ -9,7 +9,7 @@
     <body>
         <nav>
             <a th:href="${pelaaja.linkki}">Oma sivu</a>
-            <a href="liitypeliin.html">Uudet pelit</a>
+            <a href="/uudetpelit">Uudet pelit</a>
             <a href="/omatpelit">Omat pelit</a>
             <a href="pelatutpelit.html">Vanhat pelit</a>
             <a href="/pelaajahaku">Hae pelaajia</a>
@@ -21,7 +21,13 @@
         
         <h1>Asetukset</h1>
         
-        <p>Vaihda pelaajanimi (nimi joka näkyy muille pelaajille):</p>
+        <h2>Tietosi:</h2>
+        <ul>
+            <li>Käyttäjänimi: <span th:text="${pelaaja.kayttajanimi}">käyttäjänimi</span></li>
+            <li>Pelaajanimi: <span th:text="${pelaaja.nimi}">pelaajanimi</span></li>
+        </ul>
+        
+        <h2>Vaihda pelaajanimi (nimi joka näkyy muille pelaajille):</h2>
         
         <form method="POST">
             Uusi nimi: 
@@ -29,7 +35,7 @@
             <input type="submit"/>
         </form>
         
-        <p>Poista käyttäjä (VAROITUS: toiminto ei peruutettavissa!):</p>
+        <h2>Poista käyttäjä (VAROITUS: toiminto ei peruutettavissa!):</h2>
         
         <form method="POST" action="/poistakayttaja">
             Kirjoita käyttäjänimesi varmistukseksi: <input type="text" name="nimitarkistus"/>

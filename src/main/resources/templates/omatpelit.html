@@ -9,7 +9,7 @@
     <body>
         <nav>
             <a th:href="${pelaaja.linkki}">Oma sivu</a>
-            <a href="liitypeliin.html">Uudet pelit</a>
+            <a href="/uudetpelit">Uudet pelit</a>
             <a href="/omatpelit">Omat pelit</a>
             <a href="pelatutpelit.html">Vanhat pelit</a>
             <a href="/pelaajahaku">Hae pelaajia</a>
@@ -24,8 +24,9 @@
         <ul>
             <li th:each="peli: ${pelit}">
                 <h2 th:text="${peli.nimi}">Pelin nimi</h2>
-                Vuoro: <span th:text="${peli.uusinVuoro}">0</span>
-                <a th:href="${peli.pelisivu}">linkki peliin</a>
+                <p>Status: <span th:text="${peli.status}"></span></p>
+                <p>Vuoro: <span th:text="${peli.uusinVuoro}">0</span></p>
+                <p><a th:href="${peli.pelisivu}">linkki peliin</a></p>
             </li>
         </ul>
         
