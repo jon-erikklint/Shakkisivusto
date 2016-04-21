@@ -56,11 +56,17 @@ public class Vuoro {
     }
     
     public String getErikoistilanteetString(){
-        return "";
+        return erikoistilanteet.toString();
     }
     
     public String getNappulatString(){
-        return "";
+        String koodattu = "";
+        
+        for(Nappula nappula : nappulat){
+            koodattu += nappula.toString();
+        }
+        
+        return koodattu;
     }
 
     public int getVuoro() {
