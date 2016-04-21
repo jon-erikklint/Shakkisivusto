@@ -192,6 +192,8 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
         query += " WHERE ";
         query = addConditions(query, conditions);
         
+        System.out.println(query+" @@@@@@@@@@@@@@@@@@@@@@@@@@");
+        
         PreparedStatement ps = c.prepareStatement(query);
         newValues.addAll(values);
         setPreparedStatementValues(ps, newValues);

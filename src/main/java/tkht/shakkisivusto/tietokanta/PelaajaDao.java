@@ -28,7 +28,7 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
         List<String> columns = new ArrayList<>();
         columns.add("pelaajanimi");
         List<Object> values = new ArrayList<>();
-        values.add("uusiNimi");
+        values.add(uusiNimi);
         
         return update(columns, values, pelaaja.getIndeksi());
     }
