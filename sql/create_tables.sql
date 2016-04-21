@@ -27,7 +27,7 @@ CREATE TABLE Vuoro(
 vuoro int not null,
 peliid int not null,
 pelaaja int,
-lauta varchar(50) not null,
+lauta varchar(200) not null,
 erikoistilanteet varchar(20) not null,
 tekoaika timestamp not null,
 FOREIGN KEY (peliid) REFERENCES Peli(id),
