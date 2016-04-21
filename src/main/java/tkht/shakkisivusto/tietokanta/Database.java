@@ -17,11 +17,11 @@ public class Database {
     }
     
     public void alustaTietokanta() throws Exception{
-        if(!tietokantaPystyssa()){
-            alustaTietokantataulut();
+        if(tietokantaPystyssa()){
+            suoritaKaskyt(pudotusKaskyt());
         }
         
-        test();
+        suoritaKaskyt(tietokantataulut());
     }
     
     private boolean tietokantaPystyssa(){
@@ -37,13 +37,11 @@ public class Database {
         return true;
     }
     
-    private void alustaTietokantataulut() throws Exception{
-        List<String> tietokantataulut = tietokantataulut();
-        
+    private void suoritaKaskyt(List<String> kaskyt) throws Exception{
         Connection c = getConnection();
         
-        for(String taulu : tietokantataulut){
-            PreparedStatement ps = c.prepareStatement(taulu);
+        for(String kasky : kaskyt){
+            PreparedStatement ps = c.prepareStatement(kasky);
             ps.executeUpdate();
             ps.close();
         }
@@ -91,20 +89,23 @@ public class Database {
         return taulut;
     }
     
-    private void test() throws Exception{
-        Connection c = getConnection();
+    private List<String> pudotusKaskyt(){
+        List<String> kaskyt = new ArrayList<>();
         
-        PreparedStatement ps = c.prepareStatement("SELECT * FROM Peli");
+        kaskyt.add("DROP TABLE IF EXISTS Vuoro CASCADE;");
+        kaskyt.add("DROP TABLE IF EXISTS Pelinpelaaja CASCADE;");
+        kaskyt.add("DROP TABLE IF EXISTS Peli CASCADE;");
+        kaskyt.add("DROP TABLE IF EXISTS Pelaaja CASCADE;");
         
-        ResultSet rs = ps.executeQuery();
+        return kaskyt;
+    }
+    
+    private List<String> testidata(){
+        List<String> kaskyt = new ArrayList<>();
         
-        while(rs.next()){
-            System.out.println(rs.getString("id"));
-        }
+        kaskyt.add("INSERT INTO Pelaaja (kayttajanimi, pelaajanimi, salasana, admin) VALUES ('asd', 'asd', 'asd', false)");
         
-        rs.close();
-        ps.close();
-        c.close();
+        return kaskyt;
     }
     
     public Connection getConnection() throws Exception{
