@@ -22,6 +22,7 @@ public class Database {
         }
         
         suoritaKaskyt(tietokantataulut());
+        suoritaKaskyt(testidata());
     }
     
     private boolean tietokantaPystyssa(){
