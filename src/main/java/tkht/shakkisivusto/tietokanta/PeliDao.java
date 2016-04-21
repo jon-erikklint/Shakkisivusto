@@ -33,7 +33,7 @@ public class PeliDao extends AbstraktiDao<Peli>{
     }
     
     public List<Peli> findByPelaaja(int pelaajaid) throws Exception{
-        String query = "SELECT * FROM PelinPelaaja, Peli WHERE Pelinpelaaja.pelaajaid = Peli.id AND PelinPelaaja.pelaajaid = ?";
+        String query = "SELECT * FROM PelinPelaaja, Peli WHERE Pelinpelaaja.peliid = Peli.id AND PelinPelaaja.pelaajaid = ?";
         
         List<Object> values = new ArrayList<>();
         
