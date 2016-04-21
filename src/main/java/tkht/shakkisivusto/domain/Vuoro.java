@@ -62,8 +62,13 @@ public class Vuoro {
     public String getNappulatString(){
         String koodattu = "";
         
-        for(Nappula nappula : nappulat){
+        for(int i = 0 ; i < nappulat.size() ; i++){
+            Nappula nappula = nappulat.get(i);
             koodattu += nappula.toString();
+            
+            if(i < nappulat.size() - 1){
+                koodattu += ":";
+            }
         }
         
         return koodattu;
