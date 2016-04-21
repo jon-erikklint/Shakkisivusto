@@ -18,6 +18,7 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
     
     public abstract T createT(ResultSet rs) throws Exception;
     public abstract List<Object> decomposeT(T t);
+    public abstract int getId(T t);
     
     private void setPreparedStatementValues(PreparedStatement ps, List<Object> values) throws Exception{
         for(int i = 0 ; i < values.size() ; i++){
@@ -51,18 +52,26 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
     }
     
     public String addConditions(String preConditionQuery, List<String> conditions){
-        String queryWithConditions = preConditionQuery;
+        return addStrings(preConditionQuery, conditions, " AND ");
+    }
+    
+    public String addColumns(String query, List<String> columns){
+        return addStrings(query, columns, "= ?, ")+"= ?";
+    }
+    
+    private String addStrings(String query, List<String> toAdd, String between){
+        String readyQuery = query;
         
-        for(int i = 0 ; i < conditions.size() ; i++){
-            String condition = conditions.get(i);
-            queryWithConditions += condition;
+        for(int i = 0 ; i < toAdd.size() ; i++){
+            String condition = toAdd.get(i);
+            readyQuery += condition;
             
-            if(i < conditions.size()-1){
-                queryWithConditions += " AND ";
+            if(i < toAdd.size()-1){
+                readyQuery += between;
             }
         }
         
-        return queryWithConditions;
+        return readyQuery;
     }
 
     @Override
@@ -163,6 +172,45 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
         c.close();
         
         return deleted;
+    }
+    
+    public int delete(T t) throws Exception{
+        List<String> conditions = new ArrayList<>();
+        conditions.add("id");
+        List<Object> values = new ArrayList<>();
+        values.add(getId(t));
+        
+        return delete(conditions, values);
+    }
+    
+    @Override
+    public int update(List<String> columns, List<Object> newValues, List<String> conditions, List<Object> values) throws Exception{
+        Connection c = db.getConnection();
+        
+        String query = "UPDATE "+taulu+" SET ";
+        query = addColumns(query, columns);
+        query += " WHERE ";
+        query = addConditions(query, conditions);
+        
+        PreparedStatement ps = c.prepareStatement(query);
+        newValues.addAll(values);
+        setPreparedStatementValues(ps, newValues);
+        
+        int updated = ps.executeUpdate();
+        
+        ps.close();
+        c.close();
+        
+        return updated;
+    }
+    
+    public int update(List<String> columns, List<Object> newValues, int id) throws Exception{
+        List<String> condition = new ArrayList<>();
+        condition.add("id=?");
+        List<Object> values = new ArrayList<>();
+        values.add(id);
+        
+        return update(columns, newValues, condition, values);
     }
 
     @Override

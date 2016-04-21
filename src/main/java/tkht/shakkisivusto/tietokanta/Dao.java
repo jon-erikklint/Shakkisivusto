@@ -10,6 +10,7 @@ public interface Dao<T> {
     
     public boolean add(T t) throws Exception;
     public int delete(List<String> conditions, List<Object> values) throws Exception;
+    public int update(List<String> columns, List<Object> newValues, List<String> conditions, List<Object> values) throws Exception;
     
     public List<T> findByConditions(List<String> conditions, List<Object> parametres, 
             List<String> orderByConditions, boolean desc, int limit, int offset) throws Exception;

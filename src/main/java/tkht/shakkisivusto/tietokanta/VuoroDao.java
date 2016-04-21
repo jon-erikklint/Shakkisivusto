@@ -60,6 +60,11 @@ public class VuoroDao extends AbstraktiDao<Vuoro>{
         return lista;
     }
 
+    @Override
+    public int getId(Vuoro t) {
+        return t.getVuoro();
+    }
+
     
     
 }

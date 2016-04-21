@@ -23,6 +23,15 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
         }
         return vastaus.get(0);
     }
+    
+    public int paivitaNimi(Pelaaja pelaaja, String uusiNimi) throws Exception{
+        List<String> columns = new ArrayList<>();
+        columns.add("pelaajanimi");
+        List<Object> values = new ArrayList<>();
+        values.add("uusiNimi");
+        
+        return update(columns, values, pelaaja.getIndeksi());
+    }
 
     @Override
     public Pelaaja createT(ResultSet rs) throws Exception{
@@ -47,6 +56,9 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
         return attribuutit;
     }
 
-    
-    
+    @Override
+    public int getId(Pelaaja t) {
+        return t.getIndeksi();
+    }
+ 
 }

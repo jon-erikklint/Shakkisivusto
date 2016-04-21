@@ -61,4 +61,9 @@ public class PeliDao extends AbstraktiDao<Peli>{
         return hajoitettu;
     }
 
+    @Override
+    public int getId(Peli t) {
+        return t.getId();
+    }
+
 }

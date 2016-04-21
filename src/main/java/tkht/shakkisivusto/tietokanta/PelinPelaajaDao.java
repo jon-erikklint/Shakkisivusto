@@ -30,5 +30,10 @@ public class PelinPelaajaDao extends AbstraktiDao<PelinPelaaja>{
         
         return lista;
     }
+
+    @Override
+    public int getId(PelinPelaaja t) {
+        return t.getPelaaja();
+    }
     
 }

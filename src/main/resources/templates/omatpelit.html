@@ -13,7 +13,7 @@
             <a href="/omatpelit">Omat pelit</a>
             <a href="pelatutpelit.html">Vanhat pelit</a>
             <a href="/pelaajahaku">Hae pelaajia</a>
-            <a href="asetukset.html">Asetukset</a>
+            <a href="/asetukset">Asetukset</a>
             <form method="POST" action="/ulos">
                 <input type="submit" value="Kirjaudu ulos"/>
             </form>
@@ -24,8 +24,8 @@
         <ul>
             <li th:each="peli: ${pelit}">
                 <h2 th:text="${peli.nimi}">Pelin nimi</h2>
-                <p th:text="${peli.uusinVuoro}">Vuoro: 0</p>
-                <a href="${peli.pelisivu}">linkki peliin</a>
+                Vuoro: <span th:text="${peli.uusinVuoro}">0</span>
+                <a th:href="${peli.pelisivu}">linkki peliin</a>
             </li>
         </ul>
         
