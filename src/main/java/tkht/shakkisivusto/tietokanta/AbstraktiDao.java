@@ -163,8 +163,6 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
     public int delete(List<String> conditions, List<Object> values) throws Exception {
         Connection c = db.getConnection();
         
-        System.out.println(addConditions("DELETE FROM "+taulu+" WHERE ", conditions)+ " @@@@@@@@@@@@@@@@@@@@@@@@@");
-        
         PreparedStatement ps = c.prepareStatement(addConditions("DELETE FROM "+taulu+" WHERE ", conditions) );
         setPreparedStatementValues(ps, values);
         
@@ -178,7 +176,7 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
     
     public int delete(T t) throws Exception{
         List<String> conditions = new ArrayList<>();
-        conditions.add("id");
+        conditions.add("id=?");
         List<Object> values = new ArrayList<>();
         values.add(getId(t));
         
