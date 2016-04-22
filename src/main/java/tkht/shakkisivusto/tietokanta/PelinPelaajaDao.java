@@ -3,12 +3,34 @@ package tkht.shakkisivusto.tietokanta;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import tkht.shakkisivusto.domain.Peli;
 import tkht.shakkisivusto.domain.PelinPelaaja;
 
 public class PelinPelaajaDao extends AbstraktiDao<PelinPelaaja>{
 
     public PelinPelaajaDao(Database db) {
         super(db, "PelinPelaaja", "pelaajaid, peliid, valkoinen");
+    }
+    
+    public void haePelienPelaajatList(List<Peli> pelit) throws Exception{
+        for(Peli peli : pelit){
+            haePelinPelaajat(peli);
+        }
+    }
+    
+    public void haePelinPelaajat(Peli peli) throws Exception{
+        String query = "SELECT * FROM Peli, Pelinpelaaja WHERE Peli.id = Pelinpelaaja.peliid AND Peli.id = ?";
+        List<Object> values = new ArrayList<>();
+        values.add(peli.getId());
+        
+        List<PelinPelaaja> pelinpelaajat = findByQuery(query, values);
+        for(PelinPelaaja pelaaja : pelinpelaajat){
+            if(pelaaja.isValkoinen()){
+                peli.setPelaaja1id(pelaaja.getPelaaja());
+            }else{
+                peli.setPelaaja2id(pelaaja.getPelaaja());
+            }
+        }
     }
 
     @Override

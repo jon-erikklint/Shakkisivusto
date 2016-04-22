@@ -13,6 +13,9 @@ public class Peli {
     private Pelaaja pelaaja1;
     private Pelaaja pelaaja2;
     
+    private int pelaaja1id;
+    private int pelaaja2id;
+    
     public Peli(int id, String nimi, String status){
         this.id = id;
         this.nimi = nimi;
@@ -83,5 +86,21 @@ public class Peli {
     
     public String getPelisivu(){
         return "/peli/"+id;
+    }
+
+    public int getPelaaja1id() {
+        return pelaaja1id;
+    }
+
+    public void setPelaaja1id(int pelaaja1id) {
+        this.pelaaja1id = pelaaja1id;
+    }
+
+    public int getPelaaja2id() {
+        return pelaaja2id;
+    }
+
+    public void setPelaaja2id(int pelaaja2id) {
+        this.pelaaja2id = pelaaja2id;
     }
 }

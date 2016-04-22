@@ -6,7 +6,8 @@ import java.util.List;
 
 public abstract class AbstraktiDao<T> implements Dao<T>{
 
-    Database db;
+    private Database db;
+    
     String taulu;
     String columns;
     

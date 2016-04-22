@@ -10,8 +10,6 @@ public class Pelaaja {
     
     private int voittoja;
     private int tappioita;
-    
-    private boolean helpValkoinen;
 
     public Pelaaja(int indeksi, String nimi, String kayttajanimi, String salasana, boolean admin) {
         this.indeksi = indeksi;
@@ -85,13 +83,5 @@ public class Pelaaja {
     
     public double getVoittoratio(){
         return ((double)voittoja) / tappioita;
-    }
-
-    public boolean isHelpValkoinen() {
-        return helpValkoinen;
-    }
-
-    public void setHelpValkoinen(boolean helpValkoinen) {
-        this.helpValkoinen = helpValkoinen;
     }
 }

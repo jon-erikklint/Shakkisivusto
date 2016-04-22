@@ -41,20 +41,8 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
     }
     
     public void haePelaajat(Peli peli) throws Exception{
-        String query = "SELECT * FROM Peli, Pelinpelaaja, Pelaaja WHERE Peli.id = Pelinpelaaja.peliid AND Pelinpelaaja.pelaajaid = Pelaaja.id"
-                + "AND Peli.id = ?";
-        List<Object> values = new ArrayList<>();
-        values.add(peli.getId());
-        
-        List<Pelaaja> pelaajat = findByQueryExtra(query, values, 0);
-        
-        for(Pelaaja pelaaja : pelaajat){
-            if(pelaaja.isHelpValkoinen()){
-                peli.setPelaaja1(pelaaja);
-            }else{
-                peli.setPelaaja2(pelaaja);
-            }
-        }
+        peli.setPelaaja1(findOne(peli.getPelaaja1id()));
+        peli.setPelaaja2(findOne(peli.getPelaaja2id()));
     }
 
     @Override
