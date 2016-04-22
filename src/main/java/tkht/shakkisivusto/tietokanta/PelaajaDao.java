@@ -85,7 +85,7 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
     
     public void deleteCascade(Pelaaja pelaaja) throws Exception{
         List<String> columns = new ArrayList<>();
-        columns.add("Vuoro.pelaaja");
+        columns.add("Vuoro.pelaaja = ?");
         List<Object> newValues = new ArrayList<>();
         columns.add(null);
         List<String> conditions = new ArrayList<>();
@@ -96,7 +96,7 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
         vuoroDao.update(columns, newValues, conditions, values); //laitetaan vuorojen pelaajat nulliksi
         
         columns.clear();
-        columns.add("Peli.voittaja");
+        columns.add("Peli.voittaja=?");
         conditions.clear();
         conditions.add("Peli.voittaja = ?");
         

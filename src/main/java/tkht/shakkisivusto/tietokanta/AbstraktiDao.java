@@ -196,18 +196,14 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
         Connection c = db.getConnection();
         
         String query = "UPDATE "+taulu+" SET ";
-        System.out.println("1");
         query = addColumns(query, columns);
-        System.out.println("2");
         query += " WHERE ";
         query = addConditions(query, conditions);
-        System.out.println("3");
         
         PreparedStatement ps = c.prepareStatement(query);
         newValues.addAll(values);
-        System.out.println("4");
         setPreparedStatementValues(ps, newValues);
-        System.out.println("5");
+        
         int updated = ps.executeUpdate();
         
         ps.close();
