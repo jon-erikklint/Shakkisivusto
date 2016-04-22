@@ -195,6 +195,9 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
     public int update(List<String> columns, List<Object> newValues, List<String> conditions, List<Object> values) throws Exception{
         Connection c = db.getConnection();
         
+        System.out.println(columns.size()+conditions.size());
+        System.out.println(newValues.size()+values.size());
+        
         String query = "UPDATE "+taulu+" SET ";
         query = addColumns(query, columns);
         query += " WHERE ";
