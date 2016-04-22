@@ -32,6 +32,8 @@ public class UudetpelitGet extends KirjautunutHelper{
         List<Peli> liityttavatPelit = peliDao.liityttavatPelit(kirjautunut.getIndeksi());
         pelinPelaajaDao.haePelienPelaajatList(liityttavatPelit);
         pelaajaDao.haePelaajat(liityttavatPelit);
+        
+        System.out.println(liityttavatPelit.get(0).getPelaaja1());
         map.put("pelit", liityttavatPelit);
     }
     
