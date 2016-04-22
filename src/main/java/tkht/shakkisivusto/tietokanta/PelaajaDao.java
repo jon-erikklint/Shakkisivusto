@@ -87,7 +87,7 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
         List<String> columns = new ArrayList<>();
         columns.add("Vuoro.pelaaja = ?");
         List<Object> newValues = new ArrayList<>();
-        columns.add(null);
+        newValues.add(null);
         List<String> conditions = new ArrayList<>();
         conditions.add("Vuoro.pelaaja = ?");
         List<Object> values = new ArrayList<>();
