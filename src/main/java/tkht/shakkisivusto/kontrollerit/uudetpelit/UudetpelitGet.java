@@ -33,7 +33,10 @@ public class UudetpelitGet extends KirjautunutHelper{
         pelinPelaajaDao.haePelienPelaajatList(liityttavatPelit);
         pelaajaDao.haePelaajat(liityttavatPelit);
         
-        System.out.println(liityttavatPelit.get(0).getPelaaja1());
+        if(!liityttavatPelit.isEmpty()){
+            System.out.println(liityttavatPelit.get(0).getPelaaja1());
+        }
+        
         map.put("pelit", liityttavatPelit);
     }
     

@@ -26,6 +26,12 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
         for(int i = 0 ; i < values.size() ; i++){
             int j = i+1;
             Object o = values.get(i);
+            
+            if(o == null){
+                ps.setObject(j, o);
+                continue;
+            }
+            
             Class clas = o.getClass();
             
             if(clas == Timestamp.class){
