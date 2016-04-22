@@ -8,8 +8,18 @@ import tkht.shakkisivusto.domain.Peli;
 
 public class PelaajaDao extends AbstraktiDao<Pelaaja>{
 
+    private PelinPelaajaDao ppDao;
+    private PeliDao peliDao;
+    private VuoroDao vuoroDao;
+    
     public PelaajaDao(Database db) {
         super(db, "Pelaaja", "kayttajanimi, pelaajanimi, salasana, admin");
+    }
+    
+    public void addDaos(PelinPelaajaDao ppDao, PeliDao peliDao, VuoroDao vuoroDao){
+        this.ppDao = ppDao;
+        this.peliDao = peliDao;
+        this.vuoroDao = vuoroDao;
     }
     
     public Pelaaja findByKayttajatunnus(String kayttajatunnus) throws Exception{
@@ -71,6 +81,33 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
     @Override
     public int getId(Pelaaja t) {
         return t.getIndeksi();
+    }
+    
+    public void deleteCascade(Pelaaja pelaaja) throws Exception{
+        List<String> columns = new ArrayList<>();
+        columns.add("Vuoro.pelaaja");
+        List<Object> newValues = new ArrayList<>();
+        columns.add(null);
+        List<String> conditions = new ArrayList<>();
+        conditions.add("Vuoro.pelaaja = ?");
+        List<Object> values = new ArrayList<>();
+        values.add(pelaaja.getIndeksi());
+        
+        vuoroDao.update(columns, newValues, conditions, values); //laitetaan vuorojen pelaajat nulliksi
+        
+        columns.clear();
+        columns.add("Peli.voittaja");
+        conditions.clear();
+        conditions.add("Peli.voittaja = ?");
+        
+        peliDao.update(columns, newValues, conditions, values); //laitetaan voittaja nulliksi
+        
+        conditions.clear();
+        conditions.add("Pelinpelaaja.pelaajaid = ?");
+        
+        ppDao.delete(conditions, values); //poistetaan osallistumiset peleihin
+        
+        delete(pelaaja); //poistetaan itse pelaaja
     }
  
 }

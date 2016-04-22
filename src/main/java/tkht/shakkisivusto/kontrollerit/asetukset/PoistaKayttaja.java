@@ -24,7 +24,7 @@ public class PoistaKayttaja extends KirjautunutHelper{
         String salasana = rqst.queryParams("salasana");
         
         if(kirjautunut.getSalasana().equals(salasana) && kirjautunut.getKayttajanimi().equals(nimitarkistus)){
-            pelaajaDao.delete(kirjautunut);
+            pelaajaDao.deleteCascade(kirjautunut);
             
             String session = rqst.cookie("session");
             sm.removeSession(session);
