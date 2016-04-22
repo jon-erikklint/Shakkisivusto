@@ -103,4 +103,12 @@ public class Peli {
     public void setPelaaja2id(int pelaaja2id) {
         this.pelaaja2id = pelaaja2id;
     }
+    
+    public String getPelaaja1Nimi(){
+        return pelaaja1.getKayttajanimi();
+    }
+    
+    public double getPelaaja1Voittoratio(){
+        return pelaaja1.getVoittoratio();
+    }
 }

@@ -24,8 +24,8 @@
         <ul>
             <li th:each="peli : ${pelit}">
                 <h2 th:text="${peli.nimi}">Pelin nimi</h2>
-                <p>Pelin tekijä: <span th:text="${peli.pelaaja1.nimi}"></span></p>
-                <p>Vastapelaajan voittoratio: <span th:text="${peli.pelaaja1.voittoratio}"></span></p>
+                <p>Pelin tekijä: <span th:text="${peli.pelaaja1nimi}"></span></p>
+                <p>Vastapelaajan voittoratio: <span th:text="${peli.pelaaja1voittoratio}"></span></p>
                 <form method="POST" action="${peli.pelisivu}">
                     <input type="submit" value="Liity peliin"/>
                 </form>
