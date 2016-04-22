@@ -28,7 +28,7 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
             Object o = values.get(i);
             
             if(o == null){
-                ps.setObject(j, o);
+                ps.setObject(j, "");
                 continue;
             }
             
