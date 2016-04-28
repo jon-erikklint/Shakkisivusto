@@ -44,6 +44,7 @@ public class Rekisterointi implements TemplateViewRoute{
             pelaaja.setAdmin(false);
 
             pelaajaDao.add(pelaaja);
+            pelaaja = pelaajaDao.findByKayttajatunnus(kayttajatunnus);
             
             sg.generateSession(pelaaja, rspns);
             rspns.redirect("/pelaaja/"+pelaaja.getKayttajanimi());
