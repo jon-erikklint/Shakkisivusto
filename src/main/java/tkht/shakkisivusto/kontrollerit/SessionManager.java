@@ -33,6 +33,8 @@ public class SessionManager {
         }
         
         Pelaaja p = sessions.get(sessionName);
+        System.out.println(p.getNimi());
+        System.out.println(p.getIndeksi());
         p = pelaajaDao.findOne(p.getIndeksi());
         
         sessions.put(sessionName, p); //päivitetään pelaajan tiedot
