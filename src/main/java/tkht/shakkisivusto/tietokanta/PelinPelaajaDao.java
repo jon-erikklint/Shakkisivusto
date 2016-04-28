@@ -8,7 +8,7 @@ import tkht.shakkisivusto.tietokanta.luojat.PelinPelaajaLuoja;
 public class PelinPelaajaDao extends AbstraktiDao<PelinPelaaja>{
 
     public PelinPelaajaDao(Database db) {
-        super(db, "PelinPelaaja", "pelaajaid, peliid, valkoinen", new PelinPelaajaLuoja());
+        super(db, "PelinPelaaja", "pelaajaid, peliid, valkoinen, voittaja", new PelinPelaajaLuoja());
     }
 
     @Override
@@ -18,6 +18,7 @@ public class PelinPelaajaDao extends AbstraktiDao<PelinPelaaja>{
         lista.add(t.getPelaaja());
         lista.add(t.getPeli());
         lista.add(t.isValkoinen());
+        lista.add(t.isVoittaja());
         
         return lista;
     }

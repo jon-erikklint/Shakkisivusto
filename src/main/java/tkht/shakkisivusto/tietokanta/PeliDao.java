@@ -17,7 +17,7 @@ public class PeliDao extends AbstraktiDao<Peli>{
     }
     
     public int voitettujaPeleja(int pelaajaid) throws Exception{
-        String query = "SELECT COUNT(*) FROM Peli WHERE Peli.voittaja = ?";
+        String query = "SELECT COUNT(*) FROM Pelinpelaaja WHERE Pelinpelaaja.pelaajaid = ? AND Pelinpelaaja.voittaja = true";
         
         List<Object> values = new ArrayList<>();
         values.add(pelaajaid);
@@ -28,7 +28,7 @@ public class PeliDao extends AbstraktiDao<Peli>{
     public int havittyjaPeleja(int pelaajaid) throws Exception{
         String query = "SELECT COUNT(*) FROM Peli, PelinPelaaja "
                 + "WHERE Peli.id = PelinPelaaja.peliid AND Peli.status = 'LOPPUNUT' "
-                + "AND PelinPelaaja.pelaajaid = ? AND Peli.voittaja != ?";
+                + "AND PelinPelaaja.pelaajaid = ? AND Pelinpelaaja.voittaja = false";
         
         List<Object> values = new ArrayList<>();
         values.add(pelaajaid);
