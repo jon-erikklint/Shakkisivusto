@@ -19,8 +19,12 @@ public class PeliDao extends AbstraktiDao<Peli>{
     
     public void lisaaPelienpelaajienVoittoratiot(List<Peli> pelit) throws Exception{
         for(Peli peli : pelit){
-            lisaaPelaajanVoittoratio(peli.getPelaaja1().getPelaaja());
-            lisaaPelaajanVoittoratio(peli.getPelaaja2().getPelaaja());
+            if(peli.getPelaaja1() != null ){
+                lisaaPelaajanVoittoratio(peli.getPelaaja1().getPelaaja());
+            }
+            if(peli.getPelaaja2() != null ){
+                lisaaPelaajanVoittoratio(peli.getPelaaja2().getPelaaja());
+            }
         }
     }
     
