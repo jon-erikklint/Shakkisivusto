@@ -16,25 +16,10 @@ public class Database {
     }
     
     public void alustaTietokanta() throws Exception{
-        if(tietokantaPystyssa()){
-            suoritaKaskyt(pudotusKaskyt());
-        }
+        suoritaKaskyt(pudotusKaskyt());
         
         suoritaKaskyt(tietokantataulut());
         suoritaKaskyt(testidata());
-    }
-    
-    private boolean tietokantaPystyssa(){
-        try{
-            
-            Connection c = getConnection();
-            c.prepareStatement("SELECT * FROM Vuoro").executeQuery();
-            
-        }catch(Exception e){
-            return false;
-        }
-        
-        return true;
     }
     
     private void suoritaKaskyt(List<String> kaskyt) throws Exception{
@@ -62,7 +47,7 @@ public class Database {
         taulut.add("CREATE TABLE Peli(\n" +
                     "id serial primary key,\n" +
                     "nimi varchar(50) not null,\n" +
-                    "status varchar(25) not null,\n" +
+                    "status varchar(25) not null\n" +
                     ")");
         taulut.add("CREATE TABLE Pelinpelaaja(\n" +
                     "pelaajaid int not null,\n" +
