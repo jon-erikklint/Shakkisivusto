@@ -32,7 +32,6 @@ public class PeliDao extends AbstraktiDao<Peli>{
         
         List<Object> values = new ArrayList<>();
         values.add(pelaajaid);
-        values.add(pelaajaid);
         
         return super.findIntByAggregate(query, values);
     }
