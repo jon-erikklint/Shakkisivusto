@@ -84,11 +84,11 @@ public class Peli implements Yhdistettava{
         this.pelaaja2 = pelaaja2;
     }
     
-    public double getPelaaja1Voittoratio(){
+    public double getPelaaja1voittoratio(){
         return pelaaja1.getPelaaja().getVoittoratio();
     }
     
-    public String getPelaaja1Nimi(){
+    public String getPelaaja1nimi(){
         return pelaaja1.getPelaaja().getNimi();
     }
 
