@@ -22,6 +22,8 @@ public class SessionManager {
         this.refreshRate = refreshRate;
         this.sessionAliveTime = sessionAliveTime;
         this.lastCheck = System.currentTimeMillis();
+        
+        this.pelaajaDao = pelaajaDao;
     }
     
     public Pelaaja getPelaaja(String sessionName) throws Exception{
@@ -33,8 +35,6 @@ public class SessionManager {
         }
         
         Pelaaja p = sessions.get(sessionName);
-        System.out.println(p.getNimi());
-        System.out.println(p.getIndeksi());
         p = pelaajaDao.findOne(p.getIndeksi());
         
         sessions.put(sessionName, p); //päivitetään pelaajan tiedot
