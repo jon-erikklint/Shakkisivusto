@@ -24,6 +24,9 @@ public class PelisivuGet extends KirjautunutHelper{
         Peli peli = peliDao.findOneRambling(peliid);
         
         map.put("kartta", peli.getUusinVuoro().getRuudut());
+        
+        int vuorossaolijanid = peli.getUusinVuoro().getPelaajaid();
+        map.put("pelaajanVuoro", vuorossaolijanid == kirjautunut.getIndeksi());
     }
     
 }
