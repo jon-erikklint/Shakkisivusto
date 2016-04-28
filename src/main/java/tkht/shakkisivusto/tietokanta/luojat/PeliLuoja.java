@@ -11,8 +11,6 @@ public class PeliLuoja extends AbstraktiLuoja<Peli>{
         String nimi = rs.getString("nimi");
         String status = rs.getString("status");
         
-        System.out.println("PELILUOJA TOIMII");
-        
         return new Peli(id, nimi, status);
     }
 

@@ -15,6 +15,8 @@ public class PelisivuGet extends KirjautunutHelper{
     
     public PelisivuGet(PeliDao peliDao, SessionManager sm) {
         super(sm, "pelisivu");
+        
+        this.peliDao = peliDao;
     }
 
     @Override
