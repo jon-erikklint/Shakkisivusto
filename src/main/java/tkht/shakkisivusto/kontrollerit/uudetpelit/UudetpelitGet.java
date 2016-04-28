@@ -28,8 +28,12 @@ public class UudetpelitGet extends KirjautunutHelper{
 
     @Override
     public void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut) throws Exception {
+        System.out.println("UUDETPELIT ALOITETTU");
+        
         List<Peli> liityttavatPelit = peliDao.liityttavatPelit(kirjautunut.getIndeksi());
         peliDao.lisaaPelienpelaajienVoittoratiot(liityttavatPelit);
+        
+        System.out.println("UUDETPELIT HAETTU");
         
         map.put("pelit", liityttavatPelit);
     }

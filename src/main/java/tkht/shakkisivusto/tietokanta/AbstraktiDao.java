@@ -213,9 +213,6 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
         PreparedStatement ps = c.prepareStatement(query);
         newValues.addAll(values);
         
-        System.out.println(query);
-        System.out.println(newValues.size());
-        
         setPreparedStatementValues(ps, newValues);
         
         int updated = ps.executeUpdate();
