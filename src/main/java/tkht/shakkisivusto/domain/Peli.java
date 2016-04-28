@@ -36,16 +36,24 @@ public class Peli implements Yhdistettava{
         return "/peli/"+id;
     }
     
-    public int getUusinVuoro(){
-        int suurin = 0;
+    public int getUusinVuoronumero(){
+        return getUusinVuoro().getVuoro();
+    }
+    
+    public Vuoro getUusinVuoro(){
+        int indeksi = 0;
+        int suurin = vuorot.get(0).getVuoro();
         
-        for (Vuoro vuoro : vuorot){
+        for(int i = 1 ; i < vuorot.size() ; i++){
+            Vuoro vuoro = vuorot.get(i);
+            
             if(vuoro.getVuoro() > suurin){
+                indeksi = i;
                 suurin = vuoro.getVuoro();
             }
         }
         
-        return suurin;
+        return vuorot.get(indeksi);
     }
     
     public String getNimi() {

@@ -66,6 +66,10 @@ public class PeliDao extends AbstraktiDao<Peli>{
         return super.findByQuery(query, values, yhdistavaLuoja);
     }
     
+    public Peli findOneRambling(int id) throws Exception{
+        return super.findOne(id, yhdistavaLuoja);
+    }
+    
     public List<Peli> liityttavatPelit(int pelaajaid) throws Exception{
         String query = "SELECT * FROM Peli, Pelinpelaaja WHERE Pelinpelaaja.peliid = Peli.id AND "
                 + "Peli.status = 'HAETAAN VASTAPELAAJAA' AND Pelinpelaaja.pelaajaid != ?";

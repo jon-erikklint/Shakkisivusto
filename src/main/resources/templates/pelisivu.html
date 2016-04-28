@@ -8,29 +8,57 @@
     
     <body>
         <nav>
-            <a href="pelaajasivu.html">Oma sivu</a>
-            <a href="uudetpelit.html">Uudet pelit</a>
-            <a href="omatpelit.html">Omat pelit</a>
+            <a th:href="${pelaaja.linkki}">Oma sivu</a>
+            <a href="/uudetpelit">Uudet pelit</a>
+            <a href="/omatpelit">Omat pelit</a>
             <a href="pelatutpelit.html">Vanhat pelit</a>
-            <a href="asetukset.html">Asetukset</a>
+            <a href="/pelaajahaku">Hae pelaajia</a>
+            <a href="/asetukset">Asetukset</a>
+            <form method="POST" action="/ulos">
+                <input type="submit" value="Kirjaudu ulos"/>
+            </form>
         </nav>
         
         <h1>Pelin nimi</h1>
         
+        <ul>
+            <li>O = tyhjä</li>
+            <li>S = sotilas</li>
+            <li>L = lähetti</li>
+            <li>H = ratsu</li>
+            <li>T = torni</li>
+            <li>G = kuningatar</li>
+            <li>K = kuningas</li>
+            <li>[] = valkoinen</li>
+            <li>][ = musta</li>
+        </ul>
+        
         <table>
-            <p>Taulukko kentästä</p>
+            <tr th:each="rivi :${kartta}">
+                <td th:each="ruutu :${rivi}">
+                    <span th:text="${ruutu.koodi}">O</span>
+                </td>
+            </tr>
         </table>
         
-        <h2>Tee vuorosi:</h2>
-        <p>
-            Tee vuorosi ilmoittamalla sijainnin, josta haluat siirtää nappulan, 
-            ja sijainnin, johon haluat siirtää kyseisen nappulan. Käytä muotoa
-            AN jossa A on kirjain A-H ja N on numero välillä 1-8.
-        </p>
-        <form>
-            Siirrettävän nappulan sijainti<input type="text" name="mista"/>
-            Paikka johon nappula siirretään<input type="text" name="minne"/>
-            <input type="submit"/>
-        </form>
+        <div th:switch="${pelaajanVuoro}">
+            <div th:case="true">
+                <h2>Tee vuorosi:</h2>
+                <p>
+                    Tee vuorosi ilmoittamalla sijainnin, josta haluat siirtää nappulan, 
+                    ja sijainnin, johon haluat siirtää kyseisen nappulan. Käytä muotoa
+                    AN jossa A on kirjain A-H ja N on numero välillä 1-8.
+                </p>
+                <form>
+                    Siirrettävän nappulan sijainti<input type="text" name="mista"/>
+                    Paikka johon nappula siirretään<input type="text" name="minne"/>
+                    <input type="submit"/>
+                </form>
+            </div>
+            
+            <div th:case="false">
+                <p>On toisen pelaajan vuoro</p>
+            </div>
+        </div>
     </body>
 </html>

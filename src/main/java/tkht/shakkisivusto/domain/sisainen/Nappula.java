@@ -25,6 +25,21 @@ public class Nappula {
         
         sijainti = new Ruutu(teksti.substring(3));
     }
+    
+    public String karttaString(){
+        char alku;
+        char loppu;
+        
+        if(valkoinen){
+            alku='[';
+            loppu=']';
+        }else{
+            alku=']';
+            loppu='[';
+        }
+        
+        return (alku+tyyppi.toString()+loppu).toUpperCase();
+    }
 
     public Nappulatyyppi getTyyppi() {
         return tyyppi;
