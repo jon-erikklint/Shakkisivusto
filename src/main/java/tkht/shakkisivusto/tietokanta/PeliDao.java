@@ -39,8 +39,7 @@ public class PeliDao extends AbstraktiDao<Peli>{
     public int voitettujaPeleja(int pelaajaid) throws Exception{
         String query = "SELECT COUNT(*) FROM Pelinpelaaja WHERE Pelinpelaaja.pelaajaid = ? AND Pelinpelaaja.voittaja = true";
         
-        List<Object> values = new ArrayList<>();
-        values.add(pelaajaid);
+        List<Object> values = super.createList(pelaajaid);
         
         return super.findIntByAggregate(query, values);
     }
@@ -50,8 +49,7 @@ public class PeliDao extends AbstraktiDao<Peli>{
                 + "WHERE Peli.id = PelinPelaaja.peliid AND Peli.status = 'LOPPUNUT' "
                 + "AND PelinPelaaja.pelaajaid = ? AND Pelinpelaaja.voittaja = false";
         
-        List<Object> values = new ArrayList<>();
-        values.add(pelaajaid);
+        List<Object> values = super.createList(pelaajaid);
         
         return super.findIntByAggregate(query, values);
     }
@@ -59,24 +57,31 @@ public class PeliDao extends AbstraktiDao<Peli>{
     public List<Peli> findByPelaajaRambling(int pelaajaid) throws Exception{
         String query = "SELECT * FROM PelinPelaaja, Peli WHERE Pelinpelaaja.peliid = Peli.id AND PelinPelaaja.pelaajaid = ?";
         
-        List<Object> values = new ArrayList<>();
-        
-        values.add(pelaajaid);
+        List<Object> values = super.createList(pelaajaid);
         
         return super.findByQuery(query, values, yhdistavaLuoja);
     }
     
     public Peli findOneRambling(int id) throws Exception{
-        return super.findOne(id, yhdistavaLuoja);
+        String query = "SELECT * FROM Peli, PelinPelaaja, Pelaaja, Vuoro WHERE "
+                + "Peli.id = PelinPelaaja.peliid AND PelinPelaaja.pelaajaid = Pelaaja.id "
+                + "AND Peli.id = Vuoro.peliid AND Peli.id = ?";
+        
+        List<Object> values = super.createList(id);
+        
+        List<Peli> pelit = super.findByQuery(query, values);
+        if(pelit.isEmpty()){
+            return null;
+        }
+        
+        return pelit.get(0);
     }
     
     public List<Peli> liityttavatPelit(int pelaajaid) throws Exception{
         String query = "SELECT * FROM Peli, Pelinpelaaja WHERE Pelinpelaaja.peliid = Peli.id AND "
                 + "Peli.status = 'HAETAAN VASTAPELAAJAA' AND Pelinpelaaja.pelaajaid != ?";
         
-        List<Object> values = new ArrayList<>();
-        
-        values.add(pelaajaid);
+        List<Object> values = super.createList(pelaajaid);
         
         return super.findByQuery(query, values, yhdistavaLuoja);
     }

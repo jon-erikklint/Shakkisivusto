@@ -24,8 +24,7 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
     
     public Pelaaja findByKayttajatunnus(String kayttajatunnus) throws Exception{
         String query = "SELECT * FROM Pelaaja WHERE kayttajanimi = ?";
-        List<Object> values = new ArrayList<>();
-        values.add(kayttajatunnus);
+        List<Object> values = super.createList(kayttajatunnus);
         
         List<Pelaaja> vastaus = super.findByQuery(query, values);
         
@@ -38,8 +37,7 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
     public int paivitaNimi(Pelaaja pelaaja, String uusiNimi) throws Exception{
         List<String> columns = new ArrayList<>();
         columns.add("pelaajanimi");
-        List<Object> values = new ArrayList<>();
-        values.add(uusiNimi);
+        List<Object> values = super.createList(uusiNimi);
         
         return update(columns, values, pelaaja.getIndeksi());
     }
@@ -64,12 +62,10 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
     public void deleteCascade(Pelaaja pelaaja) throws Exception{
         List<String> columns = new ArrayList<>();
         columns.add("Vuoro.pelaaja");
-        List<Object> newValues = new ArrayList<>();
-        newValues.add(null);
+        List<Object> newValues = super.createList((Object) null);
         List<String> conditions = new ArrayList<>();
         conditions.add("Vuoro.pelaaja = ?");
-        List<Object> values = new ArrayList<>();
-        values.add(pelaaja.getIndeksi());
+        List<Object> values = super.createList(pelaaja.getIndeksi());
         
         vuoroDao.update(columns, newValues, conditions, values); //laitetaan vuorojen pelaajat nulliksi
         

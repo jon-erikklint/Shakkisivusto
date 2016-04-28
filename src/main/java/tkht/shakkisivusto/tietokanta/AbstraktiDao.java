@@ -25,6 +25,16 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
     public abstract List<Object> decomposeT(T t);
     public abstract int getId(T t);
     
+    protected List createList(Object... os){
+        List objects = new ArrayList<>();
+        
+        for(Object o : os){
+            objects.add(o);
+        }
+        
+        return objects;
+    }
+    
     private void setPreparedStatementValues(PreparedStatement ps, List<Object> values) throws Exception{
         for(int i = 0 ; i < values.size() ; i++){
             int j = i+1;
