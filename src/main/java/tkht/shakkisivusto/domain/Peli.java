@@ -36,7 +36,7 @@ public class Peli implements Yhdistettava{
         return "/peli/"+id;
     }
     
-    public int uusinVuoro(){
+    public int getUusinVuoro(){
         int suurin = 0;
         
         for (Vuoro vuoro : vuorot){
