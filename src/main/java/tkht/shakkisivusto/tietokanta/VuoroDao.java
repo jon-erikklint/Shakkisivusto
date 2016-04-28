@@ -29,7 +29,7 @@ public class VuoroDao extends AbstraktiDao<Vuoro>{
         
         lista.add(t.getVuoro());
         lista.add(t.getPeliid());
-        lista.add(t.getPelaaja());
+        lista.add(t.getPelaajaid());
         lista.add(t.getTekoaika());
         lista.add(t.getNappulatString());
         lista.add(t.getErikoistilanteetString());

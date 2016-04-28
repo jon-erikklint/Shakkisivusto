@@ -15,8 +15,8 @@ public class PelinPelaajaDao extends AbstraktiDao<PelinPelaaja>{
     public List<Object> decomposeT(PelinPelaaja t) {
         List<Object> lista = new ArrayList<>();
         
-        lista.add(t.getPelaaja());
-        lista.add(t.getPeli());
+        lista.add(t.getPelaajaid());
+        lista.add(t.getPeliid());
         lista.add(t.isValkoinen());
         lista.add(t.isVoittaja());
         
