@@ -1,10 +1,10 @@
 package tkht.shakkisivusto.tietokanta;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import tkht.shakkisivusto.domain.Pelaaja;
 import tkht.shakkisivusto.domain.Peli;
+import tkht.shakkisivusto.tietokanta.luojat.PelaajaLuoja;
 
 public class PelaajaDao extends AbstraktiDao<Pelaaja>{
 
@@ -13,7 +13,7 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
     private VuoroDao vuoroDao;
     
     public PelaajaDao(Database db) {
-        super(db, "Pelaaja", "kayttajanimi, pelaajanimi, salasana, admin");
+        super(db, "Pelaaja", "kayttajanimi, pelaajanimi, salasana, admin", new PelaajaLuoja());
     }
     
     public void addDaos(PelinPelaajaDao ppDao, PeliDao peliDao, VuoroDao vuoroDao){
@@ -42,28 +42,6 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
         values.add(uusiNimi);
         
         return update(columns, values, pelaaja.getIndeksi());
-    }
-    
-    public void haePelaajat(List<Peli> pelit) throws Exception{
-        for(Peli peli : pelit){
-            haePelaajat(peli);
-        }
-    }
-    
-    public void haePelaajat(Peli peli) throws Exception{
-        peli.setPelaaja1(findOne(peli.getPelaaja1id()));
-        peli.setPelaaja2(findOne(peli.getPelaaja2id()));
-    }
-
-    @Override
-    public Pelaaja createT(ResultSet rs) throws Exception{
-        int indeksi = rs.getInt("id");
-        String nimi = rs.getString("pelaajanimi");
-        String kayttajanimi = rs.getString("kayttajanimi");
-        String salasana = rs.getString("salasana");
-        boolean admin = rs.getBoolean("admin");
-        
-        return new Pelaaja(indeksi, nimi, kayttajanimi, salasana, admin);
     }
 
     @Override

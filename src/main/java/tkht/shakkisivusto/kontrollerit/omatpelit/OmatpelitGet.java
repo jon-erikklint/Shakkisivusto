@@ -1,4 +1,4 @@
-package tkht.shakkisivusto.kontrollerit.pelisivu;
+package tkht.shakkisivusto.kontrollerit.omatpelit;
 
 import java.util.List;
 import java.util.Map;
@@ -25,9 +25,7 @@ public class OmatpelitGet extends KirjautunutHelper{
 
     @Override
     public void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut) throws Exception {
-        List<Peli> pelit = peliDao.findByPelaaja(kirjautunut.getIndeksi());
-        
-        vuoroDao.lisaaVuorotiedotPeleihin(pelit);
+        List<Peli> pelit = peliDao.findByPelaajaRambling(kirjautunut.getIndeksi());
         
         map.put("pelit", pelit);
     }

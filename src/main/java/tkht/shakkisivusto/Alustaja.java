@@ -10,7 +10,7 @@ import tkht.shakkisivusto.kontrollerit.asetukset.AsetuksetController;
 import tkht.shakkisivusto.kontrollerit.etsipelaajia.EtsipelaajiaController;
 import tkht.shakkisivusto.kontrollerit.index.IndexController;
 import tkht.shakkisivusto.kontrollerit.pelaajasivu.PelaajasivuController;
-import tkht.shakkisivusto.kontrollerit.pelisivu.OmatpelitController;
+import tkht.shakkisivusto.kontrollerit.omatpelit.OmatpelitController;
 import tkht.shakkisivusto.kontrollerit.uudetpelit.UudetpelitController;
 import tkht.shakkisivusto.kontrollerit.uusipeli.UusipeliController;
 

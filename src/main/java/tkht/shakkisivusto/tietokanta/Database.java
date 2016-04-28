@@ -63,13 +63,12 @@ public class Database {
                     "id serial primary key,\n" +
                     "nimi varchar(50) not null,\n" +
                     "status varchar(25) not null,\n" +
-                    "voittaja int,\n" +
-                    "FOREIGN KEY (voittaja) REFERENCES Pelaaja(id)\n" +
                     ")");
         taulut.add("CREATE TABLE Pelinpelaaja(\n" +
                     "pelaajaid int not null,\n" +
                     "peliid int not null,\n" +
                     "valkoinen boolean not null,\n" +
+                    "voittaja boolean not null,\n" +
                     "FOREIGN KEY (pelaajaid) REFERENCES Pelaaja(id),\n" +
                     "FOREIGN KEY (peliid) REFERENCES Peli(id),\n" +
                     "CONSTRAINT pk_pelinpelaaja PRIMARY KEY (pelaajaid, peliid)\n" +

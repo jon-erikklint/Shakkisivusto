@@ -1,14 +1,19 @@
 package tkht.shakkisivusto.tietokanta;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import tkht.shakkisivusto.domain.Peli;
+import tkht.shakkisivusto.tietokanta.luojat.PeliLuoja;
+import tkht.shakkisivusto.tietokanta.luojat.PeliYhdistavaLuoja;
 
 public class PeliDao extends AbstraktiDao<Peli>{
 
+    private PeliYhdistavaLuoja yhdistavaLuoja;
+    
     public PeliDao(Database db) {
-        super(db, "Peli", "nimi, status");
+        super(db, "Peli", "nimi, status", new PeliLuoja());
+        
+        yhdistavaLuoja = new PeliYhdistavaLuoja();
     }
     
     public int voitettujaPeleja(int pelaajaid) throws Exception{
@@ -32,14 +37,14 @@ public class PeliDao extends AbstraktiDao<Peli>{
         return super.findIntByAggregate(query, values);
     }
     
-    public List<Peli> findByPelaaja(int pelaajaid) throws Exception{
+    public List<Peli> findByPelaajaRambling(int pelaajaid) throws Exception{
         String query = "SELECT * FROM PelinPelaaja, Peli WHERE Pelinpelaaja.peliid = Peli.id AND PelinPelaaja.pelaajaid = ?";
         
         List<Object> values = new ArrayList<>();
         
         values.add(pelaajaid);
         
-        return super.findByQuery(query, values);
+        return super.findByQuery(query, values, yhdistavaLuoja);
     }
     
     public List<Peli> liityttavatPelit(int pelaajaid) throws Exception{
@@ -50,16 +55,7 @@ public class PeliDao extends AbstraktiDao<Peli>{
         
         values.add(pelaajaid);
         
-        return super.findByQuery(query, values);
-    }
-
-    @Override
-    public Peli createT(ResultSet rs) throws Exception {
-        int id = rs.getInt("id");
-        String nimi = rs.getString("nimi");
-        String status = rs.getString("status");
-        
-        return new Peli(id, nimi, status);
+        return super.findByQuery(query, values, yhdistavaLuoja);
     }
 
     @Override

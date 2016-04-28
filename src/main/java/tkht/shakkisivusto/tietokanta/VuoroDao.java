@@ -6,23 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import tkht.shakkisivusto.domain.Peli;
 import tkht.shakkisivusto.domain.Vuoro;
+import tkht.shakkisivusto.tietokanta.luojat.VuoroLuoja;
 
 public class VuoroDao extends AbstraktiDao<Vuoro>{
 
     public VuoroDao(Database db) {
-        super(db, "Vuoro", "vuoro, peliid, pelaaja, tekoaika, lauta, erikoistilanteet");
-    }
-    
-    public void lisaaVuorotiedotPeleihin(List<Peli> pelit) throws Exception{
-        
-        for(Peli peli : pelit){
-            lisaaVuorotiedotPeliin(peli);
-        }
-        
-    }
-    
-    public void lisaaVuorotiedotPeliin(Peli peli) throws Exception{
-        peli.setVuorot(findByPeli(peli));
+        super(db, "Vuoro", "vuoro, peliid, pelaaja, tekoaika, lauta, erikoistilanteet", new VuoroLuoja());
     }
     
     public List<Vuoro> findByPeli(Peli peli) throws Exception{
@@ -32,18 +21,6 @@ public class VuoroDao extends AbstraktiDao<Vuoro>{
         values.add(peli.getId());
         
         return super.findByQuery(query, values);
-    }
-
-    @Override
-    public Vuoro createT(ResultSet rs) throws Exception {
-        int vuoro = rs.getInt("vuoro");
-        int peliId = rs.getInt("peliid");
-        int pelaaja = rs.getInt("pelaaja");
-        Timestamp tekoaika = rs.getTimestamp("tekoaika");
-        String lauta = rs.getString("lauta");
-        String erikoistilanteet = rs.getString("erikoistilanteet");
-        
-        return new Vuoro(vuoro, peliId, pelaaja, tekoaika, lauta, erikoistilanteet);
     }
 
     @Override

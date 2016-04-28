@@ -3,21 +3,24 @@
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import tkht.shakkisivusto.tietokanta.luojat.Luoja;
 
 public abstract class AbstraktiDao<T> implements Dao<T>{
 
     private Database db;
     
-    String taulu;
-    String columns;
+    private String taulu;
+    private String columns;
     
-    public AbstraktiDao(Database db, String taulu, String columns){
+    private Luoja<T> luoja;
+    
+    public AbstraktiDao(Database db, String taulu, String columns, Luoja<T> luoja){
         this.db = db;
         this.taulu = taulu;
         this.columns = columns;
+        this.luoja = luoja;
     }
     
-    public abstract T createT(ResultSet rs) throws Exception;
     public void addExtra(ResultSet rs, T t, int ekstra){};
     public abstract List<Object> decomposeT(T t);
     public abstract int getId(T t);
@@ -84,40 +87,45 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
 
     @Override
     public T findOne(int index) throws Exception {
+        return findOne(index, luoja);
+    }
+    
+    public T findOne(int index, Luoja<T> luoja) throws Exception{
         Connection c = db.getConnection();
         
         PreparedStatement ps = c.prepareStatement("SELECT * FROM "+taulu+" WHERE id=?");
         ps.setInt(1, index);
         ResultSet rs = ps.executeQuery();
         
-        if(!rs.next()){
-            return null;
-        }
+        T t = null;
         
-        T t = createT(rs);
+        if(rs.next()){
+            t = luoja.getOne(rs);
+        }
         
         rs.close();
         ps.close();
         c.close();
         
-        return null;
+        return t;
     }
     
     @Override
     public T findNewest() throws Exception{
+        return findNewest(luoja);
+    }
+    
+    public T findNewest(Luoja<T> luoja) throws Exception{
         Connection c = db.getConnection();
         
         PreparedStatement ps = c.prepareStatement("SELECT * FROM "+taulu+" ORDER BY id DESC");
         
         ResultSet rs = ps.executeQuery();
         
-        T t;
+        T t = null;
         
         if(rs.next()){
-            t = createT(rs);
-            rs.close();
-        }else{
-            t = null;
+            t = luoja.getOne(rs);
         }
         
         ps.close();
@@ -128,22 +136,24 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
 
     @Override
     public List<T> findAll() throws Exception {
+        return findAll(luoja);
+    }
+    
+    public List<T> findAll(Luoja<T> luoja) throws Exception{
         Connection c = db.getConnection();
         
         PreparedStatement ps = c.prepareStatement("SELECT * FROM "+taulu);
         ResultSet rs = ps.executeQuery();
         
-        List<T> ts = new ArrayList<>();
         while(rs.next()){
-            T t = createT(rs);
-            ts.add(t);
+            luoja.addT(rs);
         }
         
         rs.close();
         ps.close();
         c.close();
         
-        return ts;
+        return luoja.getAll();
     }
     
     @Override
@@ -227,6 +237,10 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
 
     @Override
     public List<T> findByConditions(List<String> conditions, List<Object> values, List<String> orderConditions, boolean desc, int limit, int offset) throws Exception{
+        return findByConditions(conditions, values, orderConditions, desc, limit, offset, luoja);
+    }
+    
+    public List<T> findByConditions(List<String> conditions, List<Object> values, List<String> orderConditions, boolean desc, int limit, int offset, Luoja luoja) throws Exception{
         String query = "SELECT * FROM "+taulu+" WHERE ";
         query = addConditions(query, conditions);
         
@@ -250,37 +264,32 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
         values.add(limit);
         values.add(offset);
         
-        List<T> ts = findByQuery(query, allValues);
+        List<T> ts = findByQuery(query, allValues, luoja);
         
         return ts;
     }
     
     @Override
     public List<T> findByQuery(String query, List<Object> values) throws Exception{
-        return findByQueryExtra(query, values, -1);
+        return findByQuery(query, values, luoja);
     }
     
-    public List<T> findByQueryExtra(String query, List<Object> values, int extra) throws Exception{
+    public List<T> findByQuery(String query, List<Object> values, Luoja<T> luoja) throws Exception{
         Connection c = db.getConnection();
         
         PreparedStatement ps = c.prepareStatement(query);
         setPreparedStatementValues(ps, values);
         ResultSet rs = ps.executeQuery();
         
-        List<T> ts = new ArrayList<>();
         while(rs.next()){
-            T t = createT(rs);
-            if( extra != -1){
-                addExtra(rs, t, extra);
-            }
-            ts.add(t);
+            luoja.addT(rs);
         }
         
         rs.close();
         ps.close();
         c.close();
         
-        return ts;
+        return luoja.getAll();
     }
     
     @Override

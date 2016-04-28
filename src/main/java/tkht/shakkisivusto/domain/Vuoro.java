@@ -4,16 +4,17 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.*;
 import tkht.shakkisivusto.domain.sisainen.*;
+import tkht.shakkisivusto.tietokanta.luojat.Yhdistettava;
 
-public class Vuoro {
+public class Vuoro implements Yhdistettava{
     
     private int vuoro;
     private int peliid;
-    private int pelaaja;
+    private int pelaajaid;
     private Timestamp tekoaika;
     
     private Peli peli;
-    private Pelaaja kenenVuoro;
+    private Pelaaja pelaaja;
     
     private List<Nappula> nappulat;
     private Erikoistilanteet erikoistilanteet;
@@ -21,7 +22,7 @@ public class Vuoro {
     public Vuoro(int vuoro, int peliid, int pelaaja, Timestamp tekoaika, String lauta, String erikoistilanteet){
         this.vuoro = vuoro;
         this.peliid = peliid;
-        this.pelaaja = pelaaja;
+        this.pelaajaid = pelaaja;
         this.tekoaika = tekoaika;
         
         this.erikoistilanteet = new Erikoistilanteet(erikoistilanteet);
@@ -32,7 +33,7 @@ public class Vuoro {
     public Vuoro(int peliid, int pelaaja){
         this.vuoro = 0;
         this.peliid = peliid;
-        this.pelaaja = pelaaja;
+        this.pelaajaid = pelaaja;
         this.tekoaika = Timestamp.from(Instant.now());
         
         this.erikoistilanteet = new Erikoistilanteet(Alku.alkutilanteet);
@@ -98,12 +99,12 @@ public class Vuoro {
         this.peli = peli;
     }
 
-    public Pelaaja getKenenVuoro() {
-        return kenenVuoro;
+    public Pelaaja getPelaaja() {
+        return pelaaja;
     }
 
-    public void setKenenVuoro(Pelaaja kenenVuoro) {
-        this.kenenVuoro = kenenVuoro;
+    public void setPelaaja(Pelaaja pelaaja) {
+        this.pelaaja = pelaaja;
     }
 
     public List<Nappula> getNappulat() {
@@ -122,12 +123,12 @@ public class Vuoro {
         this.peliid = peliid;
     }
 
-    public int getPelaaja() {
-        return pelaaja;
+    public int getPelaajaid() {
+        return pelaajaid;
     }
 
-    public void setPelaaja(int pelaaja) {
-        this.pelaaja = pelaaja;
+    public void setPelaajaid(int pelaajaid) {
+        this.pelaajaid = pelaajaid;
     }
 
     public Erikoistilanteet getErikoistilanteet() {
@@ -137,6 +138,37 @@ public class Vuoro {
     public void setErikoistilanteet(Erikoistilanteet erikoistilanteet) {
         this.erikoistilanteet = erikoistilanteet;
     }
-    
+
+    @Override
+    public boolean yhdista(Object o) {
+        if(o == null){
+            return false;
+        }
+        
+        if(o.getClass() == Peli.class){
+            Peli p = (Peli) o;
+            
+            if(p.getId() == this.peliid){
+                this.peli = p;
+                return true;
+            }
+            
+            return false;
+        }
+        
+        if(o.getClass() == Pelaaja.class){
+            Pelaaja p = (Pelaaja) o;
+            
+            if(p.getIndeksi() == this.pelaajaid){
+                this.pelaaja = p;
+                
+                return true;
+            }
+            
+            return false;
+        }
+        
+        return false;
+    }
     
 }

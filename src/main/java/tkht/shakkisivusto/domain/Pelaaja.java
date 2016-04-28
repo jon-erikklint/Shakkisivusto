@@ -1,6 +1,10 @@
 package tkht.shakkisivusto.domain;
 
-public class Pelaaja {
+import java.util.ArrayList;
+import java.util.List;
+import tkht.shakkisivusto.tietokanta.luojat.Yhdistettava;
+
+public class Pelaaja implements Yhdistettava{
     
     private int indeksi;
     private String nimi;
@@ -11,7 +15,11 @@ public class Pelaaja {
     private int voittoja;
     private int tappioita;
 
+    private List<PelinPelaaja> pelit;
+    private List<Vuoro> vuorot;
+    
     public Pelaaja(int indeksi, String nimi, String kayttajanimi, String salasana, boolean admin) {
+        this();
         this.indeksi = indeksi;
         this.nimi = nimi;
         this.kayttajanimi = kayttajanimi;
@@ -19,7 +27,10 @@ public class Pelaaja {
         this.salasana = salasana;
     }
     
-    public Pelaaja(){}
+    public Pelaaja(){
+        pelit = new ArrayList<>();
+        vuorot = new ArrayList<>();
+    }
     
     public String getNimi() {
         return nimi;
@@ -83,5 +94,36 @@ public class Pelaaja {
     
     public double getVoittoratio(){
         return ((double)voittoja) / tappioita;
+    }
+
+    @Override
+    public boolean yhdista(Object o) {
+        if(o == null){
+            return false;
+        }
+        
+        if(o.getClass() == PelinPelaaja.class){
+            PelinPelaaja pp = (PelinPelaaja) o;
+            
+            if(pp.getPelaajaid() == this.indeksi){
+                pelit.add(pp);
+                return true;
+            }
+            
+            return false;
+        }
+        
+        if(o.getClass() == Vuoro.class){
+            Vuoro v = (Vuoro) o;
+            
+            if(v.getPelaajaid() == this.indeksi){
+                vuorot.add(v);
+                return true;
+            }
+            
+            return false;
+        }
+        
+        return false;
     }
 }

@@ -26,16 +26,9 @@ public class UudetpelitGet extends KirjautunutHelper{
         this.pelinPelaajaDao = pelinPelaajaDao;
     }
 
-    //Ratkaisu on hirveä, ja tehoton, mutta en enää viitsi alkaa tekemään koko daosysteemiä uudestaan
     @Override
     public void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut) throws Exception {
         List<Peli> liityttavatPelit = peliDao.liityttavatPelit(kirjautunut.getIndeksi());
-        pelinPelaajaDao.haePelienPelaajatList(liityttavatPelit);
-        pelaajaDao.haePelaajat(liityttavatPelit);
-        
-        if(!liityttavatPelit.isEmpty()){
-            System.out.println(liityttavatPelit.get(0).getPelaaja1());
-        }
         
         map.put("pelit", liityttavatPelit);
     }
