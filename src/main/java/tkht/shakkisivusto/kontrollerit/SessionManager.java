@@ -2,6 +2,7 @@ package tkht.shakkisivusto.kontrollerit;
 
 import java.util.*;
 import tkht.shakkisivusto.domain.Pelaaja;
+import tkht.shakkisivusto.tietokanta.PelaajaDao;
 
 public class SessionManager {
     
@@ -12,7 +13,9 @@ public class SessionManager {
     private final long refreshRate;
     private final int sessionAliveTime;
     
-    public SessionManager(long refreshRate, int sessionAliveTime){
+    private PelaajaDao pelaajaDao;
+    
+    public SessionManager(PelaajaDao pelaajaDao, long refreshRate, int sessionAliveTime){
         sessions = new HashMap<>();
         sessionTimes = new HashMap<>();
         
@@ -21,7 +24,7 @@ public class SessionManager {
         this.lastCheck = System.currentTimeMillis();
     }
     
-    public Pelaaja getPelaaja(String sessionName){
+    public Pelaaja getPelaaja(String sessionName) throws Exception{
         if(!valid(sessionName)){
             
             removeSession(sessionName);
@@ -29,7 +32,12 @@ public class SessionManager {
             
         }
         
-        return sessions.get(sessionName);
+        Pelaaja p = sessions.get(sessionName);
+        p = pelaajaDao.findOne(p.getIndeksi());
+        
+        sessions.put(sessionName, p); //päivitetään pelaajan tiedot
+        
+        return p;
     }
     
     public boolean valid(String sessionName){

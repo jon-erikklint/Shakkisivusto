@@ -47,7 +47,7 @@ public class Alustaja {
     }
     
     public void alustaSessionhallinta(){
-        sm = new SessionManager(1000, 3600000);
+        sm = new SessionManager(pelaajaDao, 1000, 3600000);
     }
     
     public void alustaNakymat(){

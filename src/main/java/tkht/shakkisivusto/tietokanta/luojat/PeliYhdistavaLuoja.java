@@ -44,6 +44,15 @@ public class PeliYhdistavaLuoja extends AbstraktiYhdistaja<Peli>{
         yhdista(pelinPelaajat, pelit);
         yhdista(vuorot, pelit);
         
+        Peli peli = pelit.get(0);
+        System.out.println(peli.getId());
+        if(peli.getPelaaja1() != null){
+            System.out.println("pelinpelaaja löytyi");
+            if(peli.getPelaaja1().getPelaaja() != null){
+                System.out.println("pelaaja löytyi");
+            }
+        }
+        
         return pelit;
     }
     

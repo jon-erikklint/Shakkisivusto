@@ -37,7 +37,7 @@ public abstract class KirjautunutHelper implements TemplateViewRoute{
         return new ModelAndView(map, sivu);
     }
     
-    private Pelaaja haeKirjautunut(Request rq, Response rs){
+    private Pelaaja haeKirjautunut(Request rq, Response rs) throws Exception{
         String sessionName = rq.cookie("session");
         
         return sm.getPelaaja(sessionName);
