@@ -2,6 +2,7 @@ package tkht.shakkisivusto.tietokanta;
 
 import java.util.ArrayList;
 import java.util.List;
+import tkht.shakkisivusto.domain.Pelaaja;
 import tkht.shakkisivusto.domain.Peli;
 import tkht.shakkisivusto.tietokanta.luojat.PeliLuoja;
 import tkht.shakkisivusto.tietokanta.luojat.PeliYhdistavaLuoja;
@@ -14,6 +15,21 @@ public class PeliDao extends AbstraktiDao<Peli>{
         super(db, "Peli", "nimi, status", new PeliLuoja());
         
         yhdistavaLuoja = new PeliYhdistavaLuoja();
+    }
+    
+    public void lisaaPelienpelaajienVoittoratiot(List<Peli> pelit) throws Exception{
+        for(Peli peli : pelit){
+            lisaaPelaajanVoittoratio(peli.getPelaaja1().getPelaaja());
+            lisaaPelaajanVoittoratio(peli.getPelaaja2().getPelaaja());
+        }
+    }
+    
+    public void lisaaPelaajanVoittoratio(Pelaaja pelaaja) throws Exception{
+        int voitettuja = voitettujaPeleja(pelaaja.getIndeksi());
+        int havittyja = havittyjaPeleja(pelaaja.getIndeksi());
+        
+        pelaaja.setVoittoja(voitettuja);
+        pelaaja.setTappioita(havittyja);
     }
     
     public int voitettujaPeleja(int pelaajaid) throws Exception{

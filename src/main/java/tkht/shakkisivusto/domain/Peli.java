@@ -31,7 +31,23 @@ public class Peli implements Yhdistettava{
     public Peli(){
         vuorot = new ArrayList<>();
     }
-
+    
+    public String getPelisivu(){
+        return "/peli/"+id;
+    }
+    
+    public int uusinVuoro(){
+        int suurin = 0;
+        
+        for (Vuoro vuoro : vuorot){
+            if(vuoro.getVuoro() > suurin){
+                suurin = vuoro.getVuoro();
+            }
+        }
+        
+        return suurin;
+    }
+    
     public String getNimi() {
         return nimi;
     }
@@ -51,10 +67,6 @@ public class Peli implements Yhdistettava{
     public void setId(int id) {
         this.id = id;
     }
-    
-    public String getPelisivu(){
-        return "/peli/"+id;
-    }
 
     public PelinPelaaja getPelaaja1() {
         return pelaaja1;
@@ -70,6 +82,14 @@ public class Peli implements Yhdistettava{
 
     public void setPelaaja2(PelinPelaaja pelaaja2) {
         this.pelaaja2 = pelaaja2;
+    }
+    
+    public double getPelaaja1Voittoratio(){
+        return pelaaja1.getPelaaja().getVoittoratio();
+    }
+    
+    public String getPelaaja1Nimi(){
+        return pelaaja1.getPelaaja().getNimi();
     }
 
     @Override
