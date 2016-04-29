@@ -74,6 +74,10 @@ public class PeliDao extends AbstraktiDao<Peli>{
             return null;
         }
         
+        for(Peli peli : pelit){
+            
+        }
+        
         return pelit.get(0);
     }
     

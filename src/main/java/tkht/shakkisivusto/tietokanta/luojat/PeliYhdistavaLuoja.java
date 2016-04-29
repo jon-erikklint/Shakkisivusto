@@ -28,9 +28,11 @@ public class PeliYhdistavaLuoja extends AbstraktiYhdistaja<Peli>{
         try{
             pelaajaLuoja.addT(rs);
             pelinpelaajaLuoja.addT(rs);
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println("PELAAJANLUOJA EI LÖYTÄNYT RIVIJÄÄN");}
         
-        try{vuoroLuoja.addT(rs);}catch(Exception e){}
+        try{vuoroLuoja.addT(rs);}catch(Exception e){
+            System.out.println("VUORONLUOJA EI LÖYTÄNYT RIVIJÄÄN");}
     }
 
     @Override
