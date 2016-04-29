@@ -1,0 +1,61 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Voitit pelin!</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    
+    <body>
+        <nav>
+            <a th:href="${pelaaja.linkki}">Oma sivu</a>
+            <a href="/uudetpelit">Uudet pelit</a>
+            <a href="/omatpelit">Omat pelit</a>
+            <a href="pelatutpelit.html">Vanhat pelit</a>
+            <a href="/pelaajahaku">Hae pelaajia</a>
+            <a href="/asetukset">Asetukset</a>
+            <form method="POST" action="/ulos">
+                <input type="submit" value="Kirjaudu ulos"/>
+            </form>
+        </nav>
+        
+        <h1 th:text="${vuoro.pelinnimi}">Pelin nimi</h1>
+        <h2>Vuoro: <span th:text="vuoro.vuoro">X</span></h2>
+        
+        <ul>
+            <li>O = tyhjä</li>
+            <li>S = sotilas</li>
+            <li>L = lähetti</li>
+            <li>H = ratsu</li>
+            <li>T = torni</li>
+            <li>G = kuningatar</li>
+            <li>K = kuningas</li>
+            <li>[] = valkoinen</li>
+            <li>][ = musta</li>
+        </ul>
+        
+        <table>
+            <tr th:each="rivi :${kartta}">
+                <td th:each="ruutu :${rivi}">
+                    <span th:text="${ruutu.koodi}">O</span>
+                </td>
+            </tr>
+        </table>
+        
+        <div th:switch="${ekavuoro}">
+            <div th:case="false">
+                <a th:href="${vuoro.edellinensivu}">
+                    Vuoro: <span th:text="${vuoro.edellinen}">X</span>
+                </a>
+            </div>
+        </div>
+        <div th:switch="${vikavuoro}">
+            <div th:case="false">
+                <a th:href="${vuoro.seuraavasivu}">
+                    Vuoro: <span th:text="${vuoro.seuraava}">X</span>
+                </a>
+            </div>
+        </div>
+        
+    </body>
+</html>

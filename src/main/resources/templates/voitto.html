@@ -1,0 +1,35 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Voitit pelin!</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    
+    <body>
+        <nav>
+            <a th:href="${pelaaja.linkki}">Oma sivu</a>
+            <a href="/uudetpelit">Uudet pelit</a>
+            <a href="/omatpelit">Omat pelit</a>
+            <a href="pelatutpelit.html">Vanhat pelit</a>
+            <a href="/pelaajahaku">Hae pelaajia</a>
+            <a href="/asetukset">Asetukset</a>
+            <form method="POST" action="/ulos">
+                <input type="submit" value="Kirjaudu ulos"/>
+            </form>
+        </nav>
+        
+        <h1>Onneksi olkoon!</h1>
+        <h2>Voitit pelin <span th:text="${peli.nimi}">pelin nimi</span> <span th:text="${peli.vuoromaara}">x:ssä</span> vuorossa!</h2>
+        
+        <p>
+            Jos haluat katsoa pelisi läpi, klikkaa alla olevasta linkistä. 
+            Peli on myös tallennettu vanhoihin peleihisi jos haluat palata 
+            siihen myöhemmin. Jos et halua katsoa peliäsi läpi, liity muihin 
+            peleihin ja jatka voittoputkeasi!
+        </p>
+        
+        <a th:href="${peli.selaussivu}">Kertaa peliäsi</a>
+        
+    </body>
+</html>
