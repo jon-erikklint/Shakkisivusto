@@ -56,19 +56,23 @@ public class Vuoro implements Yhdistettava{
         }
     }
     
-    public String[][] getRuudut(){
-        String[][] kartta = new String[8][8];
+    public List<List<String>> getRuudut(){
+        List<List<String>> kartta = new ArrayList<>();
         
         for(int i = 0 ; i < 8 ; i++){
+            List<String> rivi = new ArrayList<>();
             for(int j = 0 ; j < 8 ; j++){
-                kartta[i][j] = " O ";
+                rivi.add(" 0 ");
             }
         }
         
         for(Nappula nappula : nappulat){
             Ruutu sijainti = nappula.getSijainti();
             
-            kartta[sijainti.getY()][sijainti.getX()] = nappula.karttaString();
+            int x = sijainti.getX();
+            int y = sijainti.getY();
+            
+            kartta.get(y).set(x, nappula.karttaString());
         }
         
         return kartta;
