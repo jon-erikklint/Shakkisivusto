@@ -40,9 +40,44 @@ public class PeliYhdistavaLuoja extends AbstraktiYhdistaja<Peli>{
         List<Vuoro> vuorot = vuoroLuoja.getAll();
         List<Peli> pelit = peliLuoja.getAll();
         
+        System.out.println("PP:T");
+        for(PelinPelaaja pp : pelinPelaajat){
+            System.out.println(pp);
+        }
+        System.out.println("PELAAJAT:");
+        for(Pelaaja pelaaja : pelaajat){
+            System.out.println(pelaaja);
+        }
+        System.out.println("VUOROT:");
+        for(Vuoro vuoro : vuorot){
+            System.out.println(vuoro);
+        }
+        System.out.println("Pelit:");
+        for(Peli peli: pelit){
+            System.out.println(peli);
+        }
+        
         yhdista(pelaajat, pelinPelaajat);
         yhdista(pelinPelaajat, pelit);
         yhdista(vuorot, pelit);
+        
+        System.out.println("JÄLKEEN:");
+        System.out.println("PP:T");
+        for(PelinPelaaja pp : pelinPelaajat){
+            System.out.println(pp);
+        }
+        System.out.println("PELAAJAT:");
+        for(Pelaaja pelaaja : pelaajat){
+            System.out.println(pelaaja);
+        }
+        System.out.println("VUOROT:");
+        for(Vuoro vuoro : vuorot){
+            System.out.println(vuoro);
+        }
+        System.out.println("Pelit:");
+        for(Peli peli: pelit){
+            System.out.println(peli);
+        }
         
         return pelit;
     }

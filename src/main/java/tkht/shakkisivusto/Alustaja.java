@@ -25,14 +25,9 @@ public class Alustaja {
     private PelinPelaajaDao pelinPelaajaDao;
     
     public void alusta() throws Exception{
-        alustaHeroku();
         alustaTietokanta();
         alustaSessionhallinta();
         alustaNakymat();
-    }
-    
-    public void alustaHeroku(){
-        port(Integer.valueOf(System.getenv("PORT")));
     }
     
     public void alustaTietokanta() throws Exception{

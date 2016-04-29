@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
+import static spark.Spark.port;
 
 public class Database {
     
@@ -13,6 +14,7 @@ public class Database {
     
     public Database() throws Exception{
         osoite = System.getenv("DATABASE_URL");
+        port(Integer.valueOf(System.getenv("PORT")));
     }
     
     public void alustaTietokanta() throws Exception{
@@ -84,8 +86,7 @@ public class Database {
         return kaskyt;
     }
     
-    private List<String> testidata(){
-        List<String> kaskyt = new ArrayList<>();
+    private List<String> testidata(){List<String> kaskyt = new ArrayList<>();
         
         kaskyt.add("INSERT INTO Pelaaja (kayttajanimi, pelaajanimi, salasana, admin) VALUES ('asd', 'asd', 'asd', false)");
         
