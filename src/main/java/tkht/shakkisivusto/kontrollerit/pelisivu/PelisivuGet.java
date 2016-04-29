@@ -22,7 +22,6 @@ public class PelisivuGet extends KirjautunutHelper{
     @Override
     public void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut) throws Exception {
         int peliid = Integer.parseInt(rqst.params(":peli"));
-        System.out.println(peliid);
         Peli peli = peliDao.findOneRambling(peliid);
         System.out.println(peli);
         

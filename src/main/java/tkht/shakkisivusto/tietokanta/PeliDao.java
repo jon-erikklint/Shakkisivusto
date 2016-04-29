@@ -69,7 +69,7 @@ public class PeliDao extends AbstraktiDao<Peli>{
         
         List<Object> values = super.createList(id);
         
-        List<Peli> pelit = super.findByQuery(query, values);
+        List<Peli> pelit = super.findByQuery(query, values, yhdistavaLuoja);
         if(pelit.isEmpty()){
             return null;
         }
