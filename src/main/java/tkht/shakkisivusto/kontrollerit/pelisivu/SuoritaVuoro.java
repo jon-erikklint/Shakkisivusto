@@ -64,11 +64,12 @@ public class SuoritaVuoro extends PeliHelper{
     }
     
     private Vuoro evaluoiVuoro(Request rqst, Peli peli){
-        String siirto = rqst.queryParams("siirto");
+        String mista = rqst.queryParams("mista");
+        String minne = rqst.queryParams("minne");
         Vuoro uusinVuoro = peli.getUusinVuoro();
 
         vuorotarkastaja.asetaPelitilanne(uusinVuoro, peli);
-        return vuorotarkastaja.toteutaSiirto(siirto);
+        return vuorotarkastaja.toteutaSiirto(mista, minne);
     }
     
     private void asetaVoittaja(Peli peli, Pelaaja pelaaja) throws Exception{

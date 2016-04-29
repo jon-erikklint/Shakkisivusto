@@ -41,6 +41,8 @@ public class Vuoro implements Yhdistettava{
         alustaLauta(Alku.alkulauta);
     }
     
+    public Vuoro(){}
+    
     public void alustaLauta(String lauta){
         nappulat = new ArrayList<>();
         

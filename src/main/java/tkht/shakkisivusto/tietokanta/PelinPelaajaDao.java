@@ -12,7 +12,15 @@ public class PelinPelaajaDao extends AbstraktiDao<PelinPelaaja>{
     }
     
     public void paivitaVoittaja(PelinPelaaja pp) throws Exception{
+        List<String> columns = new ArrayList<>();
+        columns.add("voittaja");
+        List<Object> newValues = createList(true);
+        List<String> conditions = new ArrayList<>();
+        conditions.add("Pelinpelaaja.peliid = ?");
+        conditions.add("Pelinpelaaja.pelaajaid = ?");
+        List<Object> values = createList(pp.getPeliid(), pp.getPelaajaid());
         
+        super.update(columns, newValues, conditions, values);
     }
 
     @Override
