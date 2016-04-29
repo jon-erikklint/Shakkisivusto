@@ -8,7 +8,7 @@ import spark.TemplateViewRoute;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tkht.shakkisivusto.kontrollerit.asetukset.AsetuksetController;
 import tkht.shakkisivusto.kontrollerit.etsipelaajia.EtsipelaajiaController;
-import tkht.shakkisivusto.kontrollerit.index.IndexController;
+import tkht.shakkisivusto.kontrollerit.etusivu.IndexController;
 import tkht.shakkisivusto.kontrollerit.pelaajasivu.PelaajasivuController;
 import tkht.shakkisivusto.kontrollerit.omatpelit.OmatpelitController;
 import tkht.shakkisivusto.kontrollerit.pelisivu.PelisivuController;

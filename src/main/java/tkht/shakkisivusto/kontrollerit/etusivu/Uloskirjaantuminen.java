@@ -1,4 +1,4 @@
-package tkht.shakkisivusto.kontrollerit.index;
+package tkht.shakkisivusto.kontrollerit.etusivu;
 
 import java.util.Map;
 import spark.Request;
