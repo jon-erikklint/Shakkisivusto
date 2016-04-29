@@ -22,7 +22,13 @@ public class PaivitaNimi extends KirjautunutHelper{
     public void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut) throws Exception {
         String uusiNimi = rqst.queryParams("uusinimi");
         
-        pelaajaDao.paivitaNimi(kirjautunut, uusiNimi);
+        if(kunnollinenNimi(uusiNimi)){
+            pelaajaDao.paivitaNimi(kirjautunut, uusiNimi);
+        }
+    }
+    
+    public boolean kunnollinenNimi(String nimi){
+        return nimi.length() > 2;
     }
     
 }

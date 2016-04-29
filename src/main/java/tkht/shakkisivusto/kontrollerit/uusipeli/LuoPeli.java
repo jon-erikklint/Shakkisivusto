@@ -29,7 +29,14 @@ public class LuoPeli extends KirjautunutHelper{
 
     @Override
     public void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut) throws Exception {
-        Peli uusiPeli = luoPeli(rqst);
+        String pelinNimi = rqst.queryParams("nimi");
+        
+        if(!kelpaakoPeli(pelinNimi)){
+            rspns.redirect("/uusipeli");
+            return;
+        }
+        
+        Peli uusiPeli = luoPeli(pelinNimi);
         
         luoPelinPelaaja(uusiPeli, kirjautunut);
         luoEnsimmainenVuoro(uusiPeli, kirjautunut);
@@ -37,9 +44,11 @@ public class LuoPeli extends KirjautunutHelper{
         rspns.redirect("/peli/"+uusiPeli.getId());
     }
     
-    private Peli luoPeli(Request rqst) throws Exception{
-        String pelinNimi = rqst.queryParams("nimi");
-        
+    private boolean kelpaakoPeli(String nimi){
+        return !nimi.isEmpty();
+    }
+    
+    private Peli luoPeli(String pelinNimi) throws Exception{
         Peli uusiPeli = new Peli(pelinNimi);
         peliDao.add(uusiPeli);
         
