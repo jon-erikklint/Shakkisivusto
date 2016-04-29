@@ -17,6 +17,15 @@ public class PeliDao extends AbstraktiDao<Peli>{
         yhdistavaLuoja = new PeliYhdistavaLuoja();
     }
     
+    public void paivitaPelistatus(int id, String uusiStatus) throws Exception{
+        List<String> columns = new ArrayList<>();
+        columns.add("status");
+        
+        List<Object> values = createList(uusiStatus);
+        
+        super.update(columns, values, id);
+    }
+    
     public void lisaaPelienpelaajienVoittoratiot(List<Peli> pelit) throws Exception{
         for(Peli peli : pelit){
             if(peli.getPelaaja1() != null ){

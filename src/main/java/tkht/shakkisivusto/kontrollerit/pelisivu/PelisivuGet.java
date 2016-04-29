@@ -9,20 +9,21 @@ import tkht.shakkisivusto.kontrollerit.KirjautunutHelper;
 import tkht.shakkisivusto.kontrollerit.SessionManager;
 import tkht.shakkisivusto.tietokanta.PeliDao;
 
-public class PelisivuGet extends KirjautunutHelper{
+public class PelisivuGet extends PeliHelper{
 
     private PeliDao peliDao;
     
     public PelisivuGet(PeliDao peliDao, SessionManager sm) {
-        super(sm, "pelisivu");
+        super(peliDao, sm);
         
         this.peliDao = peliDao;
     }
 
     @Override
-    public void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut) throws Exception {
-        int peliid = Integer.parseInt(rqst.params(":peli"));
-        Peli peli = peliDao.findOneRambling(peliid);
+    public void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut, Peli peli) throws Exception {
+        if(!tarkistaPaasy(kirjautunut, peli, map)){
+            return;
+        }
         
         map.put("kartta", peli.getUusinVuoro().getRuudut());
         
