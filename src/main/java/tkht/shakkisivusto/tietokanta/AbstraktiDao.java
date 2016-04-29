@@ -290,7 +290,6 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
         
         while(rs.next()){
             luoja.addT(rs);
-            System.out.println("LISÄTÄÄN FINDBYQUERYYN LUOJAAN");
         }
         
         rs.close();

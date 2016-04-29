@@ -18,8 +18,6 @@ public abstract class AbstraktiLuoja<T> implements Luoja<T>{
     public void addT(ResultSet rs) throws Exception{
         T t = createT(rs);
         
-        System.out.println(rs.toString());
-        
         if(results.get(t) == null){
             results.put(t, t);
         }

@@ -23,14 +23,12 @@ public class PelisivuGet extends KirjautunutHelper{
     public void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut) throws Exception {
         int peliid = Integer.parseInt(rqst.params(":peli"));
         Peli peli = peliDao.findOneRambling(peliid);
-        System.out.println(peli);
         
         map.put("kartta", peli.getUusinVuoro().getRuudut());
-        System.out.println("PELI LISÄTTY");
+        
         int vuorossaolijanid = peli.getUusinVuoro().getPelaajaid();
-        System.out.println("VUOROSSAOLIJA LÖYDETTY");
+        
         map.put("pelaajanVuoro", vuorossaolijanid == kirjautunut.getIndeksi());
-        System.out.println("EHTO LISÄTTY");
     }
     
 }
