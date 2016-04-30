@@ -38,7 +38,6 @@ public class PeliDao extends AbstraktiDao<Peli>{
     }
     
     public void lisaaPelaajanVoittoratio(Pelaaja pelaaja) throws Exception{
-        System.out.println(pelaaja);
         int voitettuja = voitettujaPeleja(pelaaja.getIndeksi());
         int havittyja = havittyjaPeleja(pelaaja.getIndeksi());
         

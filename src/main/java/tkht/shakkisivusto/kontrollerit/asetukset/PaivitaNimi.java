@@ -6,6 +6,7 @@ import spark.Response;
 import tkht.shakkisivusto.domain.Pelaaja;
 import tkht.shakkisivusto.kontrollerit.KirjautunutHelper;
 import tkht.shakkisivusto.kontrollerit.SessionManager;
+import tkht.shakkisivusto.kontrollerit.Validoija;
 import tkht.shakkisivusto.tietokanta.PelaajaDao;
 
 public class PaivitaNimi extends KirjautunutHelper{
@@ -22,13 +23,9 @@ public class PaivitaNimi extends KirjautunutHelper{
     public void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut) throws Exception {
         String uusiNimi = rqst.queryParams("uusinimi");
         
-        if(kunnollinenNimi(uusiNimi)){
+        if(Validoija.tarkistaPelaajanKayttajanimi(uusiNimi)){
             pelaajaDao.paivitaNimi(kirjautunut, uusiNimi);
         }
-    }
-    
-    public boolean kunnollinenNimi(String nimi){
-        return nimi.length() > 2;
     }
     
 }

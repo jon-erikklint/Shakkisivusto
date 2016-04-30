@@ -27,6 +27,7 @@ public class Alustaja {
     public void alusta() throws Exception{
         alustaTietokanta();
         alustaSessionhallinta();
+        alustaValidointi();
         alustaNakymat();
     }
     
@@ -44,6 +45,10 @@ public class Alustaja {
     
     public void alustaSessionhallinta(){
         sm = new SessionManager(pelaajaDao, 1000, 3600000);
+    }
+    
+    public void alustaValidointi(){
+        Validoija.alusta("qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNMåäöÅÄÖ1234567890");
     }
     
     public void alustaNakymat(){

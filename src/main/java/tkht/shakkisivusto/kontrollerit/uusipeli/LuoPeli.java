@@ -9,6 +9,7 @@ import tkht.shakkisivusto.domain.PelinPelaaja;
 import tkht.shakkisivusto.domain.Vuoro;
 import tkht.shakkisivusto.kontrollerit.KirjautunutHelper;
 import tkht.shakkisivusto.kontrollerit.SessionManager;
+import tkht.shakkisivusto.kontrollerit.Validoija;
 import tkht.shakkisivusto.tietokanta.PeliDao;
 import tkht.shakkisivusto.tietokanta.PelinPelaajaDao;
 import tkht.shakkisivusto.tietokanta.VuoroDao;
@@ -31,7 +32,7 @@ public class LuoPeli extends KirjautunutHelper{
     public void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut) throws Exception {
         String pelinNimi = rqst.queryParams("nimi");
         
-        if(!kelpaakoPeli(pelinNimi)){
+        if(!Validoija.tarkistaPelinNimi(pelinNimi)){
             rspns.redirect("/uusipeli");
             return;
         }
@@ -42,10 +43,6 @@ public class LuoPeli extends KirjautunutHelper{
         luoEnsimmainenVuoro(uusiPeli, kirjautunut);
         
         rspns.redirect("/peli/"+uusiPeli.getId());
-    }
-    
-    private boolean kelpaakoPeli(String nimi){
-        return !nimi.isEmpty();
     }
     
     private Peli luoPeli(String pelinNimi) throws Exception{

@@ -8,6 +8,7 @@ import spark.TemplateViewRoute;
 import tkht.shakkisivusto.domain.Pelaaja;
 import tkht.shakkisivusto.kontrollerit.SessionGenerator;
 import tkht.shakkisivusto.kontrollerit.SessionManager;
+import tkht.shakkisivusto.kontrollerit.Validoija;
 import tkht.shakkisivusto.tietokanta.PelaajaDao;
 
 public class Rekisterointi implements TemplateViewRoute{
@@ -15,7 +16,7 @@ public class Rekisterointi implements TemplateViewRoute{
     private PelaajaDao pelaajaDao;
     
     private SessionGenerator sg;
-
+    
     public Rekisterointi(PelaajaDao pelaajaDao, SessionManager sm) {
         this.pelaajaDao = pelaajaDao;
         sg = new SessionGenerator(sm);
@@ -38,15 +39,8 @@ public class Rekisterointi implements TemplateViewRoute{
     }
     
     public boolean kelpaakoRekisteroitumistiedot(String kayttajanimi, String salasana){
-        if(kayttajanimi.length() < 3){
-            return false;
-        }
-        
-        if(salasana.length() < 3){
-            return false;
-        }
-        
-        return true;
+        return Validoija.tarkistaPelaajanKayttajanimi(kayttajanimi) 
+                && Validoija.tarkistaPelaajanSalasana(salasana);
     }
     
     public void luoKayttaja(Response rspns, String kayttajatunnus, String salasana) throws Exception{

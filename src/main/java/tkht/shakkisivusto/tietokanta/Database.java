@@ -41,8 +41,8 @@ public class Database {
         
         taulut.add("CREATE TABLE Pelaaja(\n" +
                     "id serial primary key,\n" +
-                    "kayttajanimi varchar(50) unique not null,\n" +
-                    "pelaajanimi varchar(50) not null,\n" +
+                    "kayttajanimi varchar(30) unique not null,\n" +
+                    "pelaajanimi varchar(30) not null,\n" +
                     "salasana varchar(30) not null,\n" +
                     "admin boolean not null\n" +
                     ")");
