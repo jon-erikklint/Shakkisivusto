@@ -66,6 +66,7 @@ public class Vuoro implements Yhdistettava{
             for(int j = 0 ; j < 8 ; j++){
                 rivi.add(" 0 ");
             }
+            kartta.add(rivi);
         }
         
         for(Nappula nappula : nappulat){

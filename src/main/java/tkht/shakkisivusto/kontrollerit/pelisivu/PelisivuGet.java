@@ -28,6 +28,8 @@ public class PelisivuGet extends PeliHelper{
         
         List<List<String>> kartta = peli.getUusinVuoro().getRuudut();
         
+        System.out.println(kartta.size());
+        
         for(List<String> rivi : kartta){
             System.out.println("UUSI RIVI");
             for(String ruutu : rivi){
