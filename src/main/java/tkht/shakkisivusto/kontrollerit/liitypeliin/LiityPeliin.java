@@ -1,4 +1,4 @@
-package tkht.shakkisivusto.kontrollerit.pelisivu;
+package tkht.shakkisivusto.kontrollerit.liitypeliin;
 
 import java.util.Map;
 import spark.Request;
@@ -7,6 +7,7 @@ import tkht.shakkisivusto.domain.Pelaaja;
 import tkht.shakkisivusto.domain.Peli;
 import tkht.shakkisivusto.domain.PelinPelaaja;
 import tkht.shakkisivusto.kontrollerit.SessionManager;
+import tkht.shakkisivusto.kontrollerit.pelisivu.PeliHelper;
 import tkht.shakkisivusto.tietokanta.PeliDao;
 import tkht.shakkisivusto.tietokanta.PelinPelaajaDao;
 
@@ -15,7 +16,7 @@ public class LiityPeliin extends PeliHelper{
     private PelinPelaajaDao ppDao;
     
     public LiityPeliin(PeliDao peliDao, PelinPelaajaDao pelinPelaajaDao, SessionManager sm) {
-        super(peliDao, sm);
+        super("liitypeliin", peliDao, sm);
     }
 
     @Override

@@ -13,8 +13,8 @@ public abstract class PeliHelper extends KirjautunutHelper{
 
     protected PeliDao peliDao;
     
-    public PeliHelper(PeliDao peliDao, SessionManager sm) {
-        super(sm, "pelisivu");
+    public PeliHelper(String sivu, PeliDao peliDao, SessionManager sm) {
+        super(sm, sivu);
         
         this.peliDao = peliDao;
     }
@@ -35,6 +35,8 @@ public abstract class PeliHelper extends KirjautunutHelper{
         if(peli == null){
             ilmoitaVirhe("Virheellinen osoite", map);
         }
+        
+        map.put("peli", peli);
         
         handle(rqst, rspns, map, kirjautunut, peli);
     }

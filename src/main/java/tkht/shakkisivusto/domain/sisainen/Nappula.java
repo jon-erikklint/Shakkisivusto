@@ -34,8 +34,8 @@ public class Nappula {
             alku='[';
             loppu=']';
         }else{
-            alku=']';
-            loppu='[';
+            alku='{';
+            loppu='}';
         }
         
         return (alku+tyyppi.toString()+loppu).toUpperCase();

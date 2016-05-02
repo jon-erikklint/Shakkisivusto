@@ -18,7 +18,7 @@ public class SuoritaVuoro extends PeliHelper{
     private Vuorotarkastaja vuorotarkastaja;
     
     public SuoritaVuoro(PeliDao peliDao, PelinPelaajaDao pelinPelaajaDao, VuoroDao vuoroDao, SessionManager sm) {
-        super(peliDao, sm);
+        super("pelisivu", peliDao, sm);
         
         this.vuoroDao = vuoroDao;
         this.ppDao = pelinPelaajaDao;

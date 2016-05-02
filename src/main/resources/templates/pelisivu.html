@@ -1,7 +1,7 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Peli: pelin nimi</title>
+        <title>Pelisivu</title>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
@@ -19,7 +19,7 @@
             </form>
         </nav>
         
-        <h1>Pelin nimi</h1>
+        <h1 th:text="${peli.nimi}">Pelin nimi</h1>
         
         <ul>
             <li>O = tyhjä</li>
@@ -30,7 +30,7 @@
             <li>G = kuningatar</li>
             <li>K = kuningas</li>
             <li>[] = valkoinen</li>
-            <li>][ = musta</li>
+            <li>{} = musta</li>
         </ul>
         
         <table>

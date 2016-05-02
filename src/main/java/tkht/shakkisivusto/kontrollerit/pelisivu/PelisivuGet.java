@@ -14,7 +14,7 @@ public class PelisivuGet extends PeliHelper{
     private PeliDao peliDao;
     
     public PelisivuGet(PeliDao peliDao, SessionManager sm) {
-        super(peliDao, sm);
+        super("pelisivu", peliDao, sm);
         
         this.peliDao = peliDao;
     }

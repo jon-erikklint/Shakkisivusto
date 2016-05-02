@@ -36,6 +36,10 @@ public class Peli implements Yhdistettava{
         return "/peli/"+id;
     }
     
+    public String getLiittymislinkki(){
+        return "/peli"+id+"/liity";
+    }
+    
     public int getUusinVuoronumero(){
         Vuoro vuoro = getUusinVuoro();
         
