@@ -45,8 +45,6 @@ public class Vuorotarkastaja {
         Ruutu minne = new Ruutu(mihi);
         Nappula siirrettava = kartta.get(mista);
         
-        System.out.println("Siirretään: "+siirrettava);
-        
         if(siirrettava == null){
             return null;
         }
@@ -93,7 +91,6 @@ public class Vuorotarkastaja {
             return false;
         }
         
-        System.out.println("VOI SIIRTYÄ");
         return !itseaiheutettuShakki(siirrettava, minne);
     }
     
@@ -123,12 +120,6 @@ public class Vuorotarkastaja {
                 break;
             default:
                 siirryttavat = new HashSet<>();
-        }
-        
-        System.out.println("Siirryttäviä ruutuja: "+siirryttavat.size());
-        
-        for(Ruutu siirryttava : siirryttavat){
-            System.out.println(siirryttava.toString());
         }
         
         return siirryttavat.contains(minne);
