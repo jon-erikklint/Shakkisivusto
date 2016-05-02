@@ -63,11 +63,13 @@ public class Vuorotarkastaja {
     private Vuoro luoUusiVuoro(Nappula siirrettava, Ruutu minne){
         siirraNappula(siirrettava, minne);
         int pelaajaid;
+        System.out.println(vuoro.getVuoro());
         if(vuoro.getVuoro()+1 % 2 == 0){
             pelaajaid = peli.getPelaaja1().getPelaajaid();
         }else{
             pelaajaid = peli.getPelaaja2().getPelaajaid();
         }
+        System.out.println(pelaajaid);
         
         Vuoro uusiVuoro = new Vuoro();
         uusiVuoro.setPeliid(vuoro.getPeliid());
