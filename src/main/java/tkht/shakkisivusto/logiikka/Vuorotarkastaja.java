@@ -4,7 +4,10 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import tkht.shakkisivusto.domain.Peli;
 import tkht.shakkisivusto.domain.Vuoro;
 import tkht.shakkisivusto.domain.sisainen.*;
@@ -46,7 +49,11 @@ public class Vuorotarkastaja {
             return null;
         }
         
-        if(!voikoSiirtya(siirrettava, minne)){
+        if(siirrettava.isValkoinen() != valkoinen){
+            return null;
+        }
+        
+        if(!tarkistaSiirto(siirrettava, minne)){
             return null;
         }
         
@@ -79,7 +86,7 @@ public class Vuorotarkastaja {
         siirrettava.setSijainti(minne);
     }
     
-    private boolean voikoSiirtya(Nappula siirrettava, Ruutu minne){
+    private boolean tarkistaSiirto(Nappula siirrettava, Ruutu minne){
         if(!pystyySiirtymaan(siirrettava, minne)){
             return false;
         }
@@ -88,54 +95,199 @@ public class Vuorotarkastaja {
     }
     
     private boolean pystyySiirtymaan(Nappula siirrettava, Ruutu minne){
-        boolean voikoSiirtya = false;
+        Set<Ruutu> siirryttavat;
+        
+        Ruutu sijainti = siirrettava.getSijainti();
         
         switch(siirrettava.getTyyppi()){
             case SOTILAS:
-                voikoSiirtya = sotilas(siirrettava, minne);
+                siirryttavat = sotilas(sijainti);
                 break;
             case LAHETTI:
-                voikoSiirtya = lahetti(siirrettava, minne);
+                siirryttavat = lahetti(sijainti);
                 break;
             case RATSU:
-                voikoSiirtya = ratsu(siirrettava, minne);
+                siirryttavat = ratsu(sijainti);
                 break;
             case TORNI:
-                voikoSiirtya = torni(siirrettava, minne);
+                siirryttavat = torni(sijainti);
                 break;
             case KUNINGATAR:
-                voikoSiirtya = kuningatar(siirrettava, minne);
+                siirryttavat = kuningatar(sijainti);
                 break;
             case KUNINGAS:
-                voikoSiirtya = kuningas(siirrettava, minne);
+                siirryttavat = kuningas(sijainti);
                 break;
+            default:
+                siirryttavat = new HashSet<>();
         }
         
-        return voikoSiirtya;
+        return siirryttavat.contains(minne);
     }
     
-    private boolean sotilas(Nappula nappula, Ruutu kohde){
-        return false;
+    private Set<Ruutu> sotilas(Ruutu sijainti){
+        Set<Ruutu> liikuttavat = new HashSet<>();
+        
+        Set<Ruutu> suoraan;
+        if(valkoinen){
+            suoraan = tarkistaSuunta(sijainti, Suunta.YLOS, 1);
+        }else{
+            suoraan = tarkistaSuunta(sijainti, Suunta.ALAS, 1);
+        }
+        liikuttavat.addAll(suoraan);
+        
+        Ruutu oikea;
+        Ruutu vasen;
+        if(valkoinen){
+            oikea = tarkistaSotilaanSyonti(sijainti, Suunta.YLAOIKEA);
+            vasen = tarkistaSotilaanSyonti(sijainti, Suunta.YLAVASEN);
+        }else{
+            oikea = tarkistaSotilaanSyonti(sijainti, Suunta.ALAOIKEA);
+            vasen = tarkistaSotilaanSyonti(sijainti, Suunta.ALAVASEN);
+        }
+        
+        if(oikea != null){
+            liikuttavat.add(oikea);
+        }
+        if(vasen != null){
+            liikuttavat.add(vasen);
+        }
+        
+        return liikuttavat;
     }
     
-    private boolean lahetti(Nappula nappula, Ruutu kohde){
-        return false;
+    private Ruutu tarkistaSotilaanSyonti(Ruutu mista, Suunta suunta){
+        Ruutu minne = mista.getSuunnasta(suunta);
+        
+        if(minne == null){
+            return null;
+        }
+        
+        if(tarkistaPaasy(minne) != Siirtotyyppi.SYONTI){
+            return null;
+        }
+        
+        return minne;
     }
     
-    private boolean ratsu(Nappula nappula, Ruutu kohde){
-        return false;
+    private Set<Ruutu> lahetti(Ruutu sijainti){
+        Set<Ruutu> siirrettavat = new HashSet<>();
+        
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.ALAOIKEA, 10));
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.ALAVASEN, 10));
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.YLAOIKEA, 10));
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.YLAVASEN, 10));
+        
+        return siirrettavat;
     }
     
-    private boolean torni(Nappula nappula, Ruutu kohde){
-        return false;
+    private Set<Ruutu> ratsu(Ruutu sijainti){
+        List<Ruutu> teoreettiset = new ArrayList<>();
+        teoreettiset.add(sijainti.getVerraten(2, 1));
+        teoreettiset.add(sijainti.getVerraten(2, -1));
+        teoreettiset.add(sijainti.getVerraten(-2, -1));
+        teoreettiset.add(sijainti.getVerraten(-2, 1));
+        teoreettiset.add(sijainti.getVerraten(1, 2));
+        teoreettiset.add(sijainti.getVerraten(1, -2));
+        teoreettiset.add(sijainti.getVerraten(-1, -2));
+        teoreettiset.add(sijainti.getVerraten(-1, 2));
+        
+        Set<Ruutu> oikeat = new HashSet<>();
+        for(Ruutu teoreettinen : teoreettiset){
+            if(teoreettinen == null){
+                continue;
+            }
+            
+            if(tarkistaPaasy(teoreettinen) != Siirtotyyppi.EISIIRTO){
+                oikeat.add(teoreettinen);
+            }
+        }
+        
+        return oikeat;
     }
     
-    private boolean kuningas(Nappula nappula, Ruutu kohde){
-        return false;
+    private Set<Ruutu> torni(Ruutu sijainti){
+        Set<Ruutu> siirrettavat = new HashSet<>();
+        
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.ALAS, 10));
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.OIKEA, 10));
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.VASEN, 10));
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.YLOS, 10));
+        
+        return siirrettavat;
     }
     
-    private boolean kuningatar(Nappula nappula, Ruutu kohde){
-        return false;
+    private Set<Ruutu> kuningas(Ruutu sijainti){
+        Set<Ruutu> siirrettavat = new HashSet<>();
+        
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.ALAS, 1));
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.OIKEA, 1));
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.VASEN, 1));
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.YLOS, 1));
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.ALAOIKEA, 1));
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.ALAVASEN, 1));
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.YLAOIKEA, 1));
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.YLAVASEN, 1));
+        
+        return siirrettavat;
+    }
+    
+    private Set<Ruutu> kuningatar(Ruutu sijainti){
+        Set<Ruutu> siirrettavat = new HashSet<>();
+        
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.ALAS, 10));
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.OIKEA, 10));
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.VASEN, 10));
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.YLOS, 10));
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.ALAOIKEA, 10));
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.ALAVASEN, 10));
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.YLAOIKEA, 10));
+        siirrettavat.addAll(tarkistaSuunta(sijainti, Suunta.YLAVASEN, 10));
+        
+        return siirrettavat;
+    }
+    
+    private Set<Ruutu> tarkistaSuunta(Ruutu mista, Suunta suunta, int maksimimaara){
+        if(maksimimaara == 0){
+            return new HashSet<>();
+        }
+        
+        Ruutu suunnassa = mista.getSuunnasta(suunta);
+        
+        if(suunnassa == null){
+            return new HashSet<>();
+        }
+        
+        Siirtotyyppi siirto = tarkistaPaasy(suunnassa);
+        
+        if(siirto == Siirtotyyppi.EISIIRTO){
+            return new HashSet<>();
+        }
+        
+        Set<Ruutu> siirrot;
+        
+        if(siirto == Siirtotyyppi.SYONTI){
+            siirrot = new HashSet<>();
+        }else{
+            siirrot = tarkistaSuunta(suunnassa, suunta, maksimimaara-1);
+        }
+        
+        siirrot.add(suunnassa);
+        return siirrot;
+    }
+    
+    private Siirtotyyppi tarkistaPaasy(Ruutu kohde){
+        Nappula kohdenappula = kartta.get(kohde);
+        
+        if(kohdenappula == null){
+            return Siirtotyyppi.SIIRTO;
+        }
+        
+        if(kohdenappula.isValkoinen() == valkoinen){
+            return Siirtotyyppi.EISIIRTO;
+        }
+        
+        return Siirtotyyppi.SYONTI;
     }
     
     private boolean eiItseaiheutettuShakki(Nappula nappula, Ruutu kohde){

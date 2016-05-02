@@ -54,6 +54,73 @@ public class Ruutu {
         this.y = y;
     }
     
+    public Ruutu getSuunnasta(Suunta suunta){
+        switch(suunta){
+            case YLOS:
+                return getYlos();
+            case ALAS:
+                return getAlas();
+            case OIKEA:
+                return getOikea();
+            case VASEN:
+                return getVasen();
+            case YLAOIKEA:
+                return getYlaoikea();
+            case YLAVASEN:
+                return getYlavasen();
+            case ALAOIKEA:
+                return getAlaoikea();
+            case ALAVASEN:
+                return getAlavasen();
+        }
+        
+        return null;
+    }
+    
+    public Ruutu getYlos(){
+        return getVerraten(x, y+1);
+    }
+    
+    public Ruutu getAlas(){
+        return getVerraten(x, y-1);
+    }
+    
+    public Ruutu getOikea(){
+        return getVerraten(x+1, y);
+    }
+    
+    public Ruutu getVasen(){
+        return getVerraten(x-1, y);
+    }
+    
+    public Ruutu getYlaoikea(){
+        return getVerraten(x+1, y-1);
+    }
+    
+    public Ruutu getYlavasen(){
+        return getVerraten(x-1, y-1);
+    }
+    
+    public Ruutu getAlaoikea(){
+        return getVerraten(x+1, y+1);
+    }
+    
+    public Ruutu getAlavasen(){
+        return getVerraten(x-1, y+1);
+    }
+    
+    public Ruutu getVerraten(int x, int y){
+        if(tarkistaLuku(x) && tarkistaLuku(y)){
+            return new Ruutu(x, y);
+        }
+        
+        return null;
+    }
+    
+    private boolean tarkistaLuku(int n){
+        return n > 0 && n < 9;
+    }
+    
     @Override
     public String toString(){
         char xk = tulkitse(x);
