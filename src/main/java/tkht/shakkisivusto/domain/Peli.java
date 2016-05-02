@@ -37,7 +37,7 @@ public class Peli implements Yhdistettava{
     }
     
     public String getLiittymislinkki(){
-        return "/peli"+id+"/liity";
+        return "/peli/"+id+"/liity";
     }
     
     public int getUusinVuoronumero(){

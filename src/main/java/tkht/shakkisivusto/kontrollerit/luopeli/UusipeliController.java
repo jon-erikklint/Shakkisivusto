@@ -1,4 +1,4 @@
-package tkht.shakkisivusto.kontrollerit.uusipeli;
+package tkht.shakkisivusto.kontrollerit.luopeli;
 
 import java.util.HashMap;
 import java.util.Map;

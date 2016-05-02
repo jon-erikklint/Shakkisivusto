@@ -9,12 +9,15 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tkht.shakkisivusto.kontrollerit.asetukset.AsetuksetController;
 import tkht.shakkisivusto.kontrollerit.etsipelaajia.EtsipelaajiaController;
 import tkht.shakkisivusto.kontrollerit.etusivu.IndexController;
+import tkht.shakkisivusto.kontrollerit.katselusivu.KatselusivuController;
 import tkht.shakkisivusto.kontrollerit.liitypeliin.LiitypeliinController;
 import tkht.shakkisivusto.kontrollerit.pelaajasivu.PelaajasivuController;
 import tkht.shakkisivusto.kontrollerit.omatpelit.OmatpelitController;
 import tkht.shakkisivusto.kontrollerit.pelisivu.PelisivuController;
 import tkht.shakkisivusto.kontrollerit.uudetpelit.UudetpelitController;
-import tkht.shakkisivusto.kontrollerit.uusipeli.UusipeliController;
+import tkht.shakkisivusto.kontrollerit.luopeli.UusipeliController;
+import tkht.shakkisivusto.kontrollerit.pelatutpelit.PelatutpelitController;
+import tkht.shakkisivusto.kontrollerit.voitto.VoittoController;
 
 public class Alustaja {
     
@@ -82,6 +85,9 @@ public class Alustaja {
         kontrollerit.add(new UudetpelitController(peliDao, pelaajaDao, pelinPelaajaDao, sm));
         kontrollerit.add(new PelisivuController(peliDao, pelinPelaajaDao, vuoroDao, sm));
         kontrollerit.add(new LiitypeliinController(peliDao, pelinPelaajaDao, sm));
+        kontrollerit.add(new PelatutpelitController());
+        kontrollerit.add(new KatselusivuController());
+        kontrollerit.add(new VoittoController());
         
         return kontrollerit;
     }
