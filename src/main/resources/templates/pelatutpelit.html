@@ -19,24 +19,14 @@
             </form>
         </nav>
         
-        <form method="GET">
-            Hae pelaajalla: 
-            <input type="text" name="pealaajannimi"/>
-            <input type="submit" value="Hae"/>
-        </form>
-        
-        <h1>Pelaajan X pelatut pelit:</h1>
+        <h1><span th:text="${pelaaja.nimi}">Pelaaja</span>n pelatut pelit:</h1>
         
         <ul>
-            <li>
-                <h2>Pelin nimi</h2>
-                <p>Vuoro: 0</p>
-                <p>Peli loppui: 2000.01.01 00:00:00</p>
-                <a href="pelisivu.html">linkki peliin</a>
-                <form method="POST">
-                    <input type="checkbox" value="Varmistus" name="varmistus"/>
-                    <input type="submit" value="Poistu pelistä"/>
-                </form>
+            <li th:each="peli: ${pelit}">
+                <h2 th:text="${peli.nimi}">Pelin nimi</h2>
+                <p th:text="${peli.vuoroja}">Vuoroja: 0</p>
+                <p>Peli loppui: <span th:text="${peli.viimeisintekoaika}">2000.01.01 00:00:00</span></p>
+                <a th:href="${peli.katselusivu}">linkki peliin</a>
             </li>
         </ul>
     </body>

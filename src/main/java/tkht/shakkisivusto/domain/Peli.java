@@ -40,6 +40,21 @@ public class Peli implements Yhdistettava{
         return "/peli/"+id+"/liity";
     }
     
+    public String getKatselusivu(){
+        int vuoro = getUusinVuoronumero();
+        return "/peli/"+id+"/katsele/"+vuoro;
+    }
+    
+    public int getVuoroja(){
+        return vuorot.size();
+    }
+    
+    public String getViimeisintekoaika(){
+        Vuoro viimeisin = getUusinVuoro();
+        
+        return viimeisin.getTekoaika().toString();
+    }
+    
     public int getUusinVuoronumero(){
         Vuoro vuoro = getUusinVuoro();
         
