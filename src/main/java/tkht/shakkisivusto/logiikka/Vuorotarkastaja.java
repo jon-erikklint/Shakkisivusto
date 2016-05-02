@@ -293,7 +293,7 @@ public class Vuorotarkastaja {
     private boolean itseaiheutettuShakki(Nappula nappula, Ruutu kohde){
         Nappula kohdenappula = kartta.get(kohde);
         kartta.put(kohde, nappula);
-        kartta.put(nappula.getSijainti(), null);
+        kartta.remove(nappula.getSijainti());
         
         Ruutu kuninkaanSijainti = omaKuningas.getSijainti();
         
@@ -312,8 +312,6 @@ public class Vuorotarkastaja {
         kartta.put(nappula.getSijainti(), nappula);
         if(kohdenappula != null){
             kartta.put(kohde, kohdenappula);
-        }else{
-            kartta.put(kohde, null);
         }
         
         return itseaiheutettuShakki;
