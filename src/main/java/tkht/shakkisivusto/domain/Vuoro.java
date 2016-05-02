@@ -60,10 +60,7 @@ public class Vuoro implements Yhdistettava{
         Nappula viimeinen = new Nappula(lauta.substring(alku));
         valiaikainen.add(viimeinen);
         
-        System.out.println("LOPPUTULOS: "+valiaikainen.size());
-        
         nappulat = valiaikainen;
-        System.out.println("LOPULLINEN: "+nappulat.size());
     }
     
     public List<List<String>> getRuudut(){
