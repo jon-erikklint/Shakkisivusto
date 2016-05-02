@@ -44,6 +44,8 @@ public class PelisivuGet extends PeliHelper{
             
         }
         
+        System.out.println(vuorotilanne);
+        
         map.put("pelaajanVuoro", vuorotilanne);
     }
     
