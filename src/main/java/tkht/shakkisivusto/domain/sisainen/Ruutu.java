@@ -80,46 +80,49 @@ public class Ruutu {
     }
     
     public Ruutu getYlos(){
-        return getVerraten(x, y+1);
+        return getVerraten(0, -1);
     }
     
     public Ruutu getAlas(){
-        return getVerraten(x, y-1);
+        return getVerraten(0, 1);
     }
     
     public Ruutu getOikea(){
-        return getVerraten(x+1, y);
+        return getVerraten(1, 0);
     }
     
     public Ruutu getVasen(){
-        return getVerraten(x-1, y);
+        return getVerraten(-1, 0);
     }
     
     public Ruutu getYlaoikea(){
-        return getVerraten(x+1, y-1);
+        return getVerraten(1, -1);
     }
     
     public Ruutu getYlavasen(){
-        return getVerraten(x-1, y-1);
+        return getVerraten(-1, -1);
     }
     
     public Ruutu getAlaoikea(){
-        return getVerraten(x+1, y+1);
+        return getVerraten(1, 1);
     }
     
     public Ruutu getAlavasen(){
-        return getVerraten(x-1, y+1);
+        return getVerraten(-1, 1);
     }
     
-    public Ruutu getVerraten(int x, int y){
-        if(tarkistaLuku(x) && tarkistaLuku(y)){
-            return new Ruutu(x, y);
+    public Ruutu getVerraten(int dx, int dy){
+        int nx = x+dx;
+        int ny = y+dy;
+        
+        if(tarkistaLuku(nx) && tarkistaLuku(ny)){
+            return new Ruutu(nx, ny);
         }
         
         return null;
     }
     
-    private boolean tarkistaLuku(int n){
+    protected boolean tarkistaLuku(int n){
         return n > 0 && n < 9;
     }
     
