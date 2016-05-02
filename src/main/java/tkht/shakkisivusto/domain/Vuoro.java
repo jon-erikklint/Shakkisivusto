@@ -56,6 +56,8 @@ public class Vuoro implements Yhdistettava{
                 alku = i+1;
             }
         }
+        
+        System.out.println("Nappuloita luotu uuden pelin yhteyteen: "+nappulat.size());
     }
     
     public List<List<String>> getRuudut(){
@@ -70,12 +72,14 @@ public class Vuoro implements Yhdistettava{
         }
         
         for(Nappula nappula : nappulat){
+            System.out.println("TULKITSEN RIVIÄ");
             Ruutu sijainti = nappula.getSijainti();
             
             int x = sijainti.getX();
             int y = sijainti.getY();
             
-            kartta.get(y).set(x, nappula.karttaString());
+            List<String> oikeaRivi = kartta.get(y);
+            oikeaRivi.set(x, nappula.karttaString());
         }
         
         return kartta;

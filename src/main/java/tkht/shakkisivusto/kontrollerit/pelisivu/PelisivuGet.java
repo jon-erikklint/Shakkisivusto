@@ -24,18 +24,6 @@ public class PelisivuGet extends PeliHelper{
         if(!tarkistaPaasy(kirjautunut, peli, map)){
             return;
         }
-        System.out.println("OIKEA HENKILÖ");
-        
-        List<List<String>> kartta = peli.getUusinVuoro().getRuudut();
-        
-        System.out.println(kartta.size());
-        
-        for(List<String> rivi : kartta){
-            System.out.println("UUSI RIVI");
-            for(String ruutu : rivi){
-                System.out.println(ruutu);
-            }
-        }
         
         map.put("kartta", peli.getUusinVuoro().getRuudut());
         
