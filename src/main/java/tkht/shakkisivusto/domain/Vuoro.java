@@ -80,8 +80,8 @@ public class Vuoro implements Yhdistettava{
         for(Nappula nappula : nappulat){
             Ruutu sijainti = nappula.getSijainti();
             
-            int x = sijainti.getX();
-            int y = sijainti.getY();
+            int x = sijainti.getX() - 1;
+            int y = sijainti.getY() - 1;
             
             List<String> oikeaRivi = kartta.get(y);
             oikeaRivi.set(x, nappula.karttaString());
