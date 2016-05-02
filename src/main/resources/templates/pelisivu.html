@@ -42,7 +42,7 @@
         </table>
         
         <div th:switch="${vuorotilanne}">
-            <div th:case="onvuoro">
+            <div th:case="'onvuoro'">
                 <h2>Tee vuorosi:</h2>
                 <p>
                     Tee vuorosi ilmoittamalla sijainnin, josta haluat siirtää nappulan, 
@@ -56,11 +56,11 @@
                 </form>
             </div>
             
-            <div th:case="toisenvuoro">
+            <div th:case="'toisenvuoro'">
                 <p>On toisen pelaajan vuoro.</p>
             </div>
             
-            <div th:case="toinenpelaajaeiliittynyt">
+            <div th:case="'toinenpelaajaeiliittynyt'">
                 <p>Toinen pelaaja ei ole vielä liittynyt peliin. Odota että vastapelaaja liittyy ja pelaa sitten vuorosi.</p>
             </div>
         </div>
