@@ -44,22 +44,26 @@ public class Vuoro implements Yhdistettava{
     public Vuoro(){}
     
     public void alustaLauta(String lauta){
-        nappulat = new ArrayList<>();
+        List<Nappula> valiaikainen = new ArrayList<>();
         
         int alku = 0;
         for(int i = 0 ; i < lauta.length() ; i++){
             if(lauta.charAt(i) == ','){
                 
                 Nappula uusiNappula = new Nappula(lauta.substring(alku, i));
-                nappulat.add(uusiNappula);
-                
-                System.out.println(nappulat.size());
+                valiaikainen.add(uusiNappula);
                 
                 alku = i+1;
             }
         }
         
-        System.out.println("LOPPUTULOS: "+nappulat.size());
+        Nappula viimeinen = new Nappula(lauta.substring(alku));
+        valiaikainen.add(viimeinen);
+        
+        System.out.println("LOPPUTULOS: "+valiaikainen.size());
+        
+        nappulat = valiaikainen;
+        System.out.println("LOPULLINEN: "+nappulat.size());
     }
     
     public List<List<String>> getRuudut(){
