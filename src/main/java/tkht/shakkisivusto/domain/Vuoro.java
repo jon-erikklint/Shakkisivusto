@@ -102,7 +102,7 @@ public class Vuoro implements Yhdistettava{
             koodattu += nappula.toString();
             
             if(i < nappulat.size() - 1){
-                koodattu += ":";
+                koodattu += ",";
             }
         }
         
