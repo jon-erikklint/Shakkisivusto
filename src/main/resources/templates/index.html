@@ -10,21 +10,29 @@
         
         <h1>Shakkisivusto</h1>
         
-        <p>Tervetuloa shakkisivustolleni! Kirjaudu sisään "kirjadu sisään"-kohdassa 
-            tai tee uusi käyttäjä "Luo uusi käyttäjä"-kohdassa</p>
+        <p>Tervetuloa shakkisivustolleni! Kirjaudu sisään "kirjaudu sisään"-kohdassa 
+            tai tee uusi käyttäjä "Rekisteröidy"-kohdassa</p>
         
         <h2>Kirjaudu sisään</h2>
         <form method="POST">
-            <input type="text" name="kayttaja"/>
-            <input type="password" name="salasana"/>
-            <input type="submit"/>
+            Käyttäjätunnus: <input type="text" name="kayttaja"/><br/>
+            Salasana: <input type="password" name="salasana"/></br>
+            <input type="submit" value="Kirjaudu sisään"/>
         </form>
         
         <h2>Rekisteröidy</h2>
+        
+        <p>
+            Rekisteröidy shakkisivustolle. Käyttäjätunnuksen ja salasanan täytyy 
+            olla vähintään kolme merkkiä pitkä ja sallitut merkit ovat isot ja pienet 
+            kirjaimet sekä numerot. Varoitus: tietokanta tallentaa tällä hetkellä 
+            salasanat <b>selväkielisinä!!!!!!</b>
+        </p>
+        
         <form method="POST" action="/rekisterointi">
-            <input type="text" name="kayttaja"/>
-            <input type="password" name="salasana"/>
-            <input type="submit"/>
+            Käyttäjätunnus: <input type="text" name="kayttaja"/><br/>
+            Salasana: <input type="password" name="salasana"/><br/>
+            <input type="submit" value="Rekisteröidy"/>
         </form>
     </body>
 </html>

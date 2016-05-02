@@ -93,6 +93,14 @@ public class Pelaaja implements Yhdistettava{
     }
     
     public double getVoittoratio(){
+        if(tappioita == 0){
+            if(voittoja > 0){
+                return 1;
+            }
+            
+            return 0;
+        }
+        
         return ((double)voittoja) / tappioita;
     }
 
