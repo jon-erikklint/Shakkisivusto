@@ -38,16 +38,15 @@ public class Vuorotarkastaja {
             
             kartta.put(nappula.getSijainti(), nappula);
         }
-        
-        System.out.println("Nappuloita: "+kartta.keySet().size());
-        System.out.println("Kuningas: "+omaKuningas);
-        System.out.println("Valkoinen: "+valkoinen);
     }
     
     public Vuoro toteutaSiirto(String mist, String mihi){
         Ruutu mista = new Ruutu(mist);
         Ruutu minne = new Ruutu(mihi);
         Nappula siirrettava = kartta.get(mista);
+        
+        System.out.println("MISTA: "+mista.getX()+","+mista.getY());
+        System.out.println("MIHIN: "+minne.getX()+","+minne.getY());
         
         System.out.println("Siirretään: "+siirrettava);
         

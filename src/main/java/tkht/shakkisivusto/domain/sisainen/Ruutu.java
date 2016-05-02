@@ -11,6 +11,8 @@ public class Ruutu {
     }
     
     public Ruutu(String sijainti) {
+        sijainti = sijainti.toLowerCase();
+        
         x = sijainti.charAt(0) - 'a' + 1;
         y = Integer.parseInt(""+sijainti.charAt(1));
     }
