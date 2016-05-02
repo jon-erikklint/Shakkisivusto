@@ -38,6 +38,8 @@ public class Vuoro implements Yhdistettava{
         
         this.erikoistilanteet = new Erikoistilanteet(Alku.alkutilanteet);
         
+        System.out.println(Alku.alkulauta);
+        
         alustaLauta(Alku.alkulauta);
     }
     
@@ -46,18 +48,20 @@ public class Vuoro implements Yhdistettava{
     public void alustaLauta(String lauta){
         nappulat = new ArrayList<>();
         
+        System.out.println(lauta.length());
+        
         int alku = 0;
         for(int i = 0 ; i < lauta.length() ; i++){
+            System.out.println(lauta.charAt(i));
             if(lauta.charAt(i) == ','){
-                
+                System.out.println("UUSI NAPPULA LUODAAN");
                 Nappula uusiNappula = new Nappula(lauta.substring(alku, i));
                 nappulat.add(uusiNappula);
+                System.out.println("UUSI NAPPULA: "+uusiNappula);
                 
                 alku = i+1;
             }
         }
-        
-        System.out.println("Nappuloita luotu uuden pelin yhteyteen: "+nappulat.size());
     }
     
     public List<List<String>> getRuudut(){
@@ -72,7 +76,6 @@ public class Vuoro implements Yhdistettava{
         }
         
         for(Nappula nappula : nappulat){
-            System.out.println("TULKITSEN RIVIÄ");
             Ruutu sijainti = nappula.getSijainti();
             
             int x = sijainti.getX();
