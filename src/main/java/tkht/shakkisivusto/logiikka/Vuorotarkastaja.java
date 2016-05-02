@@ -45,9 +45,6 @@ public class Vuorotarkastaja {
         Ruutu minne = new Ruutu(mihi);
         Nappula siirrettava = kartta.get(mista);
         
-        System.out.println("MISTA: "+mista.getX()+","+mista.getY());
-        System.out.println("MIHIN: "+minne.getX()+","+minne.getY());
-        
         System.out.println("Siirretään: "+siirrettava);
         
         if(siirrettava == null){
@@ -55,7 +52,6 @@ public class Vuorotarkastaja {
         }
         
         if(siirrettava.isValkoinen() != valkoinen){
-            System.out.println("VÄÄRÄN VÄRINEN");
             return null;
         }
         
@@ -106,10 +102,12 @@ public class Vuorotarkastaja {
         Set<Ruutu> siirryttavat;
         
         Ruutu sijainti = siirrettava.getSijainti();
+        System.out.println("SIIRRETTÄVÄN SIJAINTI: "+sijainti.getX()+","+sijainti.getY());
         
         switch(siirrettava.getTyyppi()){
             case SOTILAS:
                 siirryttavat = sotilas(sijainti);
+                System.out.println("SOTILAS");
                 break;
             case LAHETTI:
                 siirryttavat = lahetti(sijainti);
@@ -128,6 +126,10 @@ public class Vuorotarkastaja {
                 break;
             default:
                 siirryttavat = new HashSet<>();
+        }
+        
+        for(Ruutu siirryttava : siirryttavat){
+            System.out.println(siirryttava.toString());
         }
         
         return siirryttavat.contains(minne);
