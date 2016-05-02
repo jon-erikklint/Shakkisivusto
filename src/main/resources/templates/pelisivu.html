@@ -41,23 +41,27 @@
             </tr>
         </table>
         
-        <div th:switch="${pelaajanVuoro}">
-            <div th:case="true">
+        <div th:switch="${vuorotilanne}">
+            <div th:case="onvuoro">
                 <h2>Tee vuorosi:</h2>
                 <p>
                     Tee vuorosi ilmoittamalla sijainnin, josta haluat siirtää nappulan, 
                     ja sijainnin, johon haluat siirtää kyseisen nappulan. Käytä muotoa
                     AN jossa A on kirjain A-H ja N on numero välillä 1-8.
                 </p>
-                <form>
+                <form method="POST">
                     Siirrettävän nappulan sijainti<input type="text" name="mista"/>
                     Paikka johon nappula siirretään<input type="text" name="minne"/>
                     <input type="submit"/>
                 </form>
             </div>
             
-            <div th:case="false">
-                <p>On toisen pelaajan vuoro</p>
+            <div th:case="toisenvuoro">
+                <p>On toisen pelaajan vuoro.</p>
+            </div>
+            
+            <div th:case="toinenpelaajaeiliittynyt">
+                <p>Toinen pelaaja ei ole vielä liittynyt peliin. Odota että vastapelaaja liittyy ja pelaa sitten vuorosi.</p>
             </div>
         </div>
     </body>

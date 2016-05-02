@@ -27,9 +27,24 @@ public class PelisivuGet extends PeliHelper{
         
         map.put("kartta", peli.getUusinVuoro().getRuudut());
         
-        int vuorossaolijanid = peli.getUusinVuoro().getPelaajaid();
+        String vuorotilanne;
+        if(peli.getPelaaja2() == null){
+            
+            vuorotilanne = "toinenpelaajaeiliittynyt";
+            
+        }else{
+            
+            int vuorossaolijanid = peli.getUusinVuoro().getPelaajaid();
         
-        map.put("pelaajanVuoro", vuorossaolijanid == kirjautunut.getIndeksi());
+            if(vuorossaolijanid == kirjautunut.getIndeksi()){
+                vuorotilanne = "onvuoro";
+            }else{
+                vuorotilanne = "toisenvuoro";
+            }
+            
+        }
+        
+        map.put("pelaajanVuoro", vuorotilanne);
     }
     
 }

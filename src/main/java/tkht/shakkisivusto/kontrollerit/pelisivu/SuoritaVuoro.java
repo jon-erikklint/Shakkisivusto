@@ -40,6 +40,10 @@ public class SuoritaVuoro extends PeliHelper{
     }
     
     private boolean onkoVuorossa(Pelaaja pelaaja, Peli peli){
+        if(peli.getPelaaja2() == null){
+            return false;
+        }
+        
         Vuoro uusin = peli.getUusinVuoro();
         
         return uusin.getPelaajaid() == pelaaja.getIndeksi();
