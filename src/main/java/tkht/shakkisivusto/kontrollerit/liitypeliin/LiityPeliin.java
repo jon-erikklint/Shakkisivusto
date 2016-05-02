@@ -25,6 +25,9 @@ public class LiityPeliin extends PeliHelper{
     protected void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut, Peli peli) throws Exception {
         if(onkoLiityttava(peli)){
             liityPeliin(kirjautunut, peli);
+            
+            rspns.redirect(peli.getPelisivu());
+            
             return;
         }
         
