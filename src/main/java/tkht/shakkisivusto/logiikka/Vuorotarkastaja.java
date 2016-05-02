@@ -38,6 +38,10 @@ public class Vuorotarkastaja {
             
             kartta.put(nappula.getSijainti(), nappula);
         }
+        
+        System.out.println("Nappuloita: "+kartta.keySet().size());
+        System.out.println("Kuningas: "+omaKuningas);
+        System.out.println("Valkoinen: "+valkoinen);
     }
     
     public Vuoro toteutaSiirto(String mist, String mihi){
@@ -45,11 +49,14 @@ public class Vuorotarkastaja {
         Ruutu minne = new Ruutu(mihi);
         Nappula siirrettava = kartta.get(mista);
         
+        System.out.println("Siirretään: "+siirrettava);
+        
         if(siirrettava == null){
             return null;
         }
         
         if(siirrettava.isValkoinen() != valkoinen){
+            System.out.println("VÄÄRÄN VÄRINEN");
             return null;
         }
         
@@ -88,10 +95,12 @@ public class Vuorotarkastaja {
     
     private boolean tarkistaSiirto(Nappula siirrettava, Ruutu minne){
         if(!pystyySiirtymaan(siirrettava, minne)){
+            System.out.println("EI VOI SIIRTYÄ");
             return false;
         }
         
-        return eiItseaiheutettuShakki(siirrettava, minne);
+        System.out.println("VOI SIIRTYÄ");
+        return !itseaiheutettuShakki(siirrettava, minne);
     }
     
     private boolean pystyySiirtymaan(Nappula siirrettava, Ruutu minne){
@@ -290,16 +299,21 @@ public class Vuorotarkastaja {
         return Siirtotyyppi.SYONTI;
     }
     
-    private boolean eiItseaiheutettuShakki(Nappula nappula, Ruutu kohde){
+    private boolean itseaiheutettuShakki(Nappula nappula, Ruutu kohde){
         Nappula kohdenappula = kartta.get(kohde);
         kartta.put(kohde, nappula);
         kartta.put(nappula.getSijainti(), null);
         
-        boolean eiItseaiheutettuShakki = true;
+        Ruutu kuninkaanSijainti = omaKuningas.getSijainti();
+        
+        boolean itseaiheutettuShakki = false;
         
         for(Nappula kokeiltava : kartta.values()){
-            if(pystyySiirtymaan(kokeiltava, kohde)){
-                eiItseaiheutettuShakki = false;
+            if(kokeiltava.isValkoinen() == valkoinen){
+                continue;
+            }
+            if(pystyySiirtymaan(kokeiltava, kuninkaanSijainti)){
+                itseaiheutettuShakki = true;
                 break;
             }
         }
@@ -311,7 +325,7 @@ public class Vuorotarkastaja {
             kartta.put(kohde, null);
         }
         
-        return eiItseaiheutettuShakki;
+        return itseaiheutettuShakki;
     }
     
     public boolean voittiko(){
