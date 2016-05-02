@@ -89,11 +89,11 @@ public class Database {
     private List<String> testidata(){List<String> kaskyt = new ArrayList<>();
         
         kaskyt.add("INSERT INTO Pelaaja (kayttajanimi, pelaajanimi, salasana, admin) VALUES ('asd', 'asd', 'asd', false)");
-        kaskyt.add("INSERT INTO Pelaaja (kayttajanimi, pelaajanimi, salasana, admin) VALUES ('sdf', 'sdf', 'sdf', false)");
-        
-        kaskyt.add("INSERT INTO Peli (nimi, status) VALUES ('asd', 'HAETAAN VASTAPELAAJAA')");
-        
-        kaskyt.add("INSERT INTO Pelinpelaaja (pelaajaid, peliid, valkoinen, voittaja) VALUES (1, 1, true, false)");
+//        kaskyt.add("INSERT INTO Pelaaja (kayttajanimi, pelaajanimi, salasana, admin) VALUES ('sdf', 'sdf', 'sdf', false)");
+//        
+//        kaskyt.add("INSERT INTO Peli (nimi, status) VALUES ('asd', 'HAETAAN VASTAPELAAJAA')");
+//        
+//        kaskyt.add("INSERT INTO Pelinpelaaja (pelaajaid, peliid, valkoinen, voittaja) VALUES (1, 1, true, false)");
         
         return kaskyt;
     }
