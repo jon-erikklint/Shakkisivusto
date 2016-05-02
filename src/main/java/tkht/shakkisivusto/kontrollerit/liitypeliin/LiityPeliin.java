@@ -31,7 +31,7 @@ public class LiityPeliin extends PeliHelper{
             return;
         }
         
-        ilmoitaVirhe("Et voi liittyä peliin", map);
+        ilmoitaVirhe("Et voi liittyä peliin", peli);
     }
     
     private boolean onkoLiityttava(Peli peli){
@@ -43,6 +43,11 @@ public class LiityPeliin extends PeliHelper{
         peliDao.paivitaPelistatus(peli.getId(), "KÄYNNISSÄ");
         
         ppDao.add(uusi);
+    }
+
+    @Override
+    protected String virheSivu(Peli peli) {
+        return peli.getLiittymislinkki();
     }
     
 }

@@ -69,9 +69,6 @@ public class Vuorotarkastaja {
         }else{
             pelaajaid = peli.getPelaaja2().getPelaajaid();
         }
-        System.out.println("Pelaaja 1: "+peli.getPelaaja1().getPelaajaid());
-        System.out.println("Pelaaja 2: "+peli.getPelaaja2().getPelaajaid());
-        System.out.println(pelaajaid);
         
         Vuoro uusiVuoro = new Vuoro();
         uusiVuoro.setPeliid(vuoro.getPeliid());

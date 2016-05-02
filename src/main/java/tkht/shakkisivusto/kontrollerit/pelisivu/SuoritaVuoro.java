@@ -36,7 +36,7 @@ public class SuoritaVuoro extends PeliHelper{
             return;
         }
         
-        ilmoitaVirhe("Ei ole vuorosi", map);
+        ilmoitaVirhe("Ei ole vuorosi", peli);
     }
     
     private boolean onkoVuorossa(Pelaaja pelaaja, Peli peli){
@@ -53,7 +53,7 @@ public class SuoritaVuoro extends PeliHelper{
         Vuoro uusiTilanne = evaluoiVuoro(rqst, peli);
 
         if(uusiTilanne == null){
-            ilmoitaVirhe("Laiton siirto", map);
+            ilmoitaVirhe("Laiton siirto", peli);
             return;
         }
 
@@ -88,6 +88,11 @@ public class SuoritaVuoro extends PeliHelper{
         
         ppDao.paivitaVoittaja(pp);
         peliDao.paivitaPelistatus(peli.getId(), "LOPPUNUT");
+    }
+
+    @Override
+    protected String virheSivu(Peli peli) {
+        return peli.getPelisivu();
     }
     
 }

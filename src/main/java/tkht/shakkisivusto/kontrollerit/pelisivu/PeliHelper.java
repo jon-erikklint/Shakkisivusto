@@ -13,6 +13,10 @@ public abstract class PeliHelper extends KirjautunutHelper{
 
     protected PeliDao peliDao;
     
+    private Response response;
+    private Pelaaja kirjautunut;
+    private Map map;
+    
     public PeliHelper(String sivu, PeliDao peliDao, SessionManager sm) {
         super(sm, sivu);
         
@@ -21,19 +25,23 @@ public abstract class PeliHelper extends KirjautunutHelper{
 
     @Override
     public void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut) throws Exception {
+        this.kirjautunut = kirjautunut;
+        this.response = rspns;
+        this.map = map;
+        
         String pelistring = rqst.params(":peli");
         int peliid;
         try{
             peliid = Integer.parseInt(pelistring);
         }catch(Exception e){
-            ilmoitaVirhe("Virheellinen osoite", map);
+            ilmoitaVirhe("Virheellinen osoite", null);
             return;
         }
         
         Peli peli = peliDao.findOneRambling(peliid);
         
         if(peli == null){
-            ilmoitaVirhe("Virheellinen osoite", map);
+            ilmoitaVirhe("Virheellinen osoite", null);
         }
         
         map.put("peli", peli);
@@ -43,8 +51,15 @@ public abstract class PeliHelper extends KirjautunutHelper{
     
     protected abstract void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut, Peli peli) throws Exception;
     
-    protected void ilmoitaVirhe(String virhe, Map map){
+    protected void ilmoitaVirhe(String virhe, Peli peli){
+        String linkki = virheSivu(peli);
+        response.redirect(linkki);
+        
         System.out.println("VIRHE: "+virhe);
+    }
+    
+    protected String virheSivu(Peli peli){
+        return "/omatpelit";
     }
     
     protected boolean tarkistaPaasy(Pelaaja kirjautunut, Peli peli, Map map){
@@ -60,7 +75,7 @@ public abstract class PeliHelper extends KirjautunutHelper{
             }
         }
         
-        ilmoitaVirhe("Sinulla ei ole katsomisoikeuksia peliin", map);
+        ilmoitaVirhe("Sinulla ei ole katsomisoikeuksia peliin", peli);
         
         return false;
     }
