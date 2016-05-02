@@ -61,9 +61,9 @@ public class SuoritaVuoro extends PeliHelper{
 
         if(vuorotarkastaja.voittiko()){
             asetaVoittaja(peli, kirjautunut);
-            rspns.redirect("/peli/"+peli.getId()+"/voitit");
+            rspns.redirect(peli.getVoittosivu());
         }else{
-            rspns.redirect("/peli"+peli.getId());
+            rspns.redirect(peli.getPelisivu());
         }
     }
     

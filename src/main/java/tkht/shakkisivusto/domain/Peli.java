@@ -45,6 +45,10 @@ public class Peli implements Yhdistettava{
         return "/peli/"+id+"/katsele/"+vuoro;
     }
     
+    public String getVoittosivu(){
+        return "/peli/"+id+"/voitit";
+    }
+    
     public int getVuoroja(){
         return vuorot.size();
     }
