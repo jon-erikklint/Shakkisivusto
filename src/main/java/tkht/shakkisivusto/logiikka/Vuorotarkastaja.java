@@ -90,7 +90,6 @@ public class Vuorotarkastaja {
     
     private boolean tarkistaSiirto(Nappula siirrettava, Ruutu minne){
         if(!pystyySiirtymaan(siirrettava, minne)){
-            System.out.println("EI VOI SIIRTYÄ");
             return false;
         }
         
@@ -102,12 +101,10 @@ public class Vuorotarkastaja {
         Set<Ruutu> siirryttavat;
         
         Ruutu sijainti = siirrettava.getSijainti();
-        System.out.println("SIIRRETTÄVÄN SIJAINTI: "+sijainti.getX()+","+sijainti.getY());
         
         switch(siirrettava.getTyyppi()){
             case SOTILAS:
                 siirryttavat = sotilas(sijainti);
-                System.out.println("SOTILAS");
                 break;
             case LAHETTI:
                 siirryttavat = lahetti(sijainti);
@@ -127,6 +124,8 @@ public class Vuorotarkastaja {
             default:
                 siirryttavat = new HashSet<>();
         }
+        
+        System.out.println("Siirryttäviä ruutuja: "+siirryttavat.size());
         
         for(Ruutu siirryttava : siirryttavat){
             System.out.println(siirryttava.toString());
