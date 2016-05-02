@@ -97,7 +97,7 @@ public class PeliDao extends AbstraktiDao<Peli>{
     }
     
     public List<Peli> pelatutPelit(int pelaajaid) throws Exception{
-        String query = "SELECT * FROM Peli, Pelinpelaaja, Pelaaja, Vuoro WHERE Pelinpelaaja.peliid = Peli.id AND"
+        String query = "SELECT * FROM Peli, Pelinpelaaja, Pelaaja, Vuoro WHERE Pelinpelaaja.peliid = Peli.id AND "
                 + "Pelaaja.id = Pelinpelaaja.peliid AND Peli.id = Vuoro.peliid AND "
                 + "Pelaaja.id = ? AND Peli.status = 'LOPPUNUT'";
         
