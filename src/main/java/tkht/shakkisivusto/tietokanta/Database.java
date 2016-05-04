@@ -4,6 +4,8 @@ import java.net.URI;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.List;
 import static spark.Spark.port;
@@ -22,6 +24,21 @@ public class Database {
         
         suoritaKaskyt(tietokantataulut());
         suoritaKaskyt(testidata());
+        test();
+    }
+    
+    private void test() throws Exception{
+        Connection c = getConnection();
+        PreparedStatement ps = c.prepareStatement("SELECT * FROM Peli, PelinPelaaja, Pelaaja");
+        
+        ResultSet rs = ps.executeQuery();
+        ResultSetMetaData rsmd = rs.getMetaData();
+        int columns = rsmd.getColumnCount();
+        for(int i = 1 ; i <= columns ; i++){
+            System.out.println(rsmd.getColumnName(i));
+        }
+        
+        c.close();
     }
     
     private void suoritaKaskyt(List<String> kaskyt) throws Exception{
