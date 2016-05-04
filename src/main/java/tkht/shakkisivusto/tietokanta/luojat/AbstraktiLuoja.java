@@ -15,7 +15,9 @@ public abstract class AbstraktiLuoja<T> implements Luoja<T>{
     
     private ResultSet rs;
 
-    public AbstraktiLuoja(String lisa){
+    public AbstraktiLuoja(String etuliite){
+        this.etuliite = etuliite;
+        
         results = new HashMap<>();
     }
     
