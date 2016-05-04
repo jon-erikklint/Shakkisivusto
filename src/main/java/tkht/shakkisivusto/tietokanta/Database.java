@@ -86,8 +86,10 @@ public class Database {
         return kaskyt;
     }
     
-    private List<String> testidata(){List<String> kaskyt = new ArrayList<>();
+    private List<String> testidata(){
+        List<String> kaskyt = new ArrayList<>();
         
+        kaskyt.add("INSER INTO Pelaaja (idpelaaja, kayttajanimi, pelaajanimi, salasana, admin) VALUES (0, '', 'KÄYTTÄJÄ POISTETTU', '', false)");
         kaskyt.add("INSERT INTO Pelaaja (kayttajanimi, pelaajanimi, salasana, admin) VALUES ('asd', 'asd', 'asd', false)");
 //        kaskyt.add("INSERT INTO Pelaaja (kayttajanimi, pelaajanimi, salasana, admin) VALUES ('sdf', 'sdf', 'sdf', false)");
 //        
