@@ -39,6 +39,8 @@ public class Database {
             columnsString= rsmd.getColumnName(i)+",";
         }
         
+        System.out.println(columnsString);
+        
         c.close();
     }
     
