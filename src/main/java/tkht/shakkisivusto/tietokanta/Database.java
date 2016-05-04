@@ -56,8 +56,8 @@ public class Database {
                     "peliid int not null,\n" +
                     "valkoinen boolean not null,\n" +
                     "voittaja boolean not null,\n" +
-                    "FOREIGN KEY (pelaajaid) REFERENCES Pelaaja(id),\n" +
-                    "FOREIGN KEY (peliid) REFERENCES Peli(id),\n" +
+                    "FOREIGN KEY (pelaajaid) REFERENCES Pelaaja(idpelaaja),\n" +
+                    "FOREIGN KEY (peliid) REFERENCES Peli(idpeli),\n" +
                     "CONSTRAINT pk_pelinpelaaja PRIMARY KEY (pelaajaid, peliid)\n" +
                     ")");
         taulut.add("CREATE TABLE Vuoro(\n" +
@@ -67,8 +67,8 @@ public class Database {
                     "lauta varchar(200) not null,\n" +
                     "erikoistilanteet varchar(20) not null,\n" +
                     "tekoaika timestamp not null,\n" +
-                    "FOREIGN KEY (peliid) REFERENCES Peli(id),\n" +
-                    "FOREIGN KEY (pelaaja) REFERENCES Pelaaja(id),\n" +
+                    "FOREIGN KEY (peliid) REFERENCES Peli(idpeli),\n" +
+                    "FOREIGN KEY (pelaaja) REFERENCES Pelaaja(idpelaaja),\n" +
                     "CONSTRAINT pk_vuoro PRIMARY KEY (vuoro, peliid)\n" +
                     ")");
         
