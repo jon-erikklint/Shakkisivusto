@@ -1,16 +1,19 @@
 package tkht.shakkisivusto.tietokanta.luojat;
 
-import java.sql.ResultSet;
 import tkht.shakkisivusto.domain.PelinPelaaja;
 
-public class PelinPelaajaLuoja extends AbstraktiLuoja{
+public class PelinPelaajaLuoja extends AbstraktiLuoja<PelinPelaaja>{
+
+    public PelinPelaajaLuoja(String lisa) {
+        super(lisa);
+    }
 
     @Override
-    protected Object createT(ResultSet rs) throws Exception {
-        int pelaajaid = rs.getInt("pelaajaid");
-        int peliid = rs.getInt("peliid");
-        boolean valkoinen = rs.getBoolean("valkoinen");
-        boolean voittaja = rs.getBoolean("voittaja");
+    protected PelinPelaaja createT() throws Exception {
+        int pelaajaid = super.getInt("pelaajaid");
+        int peliid = super.getInt("peliid");
+        boolean valkoinen = super.getBoolean("valkoinen");
+        boolean voittaja = super.getBoolean("voittaja");
         
         return new PelinPelaaja(pelaajaid, peliid, valkoinen, voittaja);
     }

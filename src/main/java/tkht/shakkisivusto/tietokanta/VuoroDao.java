@@ -1,7 +1,5 @@
 package tkht.shakkisivusto.tietokanta;
 
-import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import tkht.shakkisivusto.domain.Peli;
@@ -11,7 +9,7 @@ import tkht.shakkisivusto.tietokanta.luojat.VuoroLuoja;
 public class VuoroDao extends AbstraktiDao<Vuoro>{
 
     public VuoroDao(Database db) {
-        super(db, "Vuoro", "vuoro, peliid, pelaaja, tekoaika, lauta, erikoistilanteet", new VuoroLuoja());
+        super(db, "Vuoro", "vuoro, peliid, pelaaja, tekoaika, lauta, erikoistilanteet", new VuoroLuoja(""));
     }
     
     public List<Vuoro> findByPeli(Peli peli) throws Exception{

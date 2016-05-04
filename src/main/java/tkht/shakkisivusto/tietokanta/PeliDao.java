@@ -12,7 +12,7 @@ public class PeliDao extends AbstraktiDao<Peli>{
     private PeliYhdistavaLuoja yhdistavaLuoja;
     
     public PeliDao(Database db) {
-        super(db, "Peli", "nimi, status", new PeliLuoja());
+        super(db, "Peli", "nimi, status", new PeliLuoja(""));
         
         yhdistavaLuoja = new PeliYhdistavaLuoja();
     }

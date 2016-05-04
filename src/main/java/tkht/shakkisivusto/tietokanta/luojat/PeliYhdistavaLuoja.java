@@ -15,10 +15,10 @@ public class PeliYhdistavaLuoja extends AbstraktiYhdistaja<Peli>{
     private PelaajaLuoja pelaajaLuoja;
     
     public PeliYhdistavaLuoja(){
-        peliLuoja = new PeliLuoja();
-        pelinpelaajaLuoja = new PelinPelaajaLuoja();
-        vuoroLuoja = new VuoroLuoja();
-        pelaajaLuoja = new PelaajaLuoja();
+        peliLuoja = new PeliLuoja("Peli");
+        pelinpelaajaLuoja = new PelinPelaajaLuoja("Pelinpelaaja");
+        vuoroLuoja = new VuoroLuoja("Vuoro");
+        pelaajaLuoja = new PelaajaLuoja("Pelaaja");
     }
 
     @Override

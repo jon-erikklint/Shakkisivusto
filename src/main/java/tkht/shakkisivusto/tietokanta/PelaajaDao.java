@@ -3,7 +3,6 @@ package tkht.shakkisivusto.tietokanta;
 import java.util.ArrayList;
 import java.util.List;
 import tkht.shakkisivusto.domain.Pelaaja;
-import tkht.shakkisivusto.domain.Peli;
 import tkht.shakkisivusto.tietokanta.luojat.PelaajaLuoja;
 
 public class PelaajaDao extends AbstraktiDao<Pelaaja>{
@@ -13,7 +12,7 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
     private VuoroDao vuoroDao;
     
     public PelaajaDao(Database db) {
-        super(db, "Pelaaja", "kayttajanimi, pelaajanimi, salasana, admin", new PelaajaLuoja());
+        super(db, "Pelaaja", "kayttajanimi, pelaajanimi, salasana, admin", new PelaajaLuoja(""));
     }
     
     public void addDaos(PelinPelaajaDao ppDao, PeliDao peliDao, VuoroDao vuoroDao){
