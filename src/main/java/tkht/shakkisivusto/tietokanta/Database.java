@@ -34,8 +34,9 @@ public class Database {
         ResultSet rs = ps.executeQuery();
         ResultSetMetaData rsmd = rs.getMetaData();
         int columns = rsmd.getColumnCount();
+        String columnsString = "";
         for(int i = 1 ; i <= columns ; i++){
-            System.out.println(rsmd.getColumnName(i));
+            columnsString= rsmd.getColumnName(i)+",";
         }
         
         c.close();
