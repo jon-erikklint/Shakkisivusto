@@ -11,14 +11,16 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
     
     private String taulu;
     private String columns;
+    private String id;
     
     private Luoja<T> luoja;
     
-    public AbstraktiDao(Database db, String taulu, String columns, Luoja<T> luoja){
+    public AbstraktiDao(Database db, String taulu, String id, String columns, Luoja<T> luoja){
         this.db = db;
         this.taulu = taulu;
         this.columns = columns;
         this.luoja = luoja;
+        this.id = id;
     }
     
     public void addExtra(ResultSet rs, T t, int ekstra){};
@@ -103,7 +105,7 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
     public T findOne(int index, Luoja<T> luoja) throws Exception{
         Connection c = db.getConnection();
         
-        PreparedStatement ps = c.prepareStatement("SELECT * FROM "+taulu+" WHERE id=?");
+        PreparedStatement ps = c.prepareStatement("SELECT * FROM "+taulu+" WHERE "+id+"=?");
         ps.setInt(1, index);
         ResultSet rs = ps.executeQuery();
         
@@ -128,7 +130,7 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
     public T findNewest(Luoja<T> luoja) throws Exception{
         Connection c = db.getConnection();
         
-        PreparedStatement ps = c.prepareStatement("SELECT * FROM "+taulu+" ORDER BY id DESC");
+        PreparedStatement ps = c.prepareStatement("SELECT * FROM "+taulu+" ORDER BY "+id+" DESC");
         
         ResultSet rs = ps.executeQuery();
         
@@ -204,7 +206,7 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
     
     public int delete(T t) throws Exception{
         List<String> conditions = new ArrayList<>();
-        conditions.add("id=?");
+        conditions.add(id+"=?");
         List<Object> values = new ArrayList<>();
         values.add(getId(t));
         
@@ -235,7 +237,7 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
     
     public int update(List<String> columns, List<Object> newValues, int id) throws Exception{
         List<String> condition = new ArrayList<>();
-        condition.add("id=?");
+        condition.add(id+"=?");
         List<Object> values = new ArrayList<>();
         values.add(id);
         

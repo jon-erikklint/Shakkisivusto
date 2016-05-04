@@ -12,7 +12,7 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
     private VuoroDao vuoroDao;
     
     public PelaajaDao(Database db) {
-        super(db, "Pelaaja", "kayttajanimi, pelaajanimi, salasana, admin", new PelaajaLuoja(""));
+        super(db, "Pelaaja", "idpelaaja", "kayttajanimi, pelaajanimi, salasana, admin", new PelaajaLuoja());
     }
     
     public void addDaos(PelinPelaajaDao ppDao, PeliDao peliDao, VuoroDao vuoroDao){

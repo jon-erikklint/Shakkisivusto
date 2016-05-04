@@ -12,7 +12,7 @@ public class PeliDao extends AbstraktiDao<Peli>{
     private PeliYhdistavaLuoja yhdistavaLuoja;
     
     public PeliDao(Database db) {
-        super(db, "Peli", "nimi, status", new PeliLuoja(""));
+        super(db, "Peli", "idpeli", "nimi, status", new PeliLuoja());
         
         yhdistavaLuoja = new PeliYhdistavaLuoja();
     }
@@ -55,7 +55,7 @@ public class PeliDao extends AbstraktiDao<Peli>{
     
     public int havittyjaPeleja(int pelaajaid) throws Exception{
         String query = "SELECT COUNT(*) FROM Peli, PelinPelaaja "
-                + "WHERE Peli.id = PelinPelaaja.peliid AND Peli.status = 'LOPPUNUT' "
+                + "WHERE Peli.idpeli = PelinPelaaja.peliid AND Peli.status = 'LOPPUNUT' "
                 + "AND PelinPelaaja.pelaajaid = ? AND Pelinpelaaja.voittaja = false";
         
         List<Object> values = super.createList(pelaajaid);
@@ -64,7 +64,7 @@ public class PeliDao extends AbstraktiDao<Peli>{
     }
     
     public List<Peli> findByPelaajaRambling(int pelaajaid) throws Exception{
-        String query = "SELECT * FROM PelinPelaaja, Peli WHERE Pelinpelaaja.peliid = Peli.id AND PelinPelaaja.pelaajaid = ?";
+        String query = "SELECT * FROM PelinPelaaja, Peli WHERE Pelinpelaaja.peliid = Peli.idpeli AND PelinPelaaja.pelaajaid = ?";
         
         List<Object> values = super.createList(pelaajaid);
         
@@ -73,8 +73,8 @@ public class PeliDao extends AbstraktiDao<Peli>{
     
     public Peli findOneRambling(int id) throws Exception{
         String query = "SELECT * FROM Peli, PelinPelaaja, Pelaaja, Vuoro WHERE "
-                + "Peli.id = PelinPelaaja.peliid AND PelinPelaaja.pelaajaid = Pelaaja.id "
-                + "AND Peli.id = Vuoro.peliid AND Peli.id = ?";
+                + "Peli.idpeli = PelinPelaaja.peliid AND PelinPelaaja.pelaajaid = Pelaaja.idpelaaja "
+                + "AND Peli.idpeli = Vuoro.peli AND Peli.idpeli = ?";
         
         List<Object> values = super.createList(id);
         
@@ -87,9 +87,9 @@ public class PeliDao extends AbstraktiDao<Peli>{
     }
     
     public List<Peli> liityttavatPelit(int pelaajaid) throws Exception{
-        String query = "SELECT * FROM Peli, Pelinpelaaja, Pelaaja WHERE Pelinpelaaja.peliid = Peli.id AND "
+        String query = "SELECT * FROM Peli, Pelinpelaaja, Pelaaja WHERE Pelinpelaaja.peliid = Peli.idpeli AND "
                 + "Peli.status = 'HAETAAN VASTAPELAAJAA' AND Pelinpelaaja.pelaajaid != ? AND "
-                + "Pelaaja.id = Pelinpelaaja.pelaajaid";
+                + "Pelaaja.idpelaaja = Pelinpelaaja.pelaajaid";
         
         List<Object> values = super.createList(pelaajaid);
         
@@ -97,9 +97,9 @@ public class PeliDao extends AbstraktiDao<Peli>{
     }
     
     public List<Peli> pelatutPelit(int pelaajaid) throws Exception{
-        String query = "SELECT * FROM Peli, Pelinpelaaja, Pelaaja, Vuoro WHERE Pelinpelaaja.peliid = Peli.id AND "
-                + "Pelaaja.id = Pelinpelaaja.peliid AND Peli.id = Vuoro.peliid AND "
-                + "Pelaaja.id = ? AND Peli.status = 'LOPPUNUT'";
+        String query = "SELECT * FROM Peli, Pelinpelaaja, Pelaaja, Vuoro WHERE Pelinpelaaja.peliid = Peli.idpeli AND "
+                + "Pelaaja.idpelaaja = Pelinpelaaja.peliid AND Peli.idpeli = Vuoro.peliid AND "
+                + "Pelaaja.idpelaaja = ? AND Peli.status = 'LOPPUNUT'";
         
         List<Object> values = super.createList(pelaajaid);
         

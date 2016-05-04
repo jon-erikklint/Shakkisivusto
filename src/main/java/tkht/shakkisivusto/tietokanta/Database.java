@@ -4,8 +4,6 @@ import java.net.URI;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.List;
 import static spark.Spark.port;
@@ -24,24 +22,6 @@ public class Database {
         
         suoritaKaskyt(tietokantataulut());
         suoritaKaskyt(testidata());
-        test();
-    }
-    
-    private void test() throws Exception{
-        Connection c = getConnection();
-        PreparedStatement ps = c.prepareStatement("SELECT * FROM Peli, PelinPelaaja, Pelaaja");
-        
-        ResultSet rs = ps.executeQuery();
-        ResultSetMetaData rsmd = rs.getMetaData();
-        int columns = rsmd.getColumnCount();
-        String columnsString = "";
-        for(int i = 1 ; i <= columns ; i++){
-            columnsString += rsmd.getColumnName(i)+",";
-        }
-        
-        System.out.println(columnsString);
-        
-        c.close();
     }
     
     private void suoritaKaskyt(List<String> kaskyt) throws Exception{
@@ -60,14 +40,14 @@ public class Database {
         List<String> taulut = new ArrayList<>();
         
         taulut.add("CREATE TABLE Pelaaja(\n" +
-                    "id serial primary key,\n" +
+                    "idpelaaja serial primary key,\n" +
                     "kayttajanimi varchar(30) unique not null,\n" +
                     "pelaajanimi varchar(30) not null,\n" +
                     "salasana varchar(30) not null,\n" +
                     "admin boolean not null\n" +
                     ")");
         taulut.add("CREATE TABLE Peli(\n" +
-                    "id serial primary key,\n" +
+                    "idpeli serial primary key,\n" +
                     "nimi varchar(50) not null,\n" +
                     "status varchar(25) not null\n" +
                     ")");
@@ -82,7 +62,7 @@ public class Database {
                     ")");
         taulut.add("CREATE TABLE Vuoro(\n" +
                     "vuoro int not null,\n" +
-                    "peliid int not null,\n" +
+                    "peli int not null,\n" +
                     "pelaaja int,\n" +
                     "lauta varchar(200) not null,\n" +
                     "erikoistilanteet varchar(20) not null,\n" +

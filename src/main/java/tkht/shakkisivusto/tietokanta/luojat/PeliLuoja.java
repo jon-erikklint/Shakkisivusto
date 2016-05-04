@@ -1,18 +1,15 @@
 package tkht.shakkisivusto.tietokanta.luojat;
 
+import java.sql.ResultSet;
 import tkht.shakkisivusto.domain.Peli;
 
 public class PeliLuoja extends AbstraktiLuoja<Peli>{
 
-    public PeliLuoja(String lisa) {
-        super(lisa);
-    }
-
     @Override
-    protected Peli createT() throws Exception {
-        int id = super.getInt("id");
-        String nimi = super.getString("nimi");
-        String status = super.getString("status");
+    protected Peli createT(ResultSet rs) throws Exception {
+        int id = rs.getInt("idpeli");
+        String nimi = rs.getString("nimi");
+        String status = rs.getString("status");
         
         return new Peli(id, nimi, status);
     }
