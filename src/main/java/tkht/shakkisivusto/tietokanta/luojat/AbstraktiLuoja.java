@@ -43,6 +43,8 @@ public abstract class AbstraktiLuoja<T> implements Luoja<T>{
 
     @Override
     public T getOne(ResultSet rs) throws Exception {
+        this.rs = rs;
+        
         return createT();
     }
     
