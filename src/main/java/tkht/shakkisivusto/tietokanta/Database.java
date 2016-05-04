@@ -69,7 +69,7 @@ public class Database {
                     "tekoaika timestamp not null,\n" +
                     "FOREIGN KEY (peli) REFERENCES Peli(idpeli),\n" +
                     "FOREIGN KEY (pelaaja) REFERENCES Pelaaja(idpelaaja),\n" +
-                    "CONSTRAINT pk_vuoro PRIMARY KEY (vuoro, peliid)\n" +
+                    "CONSTRAINT pk_vuoro PRIMARY KEY (vuoro, peli)\n" +
                     ")");
         
         return taulut;
