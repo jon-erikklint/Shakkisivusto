@@ -237,7 +237,7 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
     
     public int update(List<String> columns, List<Object> newValues, int id) throws Exception{
         List<String> condition = new ArrayList<>();
-        condition.add(id+"=?");
+        condition.add(this.id+"=?");
         List<Object> values = new ArrayList<>();
         values.add(id);
         

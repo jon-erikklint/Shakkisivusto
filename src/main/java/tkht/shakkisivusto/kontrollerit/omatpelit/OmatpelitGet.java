@@ -25,7 +25,7 @@ public class OmatpelitGet extends KirjautunutHelper{
 
     @Override
     public void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut) throws Exception {
-        List<Peli> pelit = peliDao.findByPelaajaRambling(kirjautunut.getIndeksi());
+        List<Peli> pelit = peliDao.findKeskeneraiset(kirjautunut.getIndeksi());
         
         map.put("pelit", pelit);
     }

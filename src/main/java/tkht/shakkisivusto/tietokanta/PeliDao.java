@@ -63,8 +63,10 @@ public class PeliDao extends AbstraktiDao<Peli>{
         return super.findIntByAggregate(query, values);
     }
     
-    public List<Peli> findByPelaajaRambling(int pelaajaid) throws Exception{
-        String query = "SELECT * FROM PelinPelaaja, Peli WHERE Pelinpelaaja.peliid = Peli.idpeli AND PelinPelaaja.pelaajaid = ?";
+    public List<Peli> findKeskeneraiset(int pelaajaid) throws Exception{
+        String query = "SELECT * FROM PelinPelaaja, Peli, Vuoro WHERE "
+                + "Pelinpelaaja.peliid = Peli.idpeli AND Peli.idpeli = Vuoro.peli "
+                + "AND Peli.status = 'KÄYNNISSÄ' AND PelinPelaaja.pelaajaid = ?";
         
         List<Object> values = super.createList(pelaajaid);
         
