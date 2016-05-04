@@ -134,4 +134,29 @@ public class Pelaaja implements Yhdistettava{
         
         return false;
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pelaaja other = (Pelaaja) obj;
+        if (this.indeksi != other.indeksi) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + this.indeksi;
+        return hash;
+    }
 }

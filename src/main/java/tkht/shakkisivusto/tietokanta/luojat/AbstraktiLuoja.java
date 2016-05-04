@@ -2,36 +2,30 @@ package tkht.shakkisivusto.tietokanta.luojat;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 public abstract class AbstraktiLuoja<T> implements Luoja<T>{
 
-    private Map<T, T> results;
-    
-    private ResultSet rs;
+    private Set<T> results;
 
     public AbstraktiLuoja(){
-        results = new HashMap<>();
+        results = new HashSet<>();
     }
     
     @Override
     public void addT(ResultSet rs) throws Exception{
-        T t = createT(rs);
-        
-        if(results.get(t) == null){
-            results.put(t, t);
-        }
+        results.add(createT(rs));
     }
     
     protected abstract T createT(ResultSet rs) throws Exception;
 
     @Override
     public List<T> getAll() {
-        List<T> toBeReturned = new ArrayList<>(results.keySet());
+        List<T> toBeReturned = new ArrayList<>(results);
         
-        results = new HashMap<>();
+        results = new HashSet<>();
         
         return toBeReturned;
     }

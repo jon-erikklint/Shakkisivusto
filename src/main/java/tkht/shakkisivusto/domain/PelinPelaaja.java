@@ -103,4 +103,33 @@ public class PelinPelaaja implements Yhdistettava{
         
         return false;
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PelinPelaaja other = (PelinPelaaja) obj;
+        if (this.pelaajaid != other.pelaajaid) {
+            return false;
+        }
+        if (this.peliid != other.peliid) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + this.pelaajaid;
+        hash = 59 * hash + this.peliid;
+        return hash;
+    }
 }
