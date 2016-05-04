@@ -29,7 +29,7 @@ public class Rekisterointi implements TemplateViewRoute{
         
         Pelaaja pelaaja = pelaajaDao.findByKayttajatunnus(kayttajatunnus);
         
-        if(pelaaja != null || !kelpaakoRekisteroitumistiedot(kayttajatunnus, salasana)){
+        if(pelaaja == null || !kelpaakoRekisteroitumistiedot(kayttajatunnus, salasana)){
             rspns.redirect("/");
         }else{
             luoKayttaja(rspns, kayttajatunnus, salasana);

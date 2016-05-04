@@ -7,22 +7,19 @@ import tkht.shakkisivusto.tietokanta.luojat.PelaajaLuoja;
 
 public class PelaajaDao extends AbstraktiDao<Pelaaja>{
 
-    private PelinPelaajaDao ppDao;
-    private PeliDao peliDao;
-    private VuoroDao vuoroDao;
-    
     public PelaajaDao(Database db) {
         super(db, "Pelaaja", "idpelaaja", "kayttajanimi, pelaajanimi, salasana, admin", new PelaajaLuoja());
     }
     
-    public void addDaos(PelinPelaajaDao ppDao, PeliDao peliDao, VuoroDao vuoroDao){
-        this.ppDao = ppDao;
-        this.peliDao = peliDao;
-        this.vuoroDao = vuoroDao;
+    @Override
+    public List<Pelaaja> findAll() throws Exception{
+        String query = "SELECT * FROM Pelaaja WHERE idpelaaja != 0";
+        
+        return super.findByQuery(query, new ArrayList<>());
     }
     
     public Pelaaja findByKayttajatunnus(String kayttajatunnus) throws Exception{
-        String query = "SELECT * FROM Pelaaja WHERE kayttajanimi = ?";
+        String query = "SELECT * FROM Pelaaja WHERE kayttajanimi = ? AND idpelaaja != 0";
         List<Object> values = super.createList(kayttajatunnus);
         
         List<Pelaaja> vastaus = super.findByQuery(query, values);
@@ -59,28 +56,7 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
     }
     
     public void deleteCascade(Pelaaja pelaaja) throws Exception{
-        List<String> columns = new ArrayList<>();
-        columns.add("Vuoro.pelaaja");
-        List<Object> newValues = super.createList((Object) null);
-        List<String> conditions = new ArrayList<>();
-        conditions.add("Vuoro.pelaaja = ?");
-        List<Object> values = super.createList(pelaaja.getIndeksi());
         
-        vuoroDao.update(columns, newValues, conditions, values); //laitetaan vuorojen pelaajat nulliksi
-        
-        columns.clear();
-        columns.add("Peli.voittaja");
-        conditions.clear();
-        conditions.add("Peli.voittaja = ?");
-        
-        peliDao.update(columns, newValues, conditions, values); //laitetaan voittaja nulliksi
-        
-        conditions.clear();
-        conditions.add("Pelinpelaaja.pelaajaid = ?");
-        
-        ppDao.delete(conditions, values); //poistetaan osallistumiset peleihin
-        
-        delete(pelaaja); //poistetaan itse pelaaja
     }
  
 }

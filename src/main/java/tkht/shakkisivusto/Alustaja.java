@@ -43,8 +43,6 @@ public class Alustaja {
         peliDao = new PeliDao(db);
         vuoroDao = new VuoroDao(db);
         pelinPelaajaDao = new PelinPelaajaDao(db);
-        
-        pelaajaDao.addDaos(pelinPelaajaDao, peliDao, vuoroDao);
     }
     
     public void alustaSessionhallinta(){
