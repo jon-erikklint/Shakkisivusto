@@ -26,6 +26,16 @@ public class PeliDao extends AbstraktiDao<Peli>{
         super.update(columns, values, id);
     }
     
+    public int paivitaPelistatusPelaajanLoppuneisiinPeleihin(int pelaajaid, String uusiStatus) throws Exception{
+        String query = "UPDATE Peli, Pelinpelaaja, Pelaaja SET Peli.status = ? WHERE "
+                + "Peli.idpeli = Pelinpelaaja.peliid AND Pelinpelaaja.pelaajaid = Pelaaja.idpelaaja "
+                + "AND Pelaaja.idpelaaja = ? AND Peli.status != 'LOPPUNUT'";
+        
+        List values = createList(uusiStatus, pelaajaid);
+        
+        return updateByQuery(query, values);
+    }
+    
     public void lisaaPelienpelaajienVoittoratiot(List<Peli> pelit) throws Exception{
         for(Peli peli : pelit){
             if(peli.getPelaaja1() != null ){

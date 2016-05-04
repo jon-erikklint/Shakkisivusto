@@ -7,15 +7,19 @@ import tkht.shakkisivusto.domain.Pelaaja;
 import tkht.shakkisivusto.kontrollerit.KirjautunutHelper;
 import tkht.shakkisivusto.kontrollerit.SessionManager;
 import tkht.shakkisivusto.tietokanta.PelaajaDao;
+import tkht.shakkisivusto.tietokanta.PeliDao;
+import tkht.shakkisivusto.tietokanta.PelinPelaajaDao;
+import tkht.shakkisivusto.tietokanta.Poistaja;
+import tkht.shakkisivusto.tietokanta.VuoroDao;
 
 public class PoistaKayttaja extends KirjautunutHelper{
 
-    private PelaajaDao pelaajaDao;
+    private Poistaja poistaja;
     
-    public PoistaKayttaja(PelaajaDao pelaajaDao, SessionManager sm) {
+    public PoistaKayttaja(PelaajaDao pelaajaDao, PelinPelaajaDao pelinPelaajaDao, PeliDao peliDao, VuoroDao vuoroDao, SessionManager sm) {
         super(sm, "asetukset");
         
-        this.pelaajaDao = pelaajaDao;
+        poistaja = new Poistaja(pelaajaDao, peliDao, pelinPelaajaDao, vuoroDao);
     }
 
     @Override
@@ -24,7 +28,7 @@ public class PoistaKayttaja extends KirjautunutHelper{
         String salasana = rqst.queryParams("salasana");
         
         if(kirjautunut.getSalasana().equals(salasana) && kirjautunut.getKayttajanimi().equals(nimitarkistus)){
-            pelaajaDao.deleteCascade(kirjautunut);
+            poistaja.poistaKayttaja(kirjautunut);
             
             String session = rqst.cookie("session");
             sm.removeSession(session);

@@ -302,6 +302,25 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
     }
     
     @Override
+    public int updateByQuery(String query, List<Object> values) throws Exception{
+        return updateByQuery(query, values, luoja);
+    }
+    
+    public int updateByQuery(String query, List<Object> values, Luoja<T> luoja) throws Exception{
+        Connection c = db.getConnection();
+        
+        PreparedStatement ps = c.prepareStatement(query);
+        setPreparedStatementValues(ps, values);
+        
+        int updated = ps.executeUpdate();
+        
+        ps.close();
+        c.close();
+        
+        return updated;
+    }
+    
+    @Override
     public int findIntByAggregate(String query, List<Object> values) throws Exception{
         Connection c = db.getConnection();
         PreparedStatement ps = c.prepareStatement(query);

@@ -16,6 +16,7 @@ public interface Dao<T> {
             List<String> orderByConditions, boolean desc, int limit, int offset) throws Exception;
     
     public List<T> findByQuery(String query, List<Object> parametres) throws Exception;
+    public int updateByQuery(String query, List<Object> parametres) throws Exception;
     
     public int findIntByAggregate(String query, List<Object> parametres) throws Exception;
     public double findDoubleByAggregate(String query, List<Object> parametres) throws Exception;

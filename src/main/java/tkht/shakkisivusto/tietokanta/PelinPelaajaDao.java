@@ -11,6 +11,12 @@ public class PelinPelaajaDao extends AbstraktiDao<PelinPelaaja>{
         super(db, "PelinPelaaja", "id","pelaajaid, peliid, valkoinen, voittaja", new PelinPelaajaLuoja());
     }
     
+    public void paivitaVoittajat(List<PelinPelaaja> pelaajat) throws Exception{
+        for(PelinPelaaja pelaaja : pelaajat){
+            paivitaVoittaja(pelaaja);
+        }
+    }
+    
     public void paivitaVoittaja(PelinPelaaja pp) throws Exception{
         List<String> columns = new ArrayList<>();
         columns.add("voittaja");

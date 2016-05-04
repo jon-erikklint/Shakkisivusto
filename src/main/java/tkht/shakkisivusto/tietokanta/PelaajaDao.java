@@ -54,9 +54,5 @@ public class PelaajaDao extends AbstraktiDao<Pelaaja>{
     public int getId(Pelaaja t) {
         return t.getIndeksi();
     }
-    
-    public void deleteCascade(Pelaaja pelaaja) throws Exception{
-        
-    }
  
 }
