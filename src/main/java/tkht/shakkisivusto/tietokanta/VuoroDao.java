@@ -9,7 +9,7 @@ import tkht.shakkisivusto.tietokanta.luojat.VuoroLuoja;
 public class VuoroDao extends AbstraktiDao<Vuoro>{
 
     public VuoroDao(Database db) {
-        super(db, "Vuoro", "peli", "vuoro, peliid, pelaaja, tekoaika, lauta, erikoistilanteet", new VuoroLuoja());
+        super(db, "Vuoro", "peli", "vuoro, peli, pelaaja, tekoaika, lauta, erikoistilanteet", new VuoroLuoja());
     }
     
     public List<Vuoro> findByPeli(Peli peli) throws Exception{
