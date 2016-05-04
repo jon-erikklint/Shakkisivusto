@@ -36,7 +36,7 @@ public class Database {
         int columns = rsmd.getColumnCount();
         String columnsString = "";
         for(int i = 1 ; i <= columns ; i++){
-            columnsString= rsmd.getColumnName(i)+",";
+            columnsString += rsmd.getColumnName(i)+",";
         }
         
         System.out.println(columnsString);
