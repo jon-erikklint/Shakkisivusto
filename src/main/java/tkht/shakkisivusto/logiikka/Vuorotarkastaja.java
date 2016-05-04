@@ -129,46 +129,68 @@ public class Vuorotarkastaja {
     private Set<Ruutu> sotilas(Ruutu sijainti){
         Set<Ruutu> liikuttavat = new HashSet<>();
         
-        Set<Ruutu> suoraan;
+        Suunta liikkuminen;
+        List<Suunta> hyokkaykset;
         if(valkoinen){
-            suoraan = tarkistaSuunta(sijainti, Suunta.YLOS, 1);
+            liikkuminen = Suunta.valkoinenLiike();
+            hyokkaykset = Suunta.valkoisenHyokkaykset();
         }else{
-            suoraan = tarkistaSuunta(sijainti, Suunta.ALAS, 1);
-        }
-        liikuttavat.addAll(suoraan);
-        
-        Ruutu oikea;
-        Ruutu vasen;
-        if(valkoinen){
-            oikea = tarkistaSotilaanSyonti(sijainti, Suunta.YLAOIKEA);
-            vasen = tarkistaSotilaanSyonti(sijainti, Suunta.YLAVASEN);
-        }else{
-            oikea = tarkistaSotilaanSyonti(sijainti, Suunta.ALAOIKEA);
-            vasen = tarkistaSotilaanSyonti(sijainti, Suunta.ALAVASEN);
+            liikkuminen = Suunta.mustaLiike();
+            hyokkaykset = Suunta.mustanHyokkaykset();
         }
         
-        if(oikea != null){
-            liikuttavat.add(oikea);
+        liikuttavat.addAll(sotilaanLiikkeet(sijainti, liikkuminen));
+        liikuttavat.addAll(sotilaanSyonnit(sijainti, hyokkaykset));
+        
+        return liikuttavat;
+    }
+    
+    private Set<Ruutu> sotilaanSyonnit(Ruutu mista, List<Suunta> suunnat){
+        Set<Ruutu> syotavat = new HashSet<>();
+        
+        for(Suunta suunta : suunnat){
+            Ruutu hyokattava = mista.getSuunnasta(suunta);
+            
+            Siirtotyyppi tyyppi = tarkistaPaasy(hyokattava);
+            if(tyyppi == Siirtotyyppi.SYONTI){
+                syotavat.add(hyokattava);
+            }
         }
-        if(vasen != null){
-            liikuttavat.add(vasen);
+        
+        return syotavat;
+    }
+    
+    private Set<Ruutu> sotilaanLiikkeet(Ruutu mista, Suunta suunta){
+        Set<Ruutu> liikuttavat = new HashSet<>();
+        
+        liikuttavat.addAll(sotilaanLiike(mista, suunta));
+        
+        if(sotilaanKaksoisliikeMahdollinen(mista) && !liikuttavat.isEmpty()){
+            liikuttavat.addAll(sotilaanLiike(mista.getSuunnasta(suunta), suunta));
         }
         
         return liikuttavat;
     }
     
-    private Ruutu tarkistaSotilaanSyonti(Ruutu mista, Suunta suunta){
+    private Set<Ruutu> sotilaanLiike(Ruutu mista, Suunta suunta){
+        Set<Ruutu> liikuttava = new HashSet<>();
+        
         Ruutu minne = mista.getSuunnasta(suunta);
+        Siirtotyyppi siirto = tarkistaPaasy(minne);
         
-        if(minne == null){
-            return null;
+        if(siirto == Siirtotyyppi.SIIRTO){
+            liikuttava.add(minne);
         }
         
-        if(tarkistaPaasy(minne) != Siirtotyyppi.SYONTI){
-            return null;
+        return liikuttava;
+    }
+    
+    private boolean sotilaanKaksoisliikeMahdollinen(Ruutu ruutu){
+        if(valkoinen){
+            return ruutu.getY() == 7;
         }
         
-        return minne;
+        return ruutu.getY() == 2;
     }
     
     private Set<Ruutu> lahetti(Ruutu sijainti){
@@ -195,10 +217,6 @@ public class Vuorotarkastaja {
         
         Set<Ruutu> oikeat = new HashSet<>();
         for(Ruutu teoreettinen : teoreettiset){
-            if(teoreettinen == null){
-                continue;
-            }
-            
             if(tarkistaPaasy(teoreettinen) != Siirtotyyppi.EISIIRTO){
                 oikeat.add(teoreettinen);
             }
@@ -255,10 +273,6 @@ public class Vuorotarkastaja {
         
         Ruutu suunnassa = mista.getSuunnasta(suunta);
         
-        if(suunnassa == null){
-            return new HashSet<>();
-        }
-        
         Siirtotyyppi siirto = tarkistaPaasy(suunnassa);
         
         if(siirto == Siirtotyyppi.EISIIRTO){
@@ -278,6 +292,10 @@ public class Vuorotarkastaja {
     }
     
     private Siirtotyyppi tarkistaPaasy(Ruutu kohde){
+        if(kohde == null){
+            return Siirtotyyppi.EISIIRTO;
+        }
+        
         Nappula kohdenappula = kartta.get(kohde);
         
         if(kohdenappula == null){
