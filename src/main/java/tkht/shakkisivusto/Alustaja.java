@@ -81,7 +81,7 @@ public class Alustaja {
         kontrollerit.add(new UusipeliController(peliDao, pelinPelaajaDao, vuoroDao, sm));
         kontrollerit.add(new AsetuksetController(pelaajaDao, peliDao, pelinPelaajaDao, vuoroDao, sm));
         kontrollerit.add(new UudetpelitController(peliDao, pelaajaDao, pelinPelaajaDao, sm));
-        kontrollerit.add(new PelisivuController(peliDao, pelinPelaajaDao, vuoroDao, sm));
+        kontrollerit.add(new PelisivuController(peliDao, pelaajaDao, pelinPelaajaDao, vuoroDao, sm));
         kontrollerit.add(new LiitypeliinController(peliDao, pelinPelaajaDao, sm));
         kontrollerit.add(new PelatutpelitController(peliDao, sm));
         kontrollerit.add(new KatselusivuController());

@@ -26,7 +26,7 @@ public class PeliDao extends AbstraktiDao<Peli>{
         super.update(columns, values, id);
     }
     
-    public int paivitaPelistatusPelaajanLoppuneisiinPeleihin(int pelaajaid, String uusiStatus) throws Exception{
+    public int paivitaPelistatusPelaajanKeskeneraisiinPeleihin(int pelaajaid, String uusiStatus) throws Exception{
         String query = "UPDATE Peli, Pelinpelaaja, Pelaaja SET Peli.status = ? WHERE "
                 + "Peli.idpeli = Pelinpelaaja.peliid AND Pelinpelaaja.pelaajaid = Pelaaja.idpelaaja "
                 + "AND Pelaaja.idpelaaja = ? AND Peli.status != 'LOPPUNUT'";
@@ -116,6 +116,23 @@ public class PeliDao extends AbstraktiDao<Peli>{
         List<Object> values = super.createList(pelaajaid);
         
         return super.findByQuery(query, values);
+    }
+    
+    public List<Peli> pelaajanPelit(int pelaajaid) throws Exception{
+        String query = "SELECT * FROM Peli, Pelinpelaaja, Pelaaja WHERE "
+                + "Peli.idpeli = Pelinpelaaja.peliid AND Pelaaja.idpelaaja = Pelinpelaaja.pelaajaid AND "
+                + "Pelaaja.idpelaaja = ?";
+        List values = createList(pelaajaid);
+        
+        List<Peli> pelit = super.findByQuery(query, values);
+        
+        List<Peli> palautettavat = new ArrayList<>();
+        
+        for(Peli peli : pelit){
+            palautettavat.add(findOneRambling(peli.getId()));
+        }
+        
+        return palautettavat;
     }
 
     @Override

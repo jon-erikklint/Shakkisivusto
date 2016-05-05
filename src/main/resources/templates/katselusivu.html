@@ -42,6 +42,12 @@
             </tr>
         </table>
         
+        <h2>Poista peli:</h2>
+        <form method="POST" action="/poista">
+            Kirjoita "poista" ilman lainausmerkkejä varmistukseksi <input type="text" name="varmistus"/>
+            <input type="submit" value="Poista"/>
+        </form>
+        
         <div th:switch="${ekavuoro}">
             <div th:case="false">
                 <a th:href="${vuoro.edellinensivu}">

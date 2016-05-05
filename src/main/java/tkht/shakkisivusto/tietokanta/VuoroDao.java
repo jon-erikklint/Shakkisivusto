@@ -12,6 +12,21 @@ public class VuoroDao extends AbstraktiDao<Vuoro>{
         super(db, "Vuoro", "peli", "vuoro, peli, pelaaja, tekoaika, lauta, erikoistilanteet", new VuoroLuoja());
     }
     
+    public void poistaPelinVuorot(int peliid) throws Exception{
+        String query = "DELETE FROM Vuoro WHERE peli = ?";
+        List values = createList(peliid);
+        
+        super.updateByQuery(query, values);
+    }
+    
+    public void paivitaPelaajanVuorotToiselle(int pelaajaidjolta, int pelaajaidjolle) throws Exception{
+        String query = "UPDATE Vuoro SET pelaaja = ? WHERE "
+                + "pelaaja = ?";
+        List values = createList(pelaajaidjolle, pelaajaidjolta);
+        
+        super.updateByQuery(query, values);
+    }
+    
     public List<Vuoro> findByPeli(Peli peli) throws Exception{
         String query = "SELECT * FROM Vuoro WHERE peliid = ? ORDER BY vuoro DESC LIMIT 1";
         
