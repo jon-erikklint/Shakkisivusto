@@ -29,12 +29,14 @@ public class PeliDao extends AbstraktiDao<Peli>{
     public int paivitaPelistatusPelaajanKeskeneraisiinPeleihin(int pelaajaid, String uusiStatus) throws Exception{
         List<Peli> pelaajanKeskeneraisetPelit = findKeskeneraiset(pelaajaid);
         
+        if(pelaajanKeskeneraisetPelit.isEmpty()){
+            return 0;
+        }
+        
         String query = "UPDATE Peli SET Peli.status = ? WHERE "
                 + "idpeli IN (";
         query = super.addQuestionMarks(query, pelaajanKeskeneraisetPelit.size());
         query += ")";
-        
-        System.out.println(query);
         
         List values = createList(uusiStatus);
         for(Peli peli : pelaajanKeskeneraisetPelit){
