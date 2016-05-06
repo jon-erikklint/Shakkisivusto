@@ -44,6 +44,10 @@ public abstract class PeliHelper extends KirjautunutHelper{
             ilmoitaVirhe("Virheellinen osoite", null);
         }
         
+        if(peli.getStatus().equals("LOPPUNUT")){
+            ilmoitaVirhe("Peli on loppunut", null);
+        }
+        
         map.put("peli", peli);
         
         handle(rqst, rspns, map, kirjautunut, peli);
