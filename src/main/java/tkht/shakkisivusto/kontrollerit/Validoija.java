@@ -94,7 +94,11 @@ public class Validoija {
         }
         
         try{
-            Integer.parseInt(koordinaatti.substring(1, 2));
+            int luku = Integer.parseInt(koordinaatti.substring(1, 2));
+            
+            if(luku > 8 && luku < 1){
+                return false;
+            }
         }catch(Exception e){
             return false;
         }

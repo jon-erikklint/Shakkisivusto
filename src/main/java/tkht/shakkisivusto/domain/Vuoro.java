@@ -170,20 +170,20 @@ public class Vuoro implements Yhdistettava{
         this.erikoistilanteet = erikoistilanteet;
     }
     
-    public int getEdellinenvuoro(){
+    public int getEdellinen(){
         return vuoro-1;
     }
     
     public String getEdellinensivu(){
-        return "/peli/"+peli+"/vuoro/"+getEdellinenvuoro();
+        return "/peli/"+peli+"/vuoro/"+getEdellinen();
     }
     
-    public int getSeuraavavuoro(){
+    public int getSeuraava(){
         return vuoro+1;
     }
     
     public String getSeuraavasivu(){
-        return "/peli/"+peli+"/vuoro/"+getSeuraavavuoro();
+        return "/peli/"+peli+"/vuoro/"+getSeuraava();
     }
 
     @Override
