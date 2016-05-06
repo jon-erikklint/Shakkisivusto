@@ -107,7 +107,8 @@ public abstract class PeliHelper extends KirjautunutHelper{
                 onKirjautunut = true;
             }
         }
-        else if(peli.getPelaaja2() != null){
+        
+        if(peli.getPelaaja2() != null){
             if(peli.getPelaaja2().getPelaajaid() == pelaaja.getIndeksi()){
                 onKirjautunut = true;
             }
