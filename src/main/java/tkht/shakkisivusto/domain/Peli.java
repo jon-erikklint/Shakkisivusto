@@ -60,6 +60,10 @@ public class Peli implements Yhdistettava{
     public String getViimeisintekoaika(){
         Vuoro viimeisin = getUusinVuoro();
         
+        if(viimeisin == null){
+            return "";
+        }
+        
         return viimeisin.getTekoaika().toString();
     }
     
