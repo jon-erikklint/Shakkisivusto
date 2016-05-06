@@ -29,13 +29,6 @@ public class Luovuta extends PeliHelper{
             return;
         }
         
-        String tarkistus = rqst.queryParams("tarkistus");
-        
-        if(!tarkistus.equals("luovuta")){
-            rspns.redirect(peli.getPelisivu());
-            return;
-        }
-        
         poistaja.lopetaPeli(kirjautunut, false, peli);
         rspns.redirect("/omatpelit");
     }

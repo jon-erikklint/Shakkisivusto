@@ -30,7 +30,7 @@ public class PeliDao extends AbstraktiDao<Peli>{
         List<Peli> pelaajanKeskeneraisetPelit = findKeskeneraiset(pelaajaid);
         
         String query = "UPDATE Peli SET Peli.status = ? WHERE "
-                + "Peli.id IN (";
+                + "idpeli IN (";
         query = super.addQuestionMarks(query, pelaajanKeskeneraisetPelit.size());
         query += ")";
         
