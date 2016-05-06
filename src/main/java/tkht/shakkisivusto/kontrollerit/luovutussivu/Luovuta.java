@@ -37,6 +37,7 @@ public class Luovuta extends PeliHelper{
         }
         
         poistaja.lopetaPeli(kirjautunut, false, peli);
+        rspns.redirect("/omatpelit");
     }
     
 }

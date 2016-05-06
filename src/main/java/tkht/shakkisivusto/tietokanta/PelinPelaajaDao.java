@@ -36,7 +36,9 @@ public class PelinPelaajaDao extends AbstraktiDao<PelinPelaaja>{
     
     public void paivitaPelinHaviajaksi(Peli peli, int pelaaja) throws Exception{
         if(peli.getPelaaja1().getPelaajaid() == pelaaja){
-            paivitaVoittaja(peli.getPelaaja2());
+            if(peli.getPelaaja2() != null){
+                paivitaVoittaja(peli.getPelaaja2());
+            }
         }else{
             paivitaVoittaja(peli.getPelaaja1());
         }

@@ -17,7 +17,7 @@ public class LuovutaController extends AbstraktiController{
         gets.put("/peli/:peli/luovuta", new LuovutaGet(peliDao, sm));
         
         Map<String, TemplateViewRoute> puts = new HashMap<>();
-        puts.put("", new Luovuta(peliDao, pelaajaDao, pelinPelaajaDao, vuoroDao, sm));
+        puts.put("/peli/:peli/luovuta", new Luovuta(peliDao, pelaajaDao, pelinPelaajaDao, vuoroDao, sm));
         
         super.initialize(gets, puts);
     }

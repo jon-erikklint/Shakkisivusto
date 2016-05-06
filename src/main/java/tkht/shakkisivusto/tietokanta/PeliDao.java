@@ -34,7 +34,7 @@ public class PeliDao extends AbstraktiDao<Peli>{
         query = super.addQuestionMarks(query, pelaajanKeskeneraisetPelit.size());
         query += ")";
         
-        List values = createList(uusiStatus, pelaajaid);
+        List values = createList(uusiStatus);
         for(Peli peli : pelaajanKeskeneraisetPelit){
             values.add(peli.getId());
         }
