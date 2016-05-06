@@ -17,7 +17,7 @@ public class Ruutu {
         y = Integer.parseInt(""+sijainti.charAt(1));
     }
     
-    public char tulkitse(int n){
+    public static char tulkitse(int n){
         switch(n){
             case 1:
                 return 'a';

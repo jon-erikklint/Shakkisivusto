@@ -66,10 +66,18 @@ public class Vuoro implements Yhdistettava{
     public List<List<String>> getRuudut(){
         List<List<String>> kartta = new ArrayList<>();
         
-        for(int i = 0 ; i < 8 ; i++){
+        for(int i = 0 ; i < 9 ; i++){
             List<String> rivi = new ArrayList<>();
-            for(int j = 0 ; j < 8 ; j++){
-                rivi.add(" 0 ");
+            for(int j = 0 ; j < 9 ; j++){
+                if(i == 0 && j == 0){
+                    rivi.add("X");
+                }else if(i == 0){
+                    rivi.add(""+Ruutu.tulkitse(j));
+                }else if(j == 0){
+                    rivi.add(""+i);
+                }else{
+                    rivi.add(" 0 ");
+                }
             }
             kartta.add(rivi);
         }
@@ -77,8 +85,8 @@ public class Vuoro implements Yhdistettava{
         for(Nappula nappula : nappulat){
             Ruutu sijainti = nappula.getSijainti();
             
-            int x = sijainti.getX() - 1;
-            int y = sijainti.getY() - 1;
+            int x = sijainti.getX();
+            int y = sijainti.getY();
             
             List<String> oikeaRivi = kartta.get(y);
             oikeaRivi.set(x, nappula.karttaString());
