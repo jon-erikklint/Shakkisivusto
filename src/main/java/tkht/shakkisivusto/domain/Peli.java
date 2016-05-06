@@ -42,7 +42,7 @@ public class Peli implements Yhdistettava{
     
     public String getKatselusivu(){
         int vuoro = getUusinVuoronumero();
-        return "/peli/"+id+"/katsele/"+vuoro;
+        return "/peli/"+id+"/vuoro/"+vuoro;
     }
     
     public String getVoittosivu(){
