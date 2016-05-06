@@ -34,6 +34,8 @@ public class PeliDao extends AbstraktiDao<Peli>{
         query = super.addQuestionMarks(query, pelaajanKeskeneraisetPelit.size());
         query += ")";
         
+        System.out.println(query);
+        
         List values = createList(uusiStatus);
         for(Peli peli : pelaajanKeskeneraisetPelit){
             values.add(peli.getId());
@@ -121,7 +123,7 @@ public class PeliDao extends AbstraktiDao<Peli>{
         
         List<Object> values = super.createList(pelaajaid);
         
-        return super.findByQuery(query, values);
+        return super.findByQuery(query, values, yhdistavaLuoja);
     }
     
     public List<Peli> pelaajanPelit(int pelaajaid) throws Exception{
@@ -130,7 +132,7 @@ public class PeliDao extends AbstraktiDao<Peli>{
                 + "Pelaaja.idpelaaja = ?";
         List values = createList(pelaajaid);
         
-        List<Peli> pelit = super.findByQuery(query, values);
+        List<Peli> pelit = super.findByQuery(query, values, yhdistavaLuoja);
         
         List<Peli> palautettavat = new ArrayList<>();
         
