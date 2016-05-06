@@ -1,10 +1,2 @@
 INSERT INTO Pelaaja (kayttajanimi, pelaajanimi, salasana, admin) VALUES ('asd', 'asd', 'asd', false);
-
-//INSERT INTO Pelaaja (kayttajanimi, pelaajanimi, salasana, admin) VALUES ('Esimerkkiheikki', 'Heikki', 'salasana', false);
-//INSERT INTO Pelaaja (kayttajanimi, pelaajanimi, salasana, admin) VALUES ('Mattimeikalainen', 'Matti', 'qwerty', false);
-
-//INSERT INTO Peli (nimi, status, voittaja) VALUES ('Peli', 'LOPPUNUT', 1);
-//INSERT INTO Pelinpelaaja VALUES (1, 1, true);
-//INSERT INTO Pelinpelaaja VALUES (2, 1, false);
-
-//INSERT INTO Vuoro VALUES (0, 1, 1, 'mt0a1', 'tttt', '2004-10-19 10:23:54');
+INSERT INTO Pelaaja (idpelaaja, kayttajanimi, pelaajanimi, salasana, admin) VALUES (0, '', 'KÄYTTÄJÄ POISTUNUT', '', false);
