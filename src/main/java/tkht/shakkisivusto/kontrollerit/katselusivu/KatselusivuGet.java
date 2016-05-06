@@ -22,7 +22,7 @@ public class KatselusivuGet extends VuoroHelper{
             return;
         }
         
-        map.put("kartta", peli.getUusinVuoro().getRuudut());
+        map.put("kartta", vuoro.getRuudut());
         
         boolean ekavuoro = vuoro.getVuoro() == 0;
         boolean vikavuoro = vuoro.getVuoro() == peli.getVuoroja()-1;

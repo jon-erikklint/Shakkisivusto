@@ -105,6 +105,24 @@ public class Peli implements Yhdistettava{
         return vuorot.get(indeksi);
     }
     
+    public Vuoro getVuoro(int mones){
+        if(vuorot == null){
+            return null;
+        }
+        
+        if(vuorot.isEmpty()){
+            return null;
+        }
+        
+        for(Vuoro vuoro : vuorot){
+            if(vuoro.getVuoro() == mones){
+                return vuoro;
+            }
+        }
+        
+        return null;
+    }
+    
     public String getNimi() {
         return nimi;
     }

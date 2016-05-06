@@ -185,6 +185,10 @@ public class Vuoro implements Yhdistettava{
     public String getSeuraavasivu(){
         return peli.getPelisivu()+"/vuoro/"+getSeuraava();
     }
+    
+    public String getPelaajanimi(){
+        return pelaaja.getNimi();
+    }
 
     @Override
     public boolean yhdista(Object o) {
