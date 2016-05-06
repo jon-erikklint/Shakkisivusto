@@ -61,7 +61,7 @@ public abstract class AbstraktiDao<T> implements Dao<T>{
         }
     }
     
-    private String addQuestionMarks(String query, int amount){
+    protected String addQuestionMarks(String query, int amount){
         String newQuery = query;
         
         for(int i = 0 ; i < amount; i++){
