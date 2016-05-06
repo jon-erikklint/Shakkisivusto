@@ -169,6 +169,22 @@ public class Vuoro implements Yhdistettava{
     public void setErikoistilanteet(Erikoistilanteet erikoistilanteet) {
         this.erikoistilanteet = erikoistilanteet;
     }
+    
+    public int getEdellinenvuoro(){
+        return vuoro-1;
+    }
+    
+    public String getEdellinensivu(){
+        return "/peli/"+peli+"/vuoro/"+getEdellinenvuoro();
+    }
+    
+    public int getSeuraavavuoro(){
+        return vuoro+1;
+    }
+    
+    public String getSeuraavasivu(){
+        return "/peli/"+peli+"/vuoro/"+getSeuraavavuoro();
+    }
 
     @Override
     public boolean yhdista(Object o) {

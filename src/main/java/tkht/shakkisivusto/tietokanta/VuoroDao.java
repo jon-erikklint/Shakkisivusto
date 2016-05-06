@@ -5,11 +5,16 @@ import java.util.List;
 import tkht.shakkisivusto.domain.Peli;
 import tkht.shakkisivusto.domain.Vuoro;
 import tkht.shakkisivusto.tietokanta.luojat.VuoroLuoja;
+import tkht.shakkisivusto.tietokanta.luojat.VuoroYhdistavaLuoja;
 
 public class VuoroDao extends AbstraktiDao<Vuoro>{
 
+    private VuoroYhdistavaLuoja yhdistavaLuoja;
+    
     public VuoroDao(Database db) {
         super(db, "Vuoro", "peli", "vuoro, peli, pelaaja, tekoaika, lauta, erikoistilanteet", new VuoroLuoja());
+        
+        yhdistavaLuoja = new VuoroYhdistavaLuoja();
     }
     
     public void poistaPelinVuorot(int peliid) throws Exception{
@@ -34,6 +39,18 @@ public class VuoroDao extends AbstraktiDao<Vuoro>{
         values.add(peli.getId());
         
         return super.findByQuery(query, values);
+    }
+    
+    public Vuoro findVuoroRambling(int peli, int vuoro) throws Exception{
+        String query = "SELECT * FROM Vuoro WHERE peli = ? AND vuoro = ?";
+        List values = createList(peli, vuoro);
+        
+        List<Vuoro> vuorot = super.findByQuery(query, values, yhdistavaLuoja);
+        if(vuorot.isEmpty()){
+            return null;
+        }
+        
+        return vuorot.get(0);
     }
 
     @Override

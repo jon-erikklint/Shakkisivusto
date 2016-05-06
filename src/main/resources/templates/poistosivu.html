@@ -1,0 +1,30 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Asetukset</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    
+    <body>
+        <nav>
+            <a th:href="${pelaaja.linkki}">Oma sivu</a>
+            <a href="/uudetpelit">Uudet pelit</a>
+            <a href="/omatpelit">Omat pelit</a>
+            <a href="/pelatutpelit">Pelatut pelit</a>
+            <a href="/pelaajahaku">Hae pelaajia</a>
+            <a href="/asetukset">Asetukset</a>
+            <form method="POST" action="/ulos">
+                <input type="submit" value="Kirjaudu ulos"/>
+            </form>
+        </nav>
+        
+        <h1>Peli: <span th:text="${peli.nimi}">pelin nimi</span></h1>
+        
+        <p>Poista peli. Poistaa osallistumisesi peliin. Toiminto ei peruutettavissa.</p>
+        
+        <form method="POST">
+            <input type="submit" value="Poista"/>
+        </form>
+    </body>
+</html>

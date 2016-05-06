@@ -31,7 +31,9 @@ public class Poistaja {
     public void poistaPelaajaPelista(Pelaaja pelaaja, Peli peli) throws Exception{
         if(peli.getPelaaja1().getPelaajaid() == pelaaja.getIndeksi()){
             
-            if(peli.getPelaaja2().getPelaajaid() == 0){
+            if(peli.getPelaaja2() == null){
+                poistaPeli(peli);
+            }else if(peli.getPelaaja2().getPelaajaid() == 0){
                 poistaPeli(peli);
             }else{
                 pelinPelaajaDao.paivitaPelinPelinpelaajaToiseksi(peli.getId(), pelaaja.getIndeksi(), 0);

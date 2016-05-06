@@ -18,6 +18,7 @@ import tkht.shakkisivusto.kontrollerit.uudetpelit.UudetpelitController;
 import tkht.shakkisivusto.kontrollerit.luopeli.UusipeliController;
 import tkht.shakkisivusto.kontrollerit.luovutussivu.LuovutaController;
 import tkht.shakkisivusto.kontrollerit.pelatutpelit.PelatutpelitController;
+import tkht.shakkisivusto.kontrollerit.poistosivu.PoistoController;
 import tkht.shakkisivusto.kontrollerit.voitto.VoittoController;
 
 public class Alustaja {
@@ -86,7 +87,8 @@ public class Alustaja {
         kontrollerit.add(new LiitypeliinController(peliDao, pelinPelaajaDao, sm));
         kontrollerit.add(new PelatutpelitController(peliDao, sm));
         kontrollerit.add(new LuovutaController(peliDao, pelaajaDao, pelinPelaajaDao, vuoroDao, sm));
-        kontrollerit.add(new KatselusivuController());
+        kontrollerit.add(new KatselusivuController(peliDao, vuoroDao, sm));
+        kontrollerit.add(new PoistoController(peliDao, pelinPelaajaDao, pelaajaDao, vuoroDao, sm));
         kontrollerit.add(new VoittoController());
         
         return kontrollerit;
