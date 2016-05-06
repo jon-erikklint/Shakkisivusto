@@ -5,6 +5,7 @@ import spark.Request;
 import spark.Response;
 import tkht.shakkisivusto.domain.*;
 import tkht.shakkisivusto.kontrollerit.SessionManager;
+import tkht.shakkisivusto.kontrollerit.Validoija;
 import tkht.shakkisivusto.logiikka.Vuorotarkastaja;
 import tkht.shakkisivusto.tietokanta.PeliDao;
 import tkht.shakkisivusto.tietokanta.PelinPelaajaDao;
@@ -32,6 +33,14 @@ public class SuoritaVuoro extends PeliHelper{
         }
         
         if(onkoVuorossa(kirjautunut, peli)){
+            String mista = rqst.queryParams("mista");
+            String minne = rqst.queryParams("minne");
+
+            if(!Validoija.tarkistaKoordinaatti(mista) || !Validoija.tarkistaKoordinaatti(minne)){
+                ilmoitaVirhe("Virheellinen koordinaatti", peli);
+                return;
+            }
+            
             tarkistaVuoro(rqst, rspns, map, kirjautunut, peli);
             return;
         }
@@ -70,6 +79,7 @@ public class SuoritaVuoro extends PeliHelper{
     private Vuoro evaluoiVuoro(Request rqst, Peli peli){
         String mista = rqst.queryParams("mista");
         String minne = rqst.queryParams("minne");
+        
         Vuoro uusinVuoro = peli.getUusinVuoro();
 
         vuorotarkastaja.asetaPelitilanne(uusinVuoro, peli);

@@ -1,26 +1,34 @@
 package tkht.shakkisivusto.kontrollerit;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Validoija {
     
-    private static Map<Character,Character> sallitutMerkit;
+    private static Set<Character> sallitutMerkit;
+    private static Set<Character> koordinaatit;
     
     public static void alusta(String merkit){
-        sallitutMerkit = new HashMap<>();
-        
-        for(int i = 0 ; i < merkit.length() ; i++){
-            char kirjain = merkit.charAt(i);
-            sallitutMerkit.put(kirjain, kirjain);
-        }
+        sallitutMerkit = alustaSet(merkit);
+        koordinaatit = alustaSet("abcdefgh");
     }
     
-    private static boolean tarkistaMerkit(String string){
+    private static Set<Character> alustaSet(String string){
+        Set<Character> merkit = new HashSet<>();
+        
         for(int i = 0 ; i < string.length() ; i++){
-            Character kirjain = sallitutMerkit.get(string.charAt(i));
+            char kirjain = string.charAt(i);
+            merkit.add(kirjain);
+        }
+        
+        return merkit;
+    }
+    
+    private static boolean tarkistaMerkit(Set<Character> sallitut, String string){
+        for(int i = 0 ; i < string.length() ; i++){
+            char kirjain = string.charAt(i);
             
-            if(kirjain == null){
+            if(!sallitut.contains(kirjain)){
                 return false;
             }
         }
@@ -29,7 +37,7 @@ public class Validoija {
     }
     
     public static boolean tarkistaPelaajanKayttajanimi(String nimi){
-        if(!tarkistaMerkit(nimi)){
+        if(!tarkistaMerkit(sallitutMerkit, nimi)){
             return false;
         }
         
@@ -45,7 +53,7 @@ public class Validoija {
     }
     
     public static boolean tarkistaPelaajanSalasana(String salasana){
-        if(!tarkistaMerkit(salasana)){
+        if(!tarkistaMerkit(sallitutMerkit, salasana)){
             return false;
         }
         
@@ -61,7 +69,7 @@ public class Validoija {
     }
     
     public static boolean tarkistaPelinNimi(String nimi){
-        if(!tarkistaMerkit(nimi)){
+        if(!tarkistaMerkit(sallitutMerkit, nimi)){
             return false;
         }
         
@@ -70,6 +78,24 @@ public class Validoija {
         }
         
         if(nimi.length() > 50){
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public static boolean tarkistaKoordinaatti(String koordinaatti){
+        if(koordinaatti.length() != 2){
+            return false;
+        }
+        
+        if(!tarkistaMerkit(koordinaatit, koordinaatti.substring(0, 1))){
+            return false;
+        }
+        
+        try{
+            Integer.parseInt(koordinaatti.substring(1, 2));
+        }catch(Exception e){
             return false;
         }
         
