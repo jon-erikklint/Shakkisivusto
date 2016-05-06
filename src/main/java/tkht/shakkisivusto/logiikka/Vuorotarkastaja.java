@@ -2,12 +2,7 @@ package tkht.shakkisivusto.logiikka;
 
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import tkht.shakkisivusto.domain.Peli;
 import tkht.shakkisivusto.domain.Vuoro;
 import tkht.shakkisivusto.domain.sisainen.*;
@@ -15,6 +10,7 @@ import tkht.shakkisivusto.domain.sisainen.*;
 public class Vuorotarkastaja {
     
     private Nappula omaKuningas;
+    private Nappula vastustajanKuningas;
     private boolean valkoinen;
     
     private Map<Ruutu, Nappula> kartta;
@@ -34,6 +30,8 @@ public class Vuorotarkastaja {
         for(Nappula nappula : vuoro.getNappulat()){
             if(nappula.getTyyppi() == Nappulatyyppi.KUNINGAS && nappula.isValkoinen() == valkoinen){
                 omaKuningas = nappula;
+            }else if(nappula.getTyyppi() == Nappulatyyppi.KUNINGAS){
+                vastustajanKuningas = nappula;
             }
             
             kartta.put(nappula.getSijainti(), nappula);
@@ -95,6 +93,12 @@ public class Vuorotarkastaja {
     }
     
     private boolean pystyySiirtymaan(Nappula siirrettava, Ruutu minne){
+        Set<Ruutu> siirryttavat = siirryttavat(siirrettava);
+        
+        return siirryttavat.contains(minne);
+    }
+    
+    private Set<Ruutu> siirryttavat(Nappula siirrettava){
         Set<Ruutu> siirryttavat;
         
         Ruutu sijainti = siirrettava.getSijainti();
@@ -122,7 +126,7 @@ public class Vuorotarkastaja {
                 siirryttavat = new HashSet<>();
         }
         
-        return siirryttavat.contains(minne);
+        return siirryttavat;
     }
     
     private Set<Ruutu> sotilas(Ruutu sijainti){
@@ -309,20 +313,57 @@ public class Vuorotarkastaja {
     }
     
     private boolean itseaiheutettuShakki(Nappula nappula, Ruutu kohde){
+        return onkoSiirtoShakki(nappula, kohde, omaKuningas);
+    }
+    
+    public boolean voittiko(){
+        List<Nappula> vastustajanNappulat = vastustajanNappulat();
+        
+        for(Nappula nappula : vastustajanNappulat){
+            if(voikoTehdaLaillisenSiirron(nappula)){
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    private boolean voikoTehdaLaillisenSiirron(Nappula nappula){
+        Set<Ruutu> siirryttavat = siirryttavat(nappula);
+        
+        for(Ruutu siirryttava : siirryttavat){
+            if(!onkoSiirtoShakki(nappula, siirryttava, vastustajanKuningas)){
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    private List<Nappula> vastustajanNappulat(){
+        List<Nappula> vastustajanNappulat = new ArrayList<>();
+        
+        for(Nappula nappula :kartta.values()){
+            if(nappula.isValkoinen() != valkoinen){
+                vastustajanNappulat.add(nappula);
+            }
+        }
+        
+        return vastustajanNappulat;
+    }
+    
+    private boolean onkoSiirtoShakki(Nappula nappula, Ruutu kohde, Nappula kuningas){
         Nappula kohdenappula = kartta.get(kohde);
         Ruutu vanhaSijainti = nappula.getSijainti();
         nappula.setSijainti(kohde);
         kartta.put(kohde, nappula);
         kartta.remove(nappula.getSijainti());
         
-        Ruutu kuninkaanSijainti = omaKuningas.getSijainti();
+        Ruutu kuninkaanSijainti = kuningas.getSijainti();
         
         boolean itseaiheutettuShakki = false;
         
         for(Nappula kokeiltava : kartta.values()){
-            if(kokeiltava.isValkoinen() == valkoinen){
-                continue;
-            }
             if(pystyySiirtymaan(kokeiltava, kuninkaanSijainti)){
                 itseaiheutettuShakki = true;
                 break;
@@ -336,9 +377,5 @@ public class Vuorotarkastaja {
         }
         
         return itseaiheutettuShakki;
-    }
-    
-    public boolean voittiko(){
-        return false;
     }
 }
