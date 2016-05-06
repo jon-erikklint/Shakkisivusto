@@ -175,7 +175,7 @@ public class Vuoro implements Yhdistettava{
     }
     
     public String getEdellinensivu(){
-        return "/peli/"+peli+"/vuoro/"+getEdellinen();
+        return peli.getPelisivu()+"/vuoro/"+getEdellinen();
     }
     
     public int getSeuraava(){
@@ -183,7 +183,7 @@ public class Vuoro implements Yhdistettava{
     }
     
     public String getSeuraavasivu(){
-        return "/peli/"+peli+"/vuoro/"+getSeuraava();
+        return peli.getPelisivu()+"/vuoro/"+getSeuraava();
     }
 
     @Override
