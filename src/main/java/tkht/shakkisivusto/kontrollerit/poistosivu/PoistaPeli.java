@@ -18,17 +18,13 @@ public class PoistaPeli extends PeliHelper{
     private Poistaja poistaja;
     
     public PoistaPeli(PeliDao peliDao, PelinPelaajaDao pelinPelaajaDao, PelaajaDao pelaajaDao, VuoroDao vuoroDao, SessionManager sm) {
-        super("poistosivu", peliDao, sm);
+        super("poistosivu", false, true, peliDao, sm);
         
         poistaja = new Poistaja(pelaajaDao, peliDao, pelinPelaajaDao, vuoroDao);
     }
 
     @Override
     protected void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut, Peli peli) throws Exception {
-        if(!super.tarkistaPaasy(kirjautunut, peli, map)){
-            return;
-        }
-        
         poistaja.poistaPelaajaPelista(kirjautunut, peli);
         rspns.redirect("/pelatutpelit");
     }

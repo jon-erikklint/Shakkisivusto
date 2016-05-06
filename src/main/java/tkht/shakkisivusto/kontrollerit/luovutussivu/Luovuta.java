@@ -18,17 +18,13 @@ public class Luovuta extends PeliHelper{
     private Poistaja poistaja;
     
     public Luovuta(PeliDao peliDao, PelaajaDao pelaajaDao, PelinPelaajaDao pelinpelaajaDao, VuoroDao vuoroDao, SessionManager sm) {
-        super("pelisivu", peliDao, sm);
+        super("pelisivu", true, false, peliDao, sm);
         
         poistaja = new Poistaja(pelaajaDao, peliDao, pelinpelaajaDao, vuoroDao);
     }
 
     @Override
     protected void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut, Peli peli) throws Exception {
-        if(!super.tarkistaPaasy(kirjautunut, peli, map)){
-            return;
-        }
-        
         poistaja.lopetaPeli(kirjautunut, false, peli);
         rspns.redirect("/omatpelit");
     }

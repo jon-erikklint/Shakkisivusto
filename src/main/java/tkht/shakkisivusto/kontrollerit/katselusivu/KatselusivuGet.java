@@ -18,10 +18,6 @@ public class KatselusivuGet extends VuoroHelper{
 
     @Override
     protected void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut, Peli peli, Vuoro vuoro) throws Exception {
-        if(!super.tarkistaPaasy(kirjautunut, peli, map)){
-            return;
-        }
-        
         map.put("kartta", vuoro.getRuudut());
         
         boolean ekavuoro = vuoro.getVuoro() == 0;

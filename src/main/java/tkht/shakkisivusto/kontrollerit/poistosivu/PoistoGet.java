@@ -12,12 +12,10 @@ import tkht.shakkisivusto.tietokanta.PeliDao;
 public class PoistoGet extends PeliHelper{
 
     public PoistoGet(PeliDao peliDao, SessionManager sm) {
-        super("poistosivu", peliDao, sm);
+        super("poistosivu", false, true, peliDao, sm);
     }
 
     @Override
-    protected void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut, Peli peli) throws Exception {
-        super.tarkistaPaasy(kirjautunut, peli, map);
-    }
+    protected void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut, Peli peli) throws Exception {}
     
 }

@@ -12,12 +12,10 @@ import tkht.shakkisivusto.tietokanta.PeliDao;
 public class LuovutaGet extends PeliHelper{
 
     public LuovutaGet(PeliDao peliDao, SessionManager sm) {
-        super("luovutussivu", peliDao, sm);
+        super("luovutussivu", true, false, peliDao, sm);
     }
 
     @Override
-    protected void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut, Peli peli) throws Exception {
-        super.tarkistaPaasy(kirjautunut, peli, map);
-    }
+    protected void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut, Peli peli) throws Exception {}
     
 }

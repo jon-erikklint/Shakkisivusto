@@ -16,7 +16,7 @@ public abstract class VuoroHelper extends PeliHelper{
     protected VuoroDao vuoroDao;
     
     public VuoroHelper(String sivu, VuoroDao vuoroDao, PeliDao peliDao, SessionManager sm) {
-        super(sivu, peliDao, sm);
+        super(sivu, false, true, peliDao, sm);
         
         this.vuoroDao = vuoroDao;
     }

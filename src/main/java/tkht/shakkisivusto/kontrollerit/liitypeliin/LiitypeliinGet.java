@@ -12,7 +12,7 @@ import tkht.shakkisivusto.tietokanta.PeliDao;
 public class LiitypeliinGet extends PeliHelper{
 
     public LiitypeliinGet(PeliDao peliDao, SessionManager sm) {
-        super("liitypeliin", peliDao, sm);
+        super("liitypeliin", false, false, peliDao, sm);
     }
 
     @Override

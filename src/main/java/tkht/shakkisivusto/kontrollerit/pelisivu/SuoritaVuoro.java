@@ -19,7 +19,7 @@ public class SuoritaVuoro extends PeliHelper{
     private Vuorotarkastaja vuorotarkastaja;
     
     public SuoritaVuoro(PeliDao peliDao, PelinPelaajaDao pelinPelaajaDao, VuoroDao vuoroDao, SessionManager sm) {
-        super("pelisivu", peliDao, sm);
+        super("pelisivu", true, false, peliDao, sm);
         
         this.vuoroDao = vuoroDao;
         this.ppDao = pelinPelaajaDao;
@@ -28,10 +28,6 @@ public class SuoritaVuoro extends PeliHelper{
 
     @Override
     protected void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut, Peli peli) throws Exception {
-        if(!tarkistaPaasy(kirjautunut, peli, map)){
-            return;
-        }
-        
         if(onkoVuorossa(kirjautunut, peli)){
             String mista = rqst.queryParams("mista");
             String minne = rqst.queryParams("minne");

@@ -14,17 +14,13 @@ public class PelisivuGet extends PeliHelper{
     private PeliDao peliDao;
     
     public PelisivuGet(PeliDao peliDao, SessionManager sm) {
-        super("pelisivu", peliDao, sm);
+        super("pelisivu", true, false, peliDao, sm);
         
         this.peliDao = peliDao;
     }
 
     @Override
     public void handle(Request rqst, Response rspns, Map map, Pelaaja kirjautunut, Peli peli) throws Exception {
-        if(!tarkistaPaasy(kirjautunut, peli, map)){
-            return;
-        }
-        
         map.put("kartta", peli.getUusinVuoro().getRuudut());
         
         lisaaVuorotilanne(rqst, map, peli, kirjautunut);

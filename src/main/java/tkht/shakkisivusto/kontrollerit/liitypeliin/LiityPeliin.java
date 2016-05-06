@@ -16,7 +16,7 @@ public class LiityPeliin extends PeliHelper{
     private PelinPelaajaDao ppDao;
     
     public LiityPeliin(PeliDao peliDao, PelinPelaajaDao pelinPelaajaDao, SessionManager sm) {
-        super("liitypeliin", peliDao, sm);
+        super("liitypeliin", false, false, peliDao, sm);
         
         ppDao = pelinPelaajaDao;
     }
