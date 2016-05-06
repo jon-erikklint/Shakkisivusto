@@ -20,7 +20,6 @@ public class PelisivuController extends AbstraktiController{
         Map<String, TemplateViewRoute> sets = new HashMap<>();
         
         sets.put("/peli/:peli", new SuoritaVuoro(peliDao, pelinPelaajaDao, vuoroDao, sm));
-        sets.put("/peli/:peli/luovuta", new Luovuta(peliDao, pelaajaDao, pelinPelaajaDao, vuoroDao, sm));
         
         super.initialize(gets, sets);
     }

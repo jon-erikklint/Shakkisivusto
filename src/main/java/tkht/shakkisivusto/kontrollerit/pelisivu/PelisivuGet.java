@@ -27,6 +27,11 @@ public class PelisivuGet extends PeliHelper{
         
         map.put("kartta", peli.getUusinVuoro().getRuudut());
         
+        lisaaVuorotilanne(rqst, map, peli, kirjautunut);
+        lisaaValkoinenVaiMusta(peli, kirjautunut, map);
+    }
+    
+    public void lisaaVuorotilanne(Request rqst, Map map, Peli peli, Pelaaja pelaaja){
         String vuorotilanne;
         if(peli.getPelaaja2() == null){
             
@@ -36,7 +41,7 @@ public class PelisivuGet extends PeliHelper{
             
             int vuorossaolijanid = peli.getUusinVuoro().getPelaajaid();
         
-            if(vuorossaolijanid == kirjautunut.getIndeksi()){
+            if(vuorossaolijanid == pelaaja.getIndeksi()){
                 vuorotilanne = "onvuoro";
             }else{
                 vuorotilanne = "toisenvuoro";
@@ -45,6 +50,15 @@ public class PelisivuGet extends PeliHelper{
         }
         
         map.put("vuorotilanne", vuorotilanne);
+    }
+    
+    public void lisaaValkoinenVaiMusta(Peli peli, Pelaaja pelaaja, Map map){
+        boolean valkoinen = false;
+        if(peli.getPelaaja1().getPelaajaid() == pelaaja.getIndeksi()){
+            valkoinen = true;
+        }
+        
+        map.put("oletValkoinen", valkoinen);
     }
     
 }

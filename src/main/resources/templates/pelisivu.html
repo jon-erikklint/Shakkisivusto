@@ -41,6 +41,15 @@
             </tr>
         </table>
         
+        <div th:switch="${oletValkoinen}">
+            <div th:case="true">
+                <p>Olet valkoinen</p>
+            </div>
+            <div th:case="false">
+                <p>Olet musta</p>
+            </div>
+        </div>
+        
         <div th:switch="${vuorotilanne}">
             <div th:case="'onvuoro'">
                 <h2>Tee vuorosi:</h2>
@@ -65,9 +74,6 @@
             </div>
         </div>
         
-        <form method="POST" action="/luovuta">
-            Kirjoita "luovuta" ilman lainausmerkkejä varmistukseksi: <input type="text" name="tarkistus"/><br/>
-            <input type="submit" value="Luovuta"/>
-        </form>
+        <p><a th:href="${peli.luovutussivu}">Luovuta</a></p>
     </body>
 </html>

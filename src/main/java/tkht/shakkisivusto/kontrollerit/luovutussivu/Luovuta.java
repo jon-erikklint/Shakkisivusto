@@ -1,4 +1,4 @@
-package tkht.shakkisivusto.kontrollerit.pelisivu;
+package tkht.shakkisivusto.kontrollerit.luovutussivu;
 
 import java.util.Map;
 import spark.Request;
@@ -6,6 +6,7 @@ import spark.Response;
 import tkht.shakkisivusto.domain.Pelaaja;
 import tkht.shakkisivusto.domain.Peli;
 import tkht.shakkisivusto.kontrollerit.SessionManager;
+import tkht.shakkisivusto.kontrollerit.pelisivu.PeliHelper;
 import tkht.shakkisivusto.tietokanta.PelaajaDao;
 import tkht.shakkisivusto.tietokanta.PeliDao;
 import tkht.shakkisivusto.tietokanta.PelinPelaajaDao;
