@@ -35,9 +35,9 @@
         </ul>
         
         <table>
-            <tr th:each="rivi :${kartta}">
-                <td th:each="ruutu :${rivi}">
-                    <span th:text="${ruutu.koodi}">O</span>
+            <tr th:each="rivi: ${kartta}">
+                <td th:each="ruutu: ${rivi}">
+                    <span th:text="${ruutu}">O</span>
                 </td>
             </tr>
         </table>
