@@ -17,7 +17,7 @@ public class PoistoController extends AbstraktiController{
         gets.put("/peli/:peli/poista", new PoistoGet(peliDao, sm));
         
         Map<String, TemplateViewRoute> puts = new HashMap<>();
-        puts.put("", new PoistaPeli(peliDao, pelinPelaajaDao, pelaajaDao, vuoroDao, sm));
+        puts.put("/peli/:peli/poista", new PoistaPeli(peliDao, pelinPelaajaDao, pelaajaDao, vuoroDao, sm));
         
         super.initialize(gets, puts);
     }
