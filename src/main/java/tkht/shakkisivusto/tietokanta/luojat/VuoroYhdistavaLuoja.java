@@ -20,9 +20,15 @@ public class VuoroYhdistavaLuoja extends AbstraktiYhdistaja<Vuoro>{
     
     @Override
     public void addT(ResultSet rs) throws Exception {
-        pelaajaLuoja.addT(rs);
-        peliLuoja.addT(rs);
         vuoroLuoja.addT(rs);
+        
+        try{
+            pelaajaLuoja.addT(rs);
+        }catch(Exception e){System.out.println("PELAAJANLUOJA EI LÖYTÄNYT SIVUAAN");}
+        try{
+            peliLuoja.addT(rs);
+        }catch(Exception e){System.out.println("PELINLUOJA EI LÖYTÄNYT SIVUAAN");}
+        
     }
 
     @Override

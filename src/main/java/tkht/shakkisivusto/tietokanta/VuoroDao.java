@@ -42,7 +42,9 @@ public class VuoroDao extends AbstraktiDao<Vuoro>{
     }
     
     public Vuoro findVuoroRambling(int peli, int vuoro) throws Exception{
-        String query = "SELECT * FROM Vuoro WHERE peli = ? AND vuoro = ?";
+        String query = "SELECT * FROM Vuoro, Peli, Pelaaja WHERE "
+                + "Vuoro.peli = ? AND Vuoro.vuoro = ? AND "
+                + "Vuoro.peli = Peli.idpeli AND Vuoro.pelaaja = Pelaaja.idpelaaja";
         List values = createList(peli, vuoro);
         
         List<Vuoro> vuorot = super.findByQuery(query, values, yhdistavaLuoja);
